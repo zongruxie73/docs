@@ -28,6 +28,8 @@ includeGuides:
   - /code-security/secret-scanning/configuring-secret-scanning-for-your-repositories
   - /code-security/secret-scanning/defining-custom-patterns-for-secret-scanning
   - /code-security/secret-scanning/managing-alerts-from-secret-scanning
+  - /code-security/secret-scanning/protecting-pushes-with-secret-scanning
+  - /code-security/secret-scanning/pushing-a-branch-blocked-by-push-protection
   - /code-security/secret-scanning/secret-scanning-patterns
   - /code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/tracking-code-scanning-alerts-in-issues-using-task-lists
   - /code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/about-code-scanning
@@ -61,6 +63,7 @@ includeGuides:
   - /code-security/repository-security-advisories/publishing-a-repository-security-advisory
   - /code-security/repository-security-advisories/removing-a-collaborator-from-a-repository-security-advisory
   - /code-security/repository-security-advisories/withdrawing-a-repository-security-advisory
+  - /code-security/repository-security-advisories/best-practices-for-writing-repository-security-advisories
   - /code-security/security-overview/about-the-security-overview
   - /code-security/security-overview/filtering-alerts-in-the-security-overview
   - /code-security/security-overview/viewing-the-security-overview

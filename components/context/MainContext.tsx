@@ -13,13 +13,6 @@ export type ProductT = {
   versions?: Array<string>
 }
 
-export type ProductGroupT = {
-  name: string
-  icon: string
-  octicon: string
-  children: Array<ProductT>
-}
-
 type VersionItem = {
   // free-pro-team@latest, enterprise-cloud@latest, enterprise-server@3.3 ...
   version: string
@@ -27,9 +20,9 @@ type VersionItem = {
   currentRelease: string
   latestVersion: string
   shortName: string
-  // api.github.com, ghes-3.3, github.ae
+  // api.github.com, ghec, ghes-3.3, github.ae
   openApiVersionName: string
-  // api.github.com, ghes-, github.ae
+  // api.github.com, ghec, ghes-, github.ae
   openApiBaseName: string
 }
 
@@ -77,7 +70,6 @@ export type MainContextT = {
     article?: BreadcrumbT
   }
   activeProducts: Array<ProductT>
-  productGroups: Array<ProductGroupT>
   communityRedirect: {
     name: string
     href: string
@@ -87,7 +79,6 @@ export type MainContextT = {
   isHomepageVersion: boolean
   isFPT: boolean
   data: DataT
-  airGap?: boolean
   error: string
   currentCategory?: string
   relativePath?: string
@@ -126,7 +117,7 @@ export type MainContextT = {
   fullUrl: string
 }
 
-export const getMainContext = (req: any, res: any): MainContextT => {
+export const getMainContext = async (req: any, res: any): Promise<MainContextT> => {
   // Our current translation process adds 'ms.*' frontmatter properties to files
   // it translates including when data/ui.yml is translated. We don't use these
   // properties and their syntax (e.g. 'ms.openlocfilehash',
@@ -138,7 +129,6 @@ export const getMainContext = (req: any, res: any): MainContextT => {
   return {
     breadcrumbs: req.context.breadcrumbs || {},
     activeProducts: req.context.activeProducts,
-    productGroups: req.context.productGroups,
     communityRedirect: req.context.page?.communityRedirect || {},
     currentProduct: req.context.productMap[req.context.currentProduct] || null,
     currentLayoutName: req.context.currentLayoutName,
@@ -155,7 +145,6 @@ export const getMainContext = (req: any, res: any): MainContextT => {
         release_candidate: req.context.site.data.variables.release_candidate,
       },
     },
-    airGap: req.context.AIRGAP || false,
     currentCategory: req.context.currentCategory || '',
     currentPathWithoutLanguage: req.context.currentPathWithoutLanguage,
     relativePath: req.context.page?.relativePath,

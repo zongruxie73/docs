@@ -93,6 +93,15 @@ schedule:
   - cron:  "40 19 * * *"
 ```
 
+### File and directory names
+
+Use inline codeblocks to refer to file and directory names. If a file type generally follows a specific capitalization convention, such as all caps for README files, use the established convention.
+
+- **Use:** In your `README.md` file, add info about your repository.
+- **Use:** In your `.github/workflows/` directory, create the `example-workflow.yml` file.
+- **Avoid:** In your _.github/workflows/_ directory, create the `example-workflow.yml` file.
+- **Avoid:** Delete the **example.js** file.
+
 ### Indentation
 
 In YAML examples, such as actions and workflow files, use two spaces to indent lines within nested lists and block sequences.
@@ -133,9 +142,10 @@ Every image must include an alt attribute that provides a complete description o
 
 ### Filenames
 
-Be descriptive when naming image files: include the name, action, and UI element in the filename. Mirror product language. Use kebab case. If replacing an image, use the exact filename.
+Be descriptive when naming image files: include the name, action, and UI element in the filename. Mirror product language. Use kebab case. Do not use Liquid conditionals in filenames. If replacing an image, use the exact filename.
 - **Use:** `data-pack-purchase-button.png`
 - **Avoid:** `purchase_button.png`
+- **Avoid:** `purchase-button{% ifversion ghes > 3.2 %}-for-admins{% endif %}.png`
 
 ### Screenshots
 
@@ -156,7 +166,6 @@ Individual words might be small, but together they can create community, belongi
 ### Resources about inclusive language
 
 GitHub Brand Guide:
-- [People and communities](https://brand.github.com/content/grammar#people-and-communities)
 
 The Microsoft Style Guide offers resources on bias-free communication, accessibility terms, and writing for all abilities:
 - [Bias-free communication](https://docs.microsoft.com/style-guide/bias-free-communication)
@@ -235,6 +244,7 @@ Introduce links consistently using a standard format that clearly indicates wher
 For links to other articles in the GitHub docs: `For more information, see "[Page or article title]()."`
 For links to another section in the same article: `For more information, see "[Header text]()."`
 For links to specific sections in other articles in the GitHub docs: `For more information, see "[Article title]()."`
+For links to an article with a specific tool selected: `For more information, see the TOOLNAME documentation in "[ARTICLE TITLE](/PATH/TO/ARTICLE?tool=TOOLNAME).`
 For links to external documentation: `For more information, see [Page or article title]() in the X documentation.`
 Do not include quotation marks within a hyperlink.
 
@@ -273,6 +283,12 @@ To link to a specific header in the same article, use this format:
 
 To link to a specific header in a different article, use this format:
 > For more information, see "[ARTICLE TITLE](path-to-article#HEADER-TITLE)."
+
+### Links to a specific tool
+
+When we link to content with a specific tool selected, we want to make sure that someone knows that they will be looking at content relevant to a specific tool even if they do not view the tool switcher tabs in the article.
+
+> For more information, see the TOOLNAME documentation in "[ARTICLE TITLE](/PATH/TO/ARTICLE?tool=TOOLNAME).
 
 ### Links to learning paths
 
@@ -422,7 +438,13 @@ For more information, see "[Using SHAs](https://docs.github.com/en/actions/learn
 
 ### GitHub Codespaces
 
-For the first mention in the body text of an article, use "GitHub Codespaces" (`{% data variables.product.prodname_github_codespaces %}`) as the product name, not just "Codespaces". After the first use, and in headings, you can use just "Codespaces" `{% data variables.product.prodname_github_codespaces %}`, but if a passage refers to the product and instances of codespaces in close proximity, use `{% data variables.product.prodname_github_codespaces %}` for the product within that passage. This helps to avoid confusion between the product and "codespaces" (lowercase c), which refers to instances of remote coding workspaces created with GitHub Codespaces.  
+When referring to the product GitHub Codespaces, always include "GitHub", except in these circumstances:
+* In the `shortTitle` front matter (i.e. the abbreviated version of the article title).
+* In subheadings within an article, if "GitHub Codespaces" has already been used anywhere in the article prior to the subheading.
+
+Variables: `{% data variables.product.prodname_github_codespaces %}` ("GitHub Codespaces") and `{% data variables.product.prodname_codespaces %}` ("Codespaces").
+
+When referring to instances of remote working environments created with this technology, refer to these as "codespaces" (lowercase c). For example, "to delete your codespace" or "to list your codespaces."
 
 Always use "dev container" (or, where clarification is needed, its longer form "development container") and not "devcontainer" (one word), except in file/path names. The single word could form could be considered a brand, which we want to avoid, and we also want to be consistent with the two-word form used in [the Visual Studio Code documentation](https://code.visualstudio.com/docs/remote/create-dev-container#_path-to-creating-a-dev-container).
 
@@ -536,7 +558,7 @@ Microsoft Style Guide:
 
 ## Voice and tone
 
-Use clear, simple language that’s approachable and accessible for a wide range of readers. For more information, see “[Voice](https://brand.github.com/content/voice)” in GitHub’s Brand Guide. To learn more about writing approachable content, see “[Microsoft's brand voice: Above all, simple and human](https://docs.microsoft.com/style-guide/brand-voice-above-all-simple-human) and “[Top 10 tips for Microsoft style and voice](https://docs.microsoft.com/style-guide/top-10-tips-style-voice).”
+Use clear, simple language that’s approachable and accessible for a wide range of readers. To learn more about writing approachable content, see “[Microsoft's brand voice: Above all, simple and human](https://docs.microsoft.com/style-guide/brand-voice-above-all-simple-human) and “[Top 10 tips for Microsoft style and voice](https://docs.microsoft.com/style-guide/top-10-tips-style-voice).”
 
 ## Word choice and terminology
 
