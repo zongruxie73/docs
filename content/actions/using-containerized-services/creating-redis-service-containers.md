@@ -1,6 +1,6 @@
 ---
 title: Creating Redis service containers
-shortTitle: Redis service containers
+shortTitle: Create Redis service containers
 intro: You can use service containers to create a Redis client in your workflow. This guide shows examples of creating a Redis service for jobs that run in containers or directly on the runner machine.
 redirect_from:
   - /actions/automating-your-workflow-with-github-actions/creating-redis-service-containers
@@ -41,7 +41,6 @@ You may also find it helpful to have a basic understanding of YAML, the syntax f
 
 {% data reusables.actions.copy-workflow-file %}
 
-{% raw %}
 ```yaml{:copy}
 name: Redis container example
 on: push
@@ -70,7 +69,7 @@ jobs:
     steps:
       # Downloads a copy of the code in your repository before running CI tests
       - name: Check out repository code
-        uses: actions/checkout@v2
+        uses: {% data reusables.actions.action-checkout %}
 
       # Performs a clean installation of all dependencies in the `package.json` file
       # For more information, see https://docs.npmjs.com/cli/ci.html
@@ -88,7 +87,6 @@ jobs:
           # The default Redis port
           REDIS_PORT: 6379
 ```
-{% endraw %}
 
 ### Configuring the container job
 
@@ -127,7 +125,7 @@ jobs:
 steps:
   # Downloads a copy of the code in your repository before running CI tests
   - name: Check out repository code
-    uses: actions/checkout@v2
+    uses: {% data reusables.actions.action-checkout %}
 
   # Performs a clean installation of all dependencies in the `package.json` file
   # For more information, see https://docs.npmjs.com/cli/ci.html
@@ -156,7 +154,6 @@ When you run a job directly on the runner machine, you'll need to map the ports 
 
 {% data reusables.actions.copy-workflow-file %}
 
-{% raw %}
 ```yaml{:copy}
 name: Redis runner example
 on: push
@@ -186,7 +183,7 @@ jobs:
     steps:
       # Downloads a copy of the code in your repository before running CI tests
       - name: Check out repository code
-        uses: actions/checkout@v2
+        uses: {% data reusables.actions.action-checkout %}
 
       # Performs a clean installation of all dependencies in the `package.json` file
       # For more information, see https://docs.npmjs.com/cli/ci.html
@@ -205,7 +202,6 @@ jobs:
           # The default Redis port
           REDIS_PORT: 6379
 ```
-{% endraw %}
 
 ### Configuring the runner job
 
@@ -247,7 +243,7 @@ jobs:
 steps:
   # Downloads a copy of the code in your repository before running CI tests
   - name: Check out repository code
-    uses: actions/checkout@v2
+    uses: {% data reusables.actions.action-checkout %}
 
   # Performs a clean installation of all dependencies in the `package.json` file
   # For more information, see https://docs.npmjs.com/cli/ci.html

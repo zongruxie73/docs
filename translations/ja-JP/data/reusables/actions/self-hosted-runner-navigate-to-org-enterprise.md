@@ -1,17 +1,24 @@
+---
+ms.openlocfilehash: 48dc95869bae901bf79df320e83b65979dedfd65
+ms.sourcegitcommit: 478f2931167988096ae6478a257f492ecaa11794
+ms.translationtype: HT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 09/09/2022
+ms.locfileid: "147763749"
+---
 {% ifversion fpt %}
-1. Navigate to the main page of the organization where your self-hosted runner group is registered.
-2. Click {% octicon "gear" aria-label="The Settings gear" %} **Settings**.
-3. サイドバーで**Actions（アクション）**をクリックしてください。
-4. Click **Runners**.
-{% elsif ghec or ghes or ghae %}
-1. セルフホストランナーが登録されているところへアクセスしてください:
-   * **In an organization**: navigate to the main page and click {% octicon "gear" aria-label="The Settings gear" %} **Settings**.
-   * {% ifversion ghec %}**If using an enterprise account**: navigate to your enterprise account by clicking your profile photo in the top-right corner of {% data variables.product.prodname_dotcom_the_website %}, then clicking **Your enterprises**, then clicking the enterprise.{% elsif ghes or ghae %}**If using an enterprise-level runner**:
+1. セルフホステッド ランナーが登録されている、Organization のメイン ページに移動します。
+2. {% octicon "gear" aria-label="The Settings gear" %} **[設定]** をクリックします。
+{% data reusables.organizations.settings-sidebar-actions-runners %} {% elsif ghec or ghes or ghae %}
+1. ランナーが登録されている場所に移動します。
+   * **Organization 内**: メイン ページに移動して、{% octicon "gear" aria-label="The Settings gear" %} **[設定]** をクリックします。
+   * **Enterprise レベルのランナーを使用している場合**:
 
-     1. 任意のページの右上で {% octicon "rocket" aria-label="The rocket ship" %} をクリックします。
-     1. 左のサイドバーで**Enterprise overview（Enterpriseの概要）**をクリックしてください。
-     1. In the enterprise sidebar, {% octicon "law" aria-label="The law icon" %} **Policies**.{% endif %}
+{% indented_data_reference reusables.enterprise-accounts.access-enterprise spaces=5 %}
 1. {% data variables.product.prodname_actions %}設定にアクセスしてください:
-   * **In an organization**: Click **Actions** in the left sidebar{% ifversion fpt or ghec or ghes > 3.1 or ghae %}, then click **Runners**{% endif %}.
-   * {% ifversion ghec %}**Enterpriseアカウントを使っている場合**:{% elsif ghes or ghae %}**Enterpriseレベルのランナーを使っている場合**:{% endif %} "{% octicon "law" aria-label="The law icon" %} Policies（ポリシー）”の下の**Actions**をクリック{% ifversion fpt or ghec or ghes > 3.1 or ghae %}し、続いて**Runners（ランナー）**タブをクリック{% endif %}してください。
-{% endif %}
+   * **Organization 内**: 
+
+{% indented_data_reference reusables.actions.settings-ui.settings-actions-runners spaces=5 %}
+   * **Enterprise レベルのランナーを使用している場合**: 
+
+{% indented_data_reference reusables.enterprise-accounts.policies-tab spaces=5 %} {% indented_data_reference reusables.enterprise-accounts.actions-tab spaces=5 %} {% indented_data_reference reusables.enterprise-accounts.actions-runners-tab spaces=5 %} {% endif %}

@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
 import { UnderlineNav } from '@primer/react'
 import { sendEvent, EventType } from 'components/lib/events'
@@ -11,31 +12,10 @@ import { useArticleContext } from 'components/context/ArticleContext'
 // Nota bene: tool === application
 // Nota bene: picker === switcher
 
-const supportedTools = [
-  'cli',
-  'desktop',
-  'webui',
-  'curl',
-  'codespaces',
-  'vscode',
-  'importer_cli',
-  'graphql',
-]
-const toolTitles = {
-  webui: 'Web browser',
-  cli: 'GitHub CLI',
-  curl: 'cURL',
-  desktop: 'Desktop',
-  codespaces: 'Codespaces',
-  vscode: 'Visual Studio Code',
-  importer_cli: 'GitHub Enterprise Importer CLI',
-  graphql: 'GraphQL API',
-} as Record<string, string>
-
 // Imperatively modify article content to show only the selected tool
 // find all platform-specific *block* elements and hide or show as appropriate
 // example: {% webui %} block content {% endwebui %}
-function showToolSpecificContent(tool: string) {
+function showToolSpecificContent(tool: string, supportedTools: Array<string>) {
   const markdowns = Array.from(document.querySelectorAll<HTMLElement>('.extended-markdown'))
   markdowns
     .filter((el) => supportedTools.some((tool) => el.classList.contains(tool)))
@@ -67,11 +47,15 @@ function getDefaultTool(defaultTool: string | undefined, detectedTools: Array<st
   return detectedTools[0]
 }
 
+const toolQueryKey = 'tool'
 type Props = {
   variant?: 'subnav' | 'tabnav' | 'underlinenav'
 }
 export const ToolPicker = ({ variant = 'subnav' }: Props) => {
-  const { defaultTool, detectedTools } = useArticleContext()
+  const router = useRouter()
+  const { asPath, query, locale } = router
+  // allTools comes from the ArticleContext which contains the list of tools available
+  const { defaultTool, detectedTools, allTools } = useArticleContext()
   const [currentTool, setCurrentTool] = useState(getDefaultTool(defaultTool, detectedTools))
 
   const sharedContainerProps = {
@@ -91,49 +75,67 @@ export const ToolPicker = ({ variant = 'subnav' }: Props) => {
     }
   }, [])
 
-  // Whenever the currentTool is changed, update the article content
+  // Whenever the currentTool is changed, update the article content or selected tool from query param
   useEffect(() => {
     preserveAnchorNodePosition(document, () => {
-      showToolSpecificContent(currentTool)
+      showToolSpecificContent(currentTool, Object.keys(allTools))
     })
-  }, [currentTool])
 
-  function onClickTool(tool: string) {
-    setCurrentTool(tool)
-    sendEvent({
-      type: EventType.preference,
-      preference_name: 'application',
-      preference_value: tool,
-    })
-    Cookies.set('toolPreferred', tool, { sameSite: 'strict', secure: true })
-  }
+    // If tool from query is a valid option, use it
+    const tool =
+      query[toolQueryKey] && Array.isArray(query[toolQueryKey])
+        ? query[toolQueryKey][0]
+        : query[toolQueryKey] || ''
+    if (tool && detectedTools.includes(tool)) {
+      setCurrentTool(tool)
+    }
+  }, [currentTool, asPath])
+
+  const onClickTool = useCallback(
+    (tool: string) => {
+      // Set tool in query param without altering other query params
+      const [asPathRoot, asPathQuery = ''] = router.asPath.split('#')[0].split('?')
+      const params = new URLSearchParams(asPathQuery)
+      params.set(toolQueryKey, tool)
+      const newPath = `/${locale}${asPathRoot}?${params}`
+      router.push(newPath, undefined, { shallow: true, locale })
+
+      sendEvent({
+        type: EventType.preference,
+        preference_name: 'application',
+        preference_value: tool,
+      })
+      Cookies.set('toolPreferred', tool, {
+        sameSite: 'strict',
+        secure: document.location.protocol !== 'http:',
+        expires: 365,
+      })
+    },
+    [asPath, locale]
+  )
 
   if (variant === 'underlinenav') {
+    const [, pathQuery = ''] = asPath.split('?')
+    const params = new URLSearchParams(pathQuery)
     return (
       <UnderlineNav {...sharedContainerProps}>
-        {detectedTools.map((tool) => (
-          <UnderlineNav.Link
-            key={tool}
-            data-tool={tool}
-            as="button"
-            selected={tool === currentTool}
-            // Temporary fix: This should be removed when this merges: PR 24123
-            sx={{
-              color: 'var(--color-fg-default)',
-              '&.selected': { color: 'var(--color-fg-default)' },
-              ':hover': { color: 'var(--color-fg-default)' },
-              ':focus': {
-                color: 'var(--color-fg-default)',
-                outline: '-webkit-focus-ring-color auto 1px;',
-              },
-            }}
-            onClick={() => {
-              onClickTool(tool)
-            }}
-          >
-            {toolTitles[tool]}
-          </UnderlineNav.Link>
-        ))}
+        {detectedTools.map((tool) => {
+          params.set(toolQueryKey, tool)
+          return (
+            <UnderlineNav.Link
+              href={`?${params.toString()}`}
+              key={tool}
+              data-tool={tool}
+              selected={tool === currentTool}
+              onClick={(event) => {
+                event.preventDefault()
+                onClickTool(tool)
+              }}
+            >
+              {allTools[tool]}
+            </UnderlineNav.Link>
+          )
+        })}
       </UnderlineNav>
     )
   }

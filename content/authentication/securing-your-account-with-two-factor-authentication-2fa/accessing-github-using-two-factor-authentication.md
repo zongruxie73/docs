@@ -59,15 +59,21 @@ If you have installed and signed in to {% data variables.product.prodname_mobile
 
 ## Using two-factor authentication with the command line
 
-After you've enabled 2FA, you must use a personal access token or SSH key instead of your password when accessing {% data variables.product.product_name %} on the command line.
+After you've enabled 2FA, you will no longer use your password to access {% data variables.product.product_name %} on the command line. Instead, use Git Credential Manager, a {% data variables.product.pat_generic %}, or an SSH key.
+
+### Authenticating on the command line using Git Credential Manager
+
+[Git Credential Manager](https://github.com/GitCredentialManager/git-credential-manager/blob/main/README.md) is a secure Git credential helper that runs on Windows, macOS, and Linux. For more information about Git credential helpers, see [Avoiding repetition](https://git-scm.com/docs/gitcredentials#_avoiding_repetition) in the Pro Git book.
+
+Setup instructions vary based on your computer's operating system. For more information, see [Download and install](https://github.com/GitCredentialManager/git-credential-manager/blob/main/README.md#download-and-install) in the GitCredentialManager/git-credential-manager repository.
 
 ### Authenticating on the command line using HTTPS
 
-After you've enabled 2FA, you must create a personal access token to use as a password when authenticating to {% data variables.product.product_name %} on the command line using HTTPS URLs.
+After you've enabled 2FA, you must create a {% data variables.product.pat_generic %} to use as a password when authenticating to {% data variables.product.product_name %} on the command line using HTTPS URLs.
 
-When prompted for a username and password on the command line, use your {% data variables.product.product_name %} username and personal access token. The command line prompt won't specify that you should enter your personal access token when it asks for your password.
+When prompted for a username and password on the command line, use your {% data variables.product.product_name %} username and {% data variables.product.pat_generic %}. The command line prompt won't specify that you should enter your {% data variables.product.pat_generic %} when it asks for your password.
 
-For more information, see "[Creating a personal access token](/github/authenticating-to-github/creating-a-personal-access-token)."
+For more information, see "[Creating a {% data variables.product.pat_generic %}](/github/authenticating-to-github/creating-a-personal-access-token)."
 
 ### Authenticating on the command line using SSH
 
@@ -75,7 +81,7 @@ Enabling 2FA doesn't change how you authenticate to {% data variables.product.pr
 
 ## Using two-factor authentication to access a repository using Subversion
 
-When you access a repository via Subversion, you must provide a personal access token instead of entering your password. For more information, see "[Creating a personal access token](/github/authenticating-to-github/creating-a-personal-access-token)."
+When you access a repository via Subversion, you must provide a {% data variables.product.pat_generic %} instead of entering your password. For more information, see "[Creating a {% data variables.product.pat_generic %}](/github/authenticating-to-github/creating-a-personal-access-token)."
 
 ## Troubleshooting
 

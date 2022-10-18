@@ -4,16 +4,15 @@ This example workflow uses the [labeler action](https://github.com/actions/label
 name: Pull request labeler
 on: [ pull_request_target ]
 
-{% ifversion fpt or ghes > 3.1 or ghae or ghec %}permissions:
+permissions:
   contents: read
   pull-requests: write
 
-{% endif %}
 jobs:
   triage:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/labeler@v2
+      - uses: {% data reusables.actions.action-labeler %}
         with:
           repo-token: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
 ```

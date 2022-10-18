@@ -1,5 +1,13 @@
-To identify any constraints with concurrency or queuing, you can check how many jobs are currently being processed on the {% data variables.product.prodname_dotcom %}-hosted runners in your organization or enterprise.
+---
+ms.openlocfilehash: 99687deb5c170a7fab2b5050607b25e1aebb844b
+ms.sourcegitcommit: 5f9527483381cfb1e41f2322f67c80554750a47d
+ms.translationtype: HT
+ms.contentlocale: pt-BR
+ms.lasthandoff: 09/11/2022
+ms.locfileid: "145065440"
+---
+Para identificar qualquer restrição de concorrência ou fila, você pode verificar quantos trabalhos estão sendo processados atualmente nos executores hospedados em {% data variables.product.prodname_dotcom %} na sua organização ou empresa. 
 
-![Screenshot of a list of active jobs](/assets/images/help/settings/actions-runner-active-jobs.png)
+![Captura de tela da lista de trabalhos ativos](/assets/images/help/settings/actions-runner-active-jobs.png)
 
-For more information, see "[Monitoring your current jobs](/actions/using-github-hosted-runners/monitoring-your-current-jobs)."
+Para obter mais informações, confira "[Como monitorar seus trabalhos atuais](/actions/using-github-hosted-runners/monitoring-your-current-jobs)".

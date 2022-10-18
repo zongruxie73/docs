@@ -19,7 +19,7 @@ topics:
 
 This guide explains how to use {% data variables.product.prodname_actions %} to build and deploy a PHP project to [Azure App Service](https://azure.microsoft.com/services/app-service/).
 
-{% ifversion fpt or ghec or ghae-issue-4856 %}
+{% ifversion fpt or ghec or ghes > 3.4 %}
 
 {% note %}
 
@@ -66,6 +66,8 @@ Ensure that you set `AZURE_WEBAPP_NAME` in the workflow `env` key to the name of
 ```yaml{:copy}
 {% data reusables.actions.actions-not-certified-by-github-comment %}
 
+{% data reusables.actions.actions-use-sha-pinning-comment %}
+
 name: Build and deploy PHP app to Azure Web App
 
 env:
@@ -83,7 +85,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: {% data reusables.actions.action-checkout %}
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -100,10 +102,14 @@ jobs:
         id: composer-cache
         if: steps.check_files.outputs.files_exists == 'true'
         run: |
+{%- ifversion actions-save-state-set-output-envs %}
+          echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+{%- else %}
           echo "::set-output name=dir::$(composer config cache-files-dir)"
+{%- endif %}
 
       - name: Set up dependency caching for faster installs
-        uses: actions/cache@v2
+        uses: {% data reusables.actions.action-cache %}
         if: steps.check_files.outputs.files_exists == 'true'
         with:
           path: {% raw %}${{ steps.composer-cache.outputs.dir }}{% endraw %}
@@ -116,7 +122,7 @@ jobs:
         run: composer validate --no-check-publish && composer install --prefer-dist --no-progress
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
+        uses: {% data reusables.actions.action-upload-artifact %}
         with:
           name: php-app
           path: .
@@ -130,7 +136,7 @@ jobs:
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v3
+        uses: {% data reusables.actions.action-download-artifact %}
         with:
           name: php-app
 

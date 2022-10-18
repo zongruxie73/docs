@@ -9,23 +9,30 @@ featuredLinks:
   popular:
     - /pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests
     - /authentication
-    - /github/importing-your-projects-to-github/adding-an-existing-project-to-github-using-the-command-line
+    - /get-started/importing-your-projects-to-github/importing-source-code-to-github/adding-locally-hosted-code-to-github
     - /get-started/getting-started-with-git/managing-remote-repositories
     - /pages
+redirect_from:
+  - /github
+  - /articles
+  - /common-issues-and-questions
+  - /troubleshooting-common-issues
 versions: '*'
 children:
+  - search
   - get-started
   - account-and-profile
   - authentication
   - repositories
-  - github
   - admin
   - billing
+  - site-policy
   - organizations
   - code-security
   - pull-requests
   - issues
   - actions
+  - copilot
   - codespaces
   - packages
   - search-github
@@ -49,6 +56,7 @@ childGroups:
       - account-and-profile
       - authentication
       - billing
+      - site-policy
   - name: Collaborative coding
     octicon: CommentDiscussionIcon
     children:
@@ -56,6 +64,7 @@ childGroups:
       - repositories
       - pull-requests
       - discussions
+      - copilot
   - name: CI/CD and DevOps
     octicon: GearIcon
     children:
@@ -66,6 +75,10 @@ childGroups:
     octicon: ShieldLockIcon
     children:
       - code-security
+      - code-security/supply-chain-security
+      - code-security/dependabot
+      - code-security/code-scanning
+      - code-security/secret-scanning
   - name: Client apps
     octicon: DeviceMobileIcon
     children:
@@ -77,7 +90,7 @@ childGroups:
       - issues
       - search-github
   - name: Developers
-    octicon: MarkGithubIcon
+    octicon: CodeSquareIcon
     children:
       - developers
       - rest
@@ -116,4 +129,3 @@ externalProducts:
     href: 'https://docs.npmjs.com/'
     external: true
 ---
-

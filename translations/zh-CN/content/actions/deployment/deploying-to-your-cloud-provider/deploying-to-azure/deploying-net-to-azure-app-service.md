@@ -15,11 +15,11 @@ topics:
 {% data reusables.actions.enterprise-beta %}
 {% data reusables.actions.enterprise-github-hosted-runners %}
 
-## 简介
+## Introduction
 
 This guide explains how to use {% data variables.product.prodname_actions %} to build and deploy a .NET project to [Azure App Service](https://azure.microsoft.com/services/app-service/).
 
-{% ifversion fpt or ghec or ghae-issue-4856 %}
+{% ifversion fpt or ghec or ghes > 3.4 %}
 
 {% note %}
 
@@ -29,13 +29,13 @@ This guide explains how to use {% data variables.product.prodname_actions %} to 
 
 {% endif %}
 
-## 基本要求
+## Prerequisites
 
-在创建 {% data variables.product.prodname_actions %} 工作流程之前，首先需要完成以下设置步骤：
+Before creating your {% data variables.product.prodname_actions %} workflow, you will first need to complete the following setup steps:
 
 {% data reusables.actions.create-azure-app-plan %}
 
-2. 创建 Web 应用。
+2. Create a web app.
 
    For example, you can use the Azure CLI to create an Azure App Service web app with a .NET runtime:
 
@@ -47,24 +47,26 @@ This guide explains how to use {% data variables.product.prodname_actions %} to 
        --runtime "DOTNET|5.0"
    ```
 
-   在上面的命令中，将参数替换为您自己的值，其中 `MY_WEBAPP_NAME` 是 Web 应用的新名称。
+   In the command above, replace the parameters with your own values, where `MY_WEBAPP_NAME` is a new name for the web app.
 
 {% data reusables.actions.create-azure-publish-profile %}
 
 5. Optionally, configure a deployment environment. {% data reusables.actions.about-environments %}
 
-## 创建工作流程
+## Creating the workflow
 
-完成先决条件后，可以继续创建工作流程。
+Once you've completed the prerequisites, you can proceed with creating the workflow.
 
 The following example workflow demonstrates how to build and deploy a .NET project to Azure App Service when there is a push to the `main` branch.
 
-确保在工作流程 `env` 中将 `AZURE_WEBAPP_NAME` 密钥设置为您创建的 web 应用程序名称。 If the path to your project is not the repository root, change `AZURE_WEBAPP_PACKAGE_PATH`.  If you use a version of .NET other than `5`, change `DOTNET_VERSION`.
+Ensure that you set `AZURE_WEBAPP_NAME` in the workflow `env` key to the name of the web app you created. If the path to your project is not the repository root, change `AZURE_WEBAPP_PACKAGE_PATH`.  If you use a version of .NET other than `5`, change `DOTNET_VERSION`.
 
 {% data reusables.actions.delete-env-key %}
 
 ```yaml{:copy}
 {% data reusables.actions.actions-not-certified-by-github-comment %}
+
+{% data reusables.actions.actions-use-sha-pinning-comment %}
 
 name: Build and deploy ASP.Net Core app to an Azure Web App
 
@@ -83,15 +85,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: {% data reusables.actions.action-checkout %}
 
       - name: Set up .NET Core
-        uses: actions/setup-dotnet@v1
+        uses: {% data reusables.actions.action-setup-dotnet %}
         with:
           dotnet-version: {% raw %}${{ env.DOTNET_VERSION }}{% endraw %}
 
       - name: Set up dependency caching for faster builds
-        uses: actions/cache@v2
+        uses: {% data reusables.actions.action-cache %}
         with:
           path: ~/.nuget/packages
           key: {% raw %}${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}{% endraw %}
@@ -105,7 +107,7 @@ jobs:
         run: dotnet publish -c Release -o {% raw %}${{env.DOTNET_ROOT}}{% endraw %}/myapp
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
+        uses: {% data reusables.actions.action-upload-artifact %}
         with:
           name: .net-app
           path: {% raw %}${{env.DOTNET_ROOT}}{% endraw %}/myapp
@@ -119,7 +121,7 @@ jobs:
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v3
+        uses: {% data reusables.actions.action-download-artifact %}
         with:
           name: .net-app
 
@@ -132,10 +134,10 @@ jobs:
           package: {% raw %}${{ env.AZURE_WEBAPP_PACKAGE_PATH }}{% endraw %}
 ```
 
-## 其他资源
+## Additional resources
 
-以下资源也可能有用：
+The following resources may also be useful:
 
-* 有关原始入门工作流程，请参阅 {% data variables.product.prodname_actions %} `starter-workflows` 仓库中的 [`azure-webapps-dotnet-core.yml`](https://github.com/actions/starter-workflows/blob/main/deployments/azure-webapps-dotnet-core.yml)。
-* 用于部署 Web 应用的操作是正式的 Azure [`Azure/webapps-deploy`](https://github.com/Azure/webapps-deploy) 操作。
+* For the original starter workflow, see [`azure-webapps-dotnet-core.yml`](https://github.com/actions/starter-workflows/blob/main/deployments/azure-webapps-dotnet-core.yml) in the {% data variables.product.prodname_actions %} `starter-workflows` repository.
+* The action used to deploy the web app is the official Azure [`Azure/webapps-deploy`](https://github.com/Azure/webapps-deploy) action.
 * For more examples of GitHub Action workflows that deploy to Azure, see the [actions-workflow-samples](https://github.com/Azure/actions-workflow-samples) repository.

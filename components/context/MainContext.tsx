@@ -13,13 +13,6 @@ export type ProductT = {
   versions?: Array<string>
 }
 
-export type ProductGroupT = {
-  name: string
-  icon: string
-  octicon: string
-  children: Array<ProductT>
-}
-
 type VersionItem = {
   // free-pro-team@latest, enterprise-cloud@latest, enterprise-server@3.3 ...
   version: string
@@ -27,9 +20,9 @@ type VersionItem = {
   currentRelease: string
   latestVersion: string
   shortName: string
-  // api.github.com, ghes-3.3, github.ae
+  // api.github.com, ghec, ghes-3.3, github.ae
   openApiVersionName: string
-  // api.github.com, ghes-, github.ae
+  // api.github.com, ghec, ghes-, github.ae
   openApiBaseName: string
 }
 
@@ -77,7 +70,6 @@ export type MainContextT = {
     article?: BreadcrumbT
   }
   activeProducts: Array<ProductT>
-  productGroups: Array<ProductGroupT>
   communityRedirect: {
     name: string
     href: string
@@ -87,13 +79,11 @@ export type MainContextT = {
   isHomepageVersion: boolean
   isFPT: boolean
   data: DataT
-  airGap?: boolean
   error: string
   currentCategory?: string
   relativePath?: string
   enterpriseServerReleases: EnterpriseServerReleases
   currentPathWithoutLanguage: string
-  userLanguage: string
   allVersions: Record<string, VersionItem>
   currentVersion?: string
   currentProductTree?: ProductTreeNode | null
@@ -107,6 +97,7 @@ export type MainContextT = {
     fullTitle?: string
     introPlainText?: string
     hidden: boolean
+    noEarlyAccessBanner: boolean
     permalinks?: Array<{
       languageCode: string
       relativePath: string
@@ -126,11 +117,18 @@ export type MainContextT = {
   fullUrl: string
 }
 
-export const getMainContext = (req: any, res: any): MainContextT => {
+export const getMainContext = async (req: any, res: any): Promise<MainContextT> => {
+  // Our current translation process adds 'ms.*' frontmatter properties to files
+  // it translates including when data/ui.yml is translated. We don't use these
+  // properties and their syntax (e.g. 'ms.openlocfilehash',
+  // 'ms.sourcegitcommit', etc.) causes problems so just delete them.
+  if (req.context.site.data.ui.ms) {
+    delete req.context.site.data.ui.ms
+  }
+
   return {
     breadcrumbs: req.context.breadcrumbs || {},
     activeProducts: req.context.activeProducts,
-    productGroups: req.context.productGroups,
     communityRedirect: req.context.page?.communityRedirect || {},
     currentProduct: req.context.productMap[req.context.currentProduct] || null,
     currentLayoutName: req.context.currentLayoutName,
@@ -147,7 +145,6 @@ export const getMainContext = (req: any, res: any): MainContextT => {
         release_candidate: req.context.site.data.variables.release_candidate,
       },
     },
-    airGap: req.context.AIRGAP || false,
     currentCategory: req.context.currentCategory || '',
     currentPathWithoutLanguage: req.context.currentPathWithoutLanguage,
     relativePath: req.context.page?.relativePath,
@@ -170,6 +167,7 @@ export const getMainContext = (req: any, res: any): MainContextT => {
         ])
       ),
       hidden: req.context.page.hidden || false,
+      noEarlyAccessBanner: req.context.page.noEarlyAccessBanner || false,
     },
     enterpriseServerReleases: pick(req.context.enterpriseServerReleases, [
       'isOldestReleaseDeprecated',
@@ -178,7 +176,6 @@ export const getMainContext = (req: any, res: any): MainContextT => {
       'supported',
     ]),
     enterpriseServerVersions: req.context.enterpriseServerVersions,
-    userLanguage: req.context.userLanguage || '',
     allVersions: req.context.allVersions,
     currentVersion: req.context.currentVersion,
     currentProductTree: req.context.currentProductTree
