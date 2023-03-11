@@ -1,5 +1,8 @@
 import { Client } from '@elastic/elasticsearch'
 
+export const POSSIBLE_HIGHLIGHT_FIELDS = ['title', 'content', 'headings']
+export const DEFAULT_HIGHLIGHT_FIELDS = ['title', 'content']
+
 const ELASTICSEARCH_URL = process.env.ELASTICSEARCH_URL
 
 const isDevMode = process.env.NODE_ENV !== 'production'
@@ -37,9 +40,19 @@ export async function getSearchResults({
   topics,
   includeTopics,
   usePrefixSearch,
+  highlights,
+  include,
 }) {
   if (topics && !Array.isArray(topics)) {
     throw new Error("'topics' has to be an array")
+  }
+  if (include) {
+    if (!Array.isArray(include)) {
+      throw new Error("'include' has to be an array")
+    }
+    if (!include.every((value) => typeof value === 'string')) {
+      throw new Error("Every entry in the 'include' must be a string")
+    }
   }
   const t0 = new Date()
   const client = getClient()
@@ -72,7 +85,8 @@ export async function getSearchResults({
     matchQuery.bool.filter = topicsFilter
   }
 
-  const highlight = getHighlightConfiguration(query)
+  const highlightFields = highlights || DEFAULT_HIGHLIGHT_FIELDS
+  const highlight = getHighlightConfiguration(query, highlightFields)
 
   const searchQuery = {
     highlight,
@@ -141,7 +155,13 @@ export async function getSearchResults({
 
   // const hitsAll = result.hits  // ES >7.11
   const hitsAll = result.body // ES <=7.11
-  const hits = getHits(hitsAll.hits.hits, { indexName, debug, includeTopics })
+  const hits = getHits(hitsAll.hits.hits, {
+    indexName,
+    debug,
+    includeTopics,
+    highlightFields,
+    include,
+  })
   const t1 = new Date()
 
   const meta = {
@@ -345,14 +365,26 @@ function getMatchQueries(query, { usePrefixSearch, fuzzy }) {
   return matchQueries
 }
 
-function getHits(hits, { indexName, debug, includeTopics }) {
+function getHits(hits, { indexName, debug, includeTopics, highlightFields, include }) {
   return hits.map((hit) => {
+    // Return `hit.highlights[...]` based on the highlight fields requested.
+    // So if you searched with `&highlights=headings&highlights=content`
+    // this will become:
+    //   {
+    //      content: [...],
+    //      headings: [...]
+    //   }
+    // even if there was a match on 'title'.
+    const hitHighlights = Object.fromEntries(
+      highlightFields.map((key) => [key, (hit.highlight && hit.highlight[key]) || []])
+    )
+
     const result = {
       id: hit._id,
       url: hit._source.url,
       title: hit._source.title,
       breadcrumbs: hit._source.breadcrumbs,
-      highlights: hit.highlight || {},
+      highlights: hitHighlights,
     }
     if (includeTopics) {
       result.topics = hit._source.topics || []
@@ -364,7 +396,9 @@ function getHits(hits, { indexName, debug, includeTopics }) {
         result.es_url = `http://localhost:9200/${indexName}/_doc/${hit._id}`
       }
     }
-
+    for (const field of include || []) {
+      result[field] = hit._source[field]
+    }
     return result
   })
 }
@@ -374,31 +408,38 @@ function getHits(hits, { indexName, debug, includeTopics }) {
 // of highlights of content under each title. If we feel it shows too
 // many highlights in the search result UI, we can come back here
 // and change it to something more appropriate.
-function getHighlightConfiguration(query) {
-  return {
-    pre_tags: ['<mark>'],
-    post_tags: ['</mark>'],
-    fields: {
-      title: {
-        fragment_size: 200,
-        number_of_fragments: 1,
-      },
-      headings: { fragment_size: 150, number_of_fragments: 2 },
-      // The 'no_match_size' is so we can display *something* for the
-      // preview if there was no highlight match at all within the content.
-      content: {
-        fragment_size: 150,
-        number_of_fragments: 3,
-        no_match_size: 150,
+function getHighlightConfiguration(query, highlights) {
+  const fields = {}
+  if (highlights.includes('title')) {
+    fields.title = {
+      fragment_size: 200,
+      number_of_fragments: 1,
+    }
+  }
+  if (highlights.includes('headings')) {
+    fields.headings = { fragment_size: 150, number_of_fragments: 2 }
+  }
+  if (highlights.includes('content')) {
+    // The 'no_match_size' is so we can display *something* for the
+    // preview if there was no highlight match at all within the content.
+    fields.content = {
+      fragment_size: 150,
+      number_of_fragments: 1,
+      no_match_size: 150,
 
-        highlight_query: {
-          match_phrase_prefix: {
-            content: {
-              query,
-            },
+      highlight_query: {
+        match_phrase_prefix: {
+          content: {
+            query,
           },
         },
       },
-    },
+    }
+  }
+
+  return {
+    pre_tags: ['<mark>'],
+    post_tags: ['</mark>'],
+    fields,
   }
 }
