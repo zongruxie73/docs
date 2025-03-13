@@ -1,7 +1,8 @@
-当您为现有仓库启用一个或多个安全和分析功能时，您将在几分钟内看到 {% data variables.product.prodname_dotcom %} 上显示的任何结果：
+When you enable one or more security and analysis features for existing repositories, you will see any results displayed on {% data variables.product.prodname_dotcom %} within minutes:
 
-- 所有现有仓库将具有选定的配置。
-- 如果您已为新仓库启用复选框，新仓库将使用选定的配置。{% if currentVersion == "free-pro-team@latest" or currentVersion ver_gt "enterprise-server@2.22" %}
-- 我们使用权限扫描清单文件以应用相关服务。
-- 您将看到有关您的依赖关系图的信息。
-- {% data variables.product.prodname_dotcom %} 将生成 {% data variables.product.prodname_dependabot_alerts %}{% endif %}{% if currentVersion == "free-pro-team@latest" %} 并提出拉取请求{% endif %}。 
+- All the existing repositories will have the selected configuration.
+- New repositories will follow the selected configuration if you've enabled the checkbox for new repositories.{% ifversion fpt or ghec %}
+- We use the permissions to scan for manifest files to apply the relevant services.
+- If enabled, you'll see dependency information in the dependency graph.
+- If enabled, {% data variables.product.prodname_dotcom %} will generate {% data variables.product.prodname_dependabot_alerts %} for vulnerable dependencies or malware.{% endif %}{% ifversion fpt or ghec or ghes %}
+- If enabled, {% data variables.product.prodname_dependabot %} security updates will create pull requests to upgrade vulnerable dependencies when {% data variables.product.prodname_dependabot_alerts %} are triggered.{% endif %}

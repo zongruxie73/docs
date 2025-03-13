@@ -1,14 +1,9 @@
-{{ site.data.variables.product.prodname_registry }}でパッケージを公開、インストール、削除するにはアクセストークンが必要です。 {% data variables.product.prodname_registry %}に直接、あるいは{% data variables.product.prodname_dotcom %} APIでユーザ名で認証を受けるのに、個人のアクセストークンが利用できます。 個人トークンを作成する際には、必要に応じて様々なスコープをトークンに割り当てできます。
+{% data reusables.package_registry.packages-classic-pat-only %}
 
-{% if currentVersion == "free-pro-team@latest" %}
-認証を
-{% data variables.product.prodname_actions %}のワークフローで行うには:
-- パッケージレジストリの場合(`PACKAGE-REGISTRY.pkg.github.com`)は、`GITHUB_TOKEN`を利用できます。
-- コンテナレジストリ（`ghcr.io/OWNER/IMAGE-NAME`）の場合は、`GITHUB_TOKEN`もしくは個人アクセストークンを利用できます。 `GITHUB_TOKEN`を利用し、リポジトリに不要なアクセスをしないようにすることを強くおすすめします。
+You need an access token to publish, install, and delete private, internal, and public packages.
 
-{% data variables.product.prodname_actions %}ワークフローで使われる`GITHUB_TOKEN`に関する情報については、「[暗号化されたシークレット](/actions/reference/encrypted-secrets)」及び「[ワークフロー内での認証](/actions/reference/authentication-in-a-workflow#using-the-github_token-in-a-workflow)」を参照してください。
+You can use a {% data variables.product.pat_v1 %} to authenticate to {% data variables.product.prodname_registry %} or the {% ifversion fpt or ghec %}{% data variables.product.prodname_dotcom %}{% else %}{% data variables.product.product_name %}{% endif %} API. When you create a {% data variables.product.pat_v1 %}, you can assign the token different scopes depending on your needs. For more information about packages-related scopes for a {% data variables.product.pat_v1 %}, see "[About permissions for GitHub Packages](/packages/learn-github-packages/about-permissions-for-github-packages#about-scopes-and-permissions-for-package-registries)."
 
-{% else %}
-認証を
-{% data variables.product.prodname_actions %}ワークフローを使って{% data variables.product.prodname_registry %}に対して行うには、`GITHUB_TOKEN`を使わなければなりません。
-{% endif %}
+To authenticate to a {% data variables.product.prodname_registry %} registry within a {% data variables.product.prodname_actions %} workflow, you can use:
+- `GITHUB_TOKEN` to publish packages associated with the workflow repository.
+- a {% data variables.product.pat_v1 %} with at least `packages:read` scope to install packages associated with other private repositories (which `GITHUB_TOKEN` can't access).
