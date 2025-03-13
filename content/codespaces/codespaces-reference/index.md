@@ -1,14 +1,15 @@
 ---
 title: Reference
-intro: 'This section contains references that will allow you to be successful with {% data variables.product.prodname_codespaces %}'
+intro: 'This section contains references that will allow you to be successful with {% data variables.product.prodname_github_codespaces %}'
 versions:
-  free-pro-team: '*'
+  fpt: '*'
+  ghec: '*'
+product: '{% data reusables.gated-features.codespaces %}'
+children:
+  - /allowing-your-codespace-to-access-a-private-image-registry
+  - /using-github-copilot-in-github-codespaces
+  - /using-the-vs-code-command-palette-in-codespaces
+  - /security-in-github-codespaces
+  - /disaster-recovery-for-github-codespaces
 ---
 
-{% data reusables.codespaces.release-stage %}
-
-{% link_with_intro /about-billing-for-codespaces %}
-
-{% link_with_intro /troubleshooting-your-codespace %}
-
-{% link_with_intro /allowing-your-codespace-to-access-a-private-image-registry %}
