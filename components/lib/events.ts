@@ -1,18 +1,24 @@
 /* eslint-disable camelcase */
 import { v4 as uuidv4 } from 'uuid'
 import Cookies from 'js-cookie'
-import getCsrf from './get-csrf'
-import parseUserAgent from './user-agent'
+import { parseUserAgent } from './user-agent'
 
 const COOKIE_NAME = '_docs-events'
 
 const startVisitTime = Date.now()
 
+let initialized = false
 let cookieValue: string | undefined
 let pageEventId: string | undefined
 let maxScrollY = 0
 let pauseScrolling = false
 let sentExit = false
+
+function resetPageParams() {
+  maxScrollY = 0
+  pauseScrolling = false
+  sentExit = false
+}
 
 export function getUserEventsId() {
   if (cookieValue) return cookieValue
@@ -20,7 +26,7 @@ export function getUserEventsId() {
   if (cookieValue) return cookieValue
   cookieValue = uuidv4()
   Cookies.set(COOKIE_NAME, cookieValue, {
-    secure: true,
+    secure: document.location.protocol !== 'http:',
     sameSite: 'strict',
     expires: 365,
   })
@@ -32,6 +38,7 @@ export enum EventType {
   exit = 'exit',
   link = 'link',
   search = 'search',
+  searchResult = 'searchResult',
   navigate = 'navigate',
   survey = 'survey',
   experiment = 'experiment',
@@ -50,8 +57,14 @@ type SendEventProps = {
   exit_visit_duration?: number
   exit_scroll_length?: number
   link_url?: string
+  link_samesite?: boolean
   search_query?: string
   search_context?: string
+  search_result_query?: string
+  search_result_index?: number
+  search_result_total?: number
+  search_result_rank?: number
+  search_result_url?: string
   navigate_label?: string
   survey_token?: string // Honeypot, doesn't exist in schema
   survey_vote?: boolean
@@ -65,10 +78,13 @@ type SendEventProps = {
   preference_value?: string
 }
 
+function getMetaContent(name: string) {
+  const metaTag = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement
+  return metaTag?.content
+}
+
 export function sendEvent({ type, version = '1.0.0', ...props }: SendEventProps) {
   const body = {
-    _csrf: getCsrf(),
-
     type,
 
     context: {
@@ -85,7 +101,13 @@ export function sendEvent({ type, version = '1.0.0', ...props }: SendEventProps)
       referrer: document.referrer,
       search: location.search,
       href: location.href,
-      site_language: location.pathname.split('/')[1],
+      path_language: getMetaContent('path-language'),
+      path_version: getMetaContent('path-version'),
+      path_product: getMetaContent('path-product'),
+      path_article: getMetaContent('path-article'),
+      page_document_type: getMetaContent('page-document-type'),
+      page_type: getMetaContent('page-type'),
+      status: Number(getMetaContent('status') || 0),
 
       // Device information
       // os, os_version, browser, browser_version:
@@ -99,18 +121,41 @@ export function sendEvent({ type, version = '1.0.0', ...props }: SendEventProps)
 
       // Preference information
       application_preference: Cookies.get('toolPreferred'),
+      color_mode_preference: getColorModePreference(),
+      os_preference: Cookies.get('osPreferred'),
     },
 
     ...props,
   }
 
-  // Only send the beacon if the feature is not disabled in the user's browser
-  if (navigator?.sendBeacon) {
-    const blob = new Blob([JSON.stringify(body)], { type: 'application/json' })
-    navigator.sendBeacon('/events', blob)
+  const blob = new Blob([JSON.stringify(body)], { type: 'application/json' })
+  const endpoint = '/api/events'
+  try {
+    // Only send the beacon if the feature is not disabled in the user's browser
+    // Even if the function exists, it can still throw an error from the call being blocked
+    navigator?.sendBeacon(endpoint, blob)
+  } catch {
+    console.warn(`sendBeacon to '${endpoint}' failed.`)
   }
 
   return body
+}
+
+function getColorModePreference() {
+  // color mode is set as attributes on <body>, we'll use that information
+  // along with media query checking rather than parsing the cookie value
+  // set by github.com
+  let color_mode_preference = document.querySelector('body')?.dataset.colorMode
+
+  if (color_mode_preference === 'auto') {
+    if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+      color_mode_preference += ':light'
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      color_mode_preference += ':dark'
+    }
+  }
+
+  return color_mode_preference
 }
 
 function getPerformance() {
@@ -142,9 +187,13 @@ function trackScroll() {
   if (scrollPosition > maxScrollY) maxScrollY = scrollPosition
 }
 
+function sendPage() {
+  const pageEvent = sendEvent({ type: EventType.page })
+  pageEventId = pageEvent?.context?.event_id
+}
+
 function sendExit() {
   if (sentExit) return
-  if (document.visibilityState !== 'hidden') return
   sentExit = true
   const { render, firstContentfulPaint, domInteractive, domComplete } = getPerformance()
   return sendEvent({
@@ -158,9 +207,33 @@ function sendExit() {
   })
 }
 
-function initPageEvent() {
-  const pageEvent = sendEvent({ type: EventType.page })
-  pageEventId = pageEvent?.context?.event_id
+function initPageAndExitEvent() {
+  sendPage() // Initial page hit
+
+  // Regular page exits
+  window.addEventListener('scroll', trackScroll)
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+      sendExit()
+    }
+  })
+
+  // Client-side routing
+  const pushState = history.pushState
+  history.pushState = function (state, title, url) {
+    // Don't trigger page events on query string or hash changes
+    const newPath = url?.toString().replace(location.origin, '').split('?')[0]
+    const shouldSendEvents = newPath !== location.pathname
+    if (shouldSendEvents) {
+      sendExit()
+    }
+    const result = pushState.call(history, state, title, url)
+    if (shouldSendEvents) {
+      sendPage()
+      resetPageParams()
+    }
+    return result
+  }
 }
 
 function initClipboardEvent() {
@@ -171,59 +244,46 @@ function initClipboardEvent() {
   })
 }
 
+function initCopyButtonEvent() {
+  document.documentElement.addEventListener('click', (evt) => {
+    const target = evt.target as HTMLElement
+    const button = target.closest('.js-btn-copy') as HTMLButtonElement
+    if (!button) return
+    sendEvent({ type: EventType.navigate, navigate_label: 'copy icon button' })
+  })
+}
+
 function initLinkEvent() {
   document.documentElement.addEventListener('click', (evt) => {
     const target = evt.target as HTMLElement
-    const link = target.closest('a[href^="http"]') as HTMLAnchorElement
+    const link = target.closest('a[href]') as HTMLAnchorElement
     if (!link) return
+    const sameSite = link.origin === location.origin
     sendEvent({
       type: EventType.link,
       link_url: link.href,
+      link_samesite: sameSite,
     })
   })
 }
 
-function initExitEvent() {
-  window.addEventListener('scroll', trackScroll)
-  document.addEventListener('visibilitychange', sendExit)
-}
-
-function initNavigateEvent() {
-  if (!document.querySelector('.sidebar-products')) return
-
-  Array.from(document.querySelectorAll('.sidebar-products details')).forEach((details) =>
-    details.addEventListener('toggle', (evt) => {
-      const target = evt.target as HTMLDetailsElement
-      sendEvent({
-        type: EventType.navigate,
-        navigate_label: `details ${target.open ? 'open' : 'close'}: ${
-          target?.querySelector('summary')?.innerText
-        }`,
-      })
-    })
-  )
-
-  document.querySelector('.sidebar-products')?.addEventListener('click', (evt) => {
-    const target = evt.target as HTMLElement
-    const link = target.closest('a') as HTMLAnchorElement
-    if (!link) return
-    sendEvent({
-      type: EventType.navigate,
-      navigate_label: `link: ${link.href}`,
-    })
+function initPrintEvent() {
+  window.addEventListener('beforeprint', () => {
+    sendEvent({ type: EventType.print })
   })
 }
 
-export default function initializeEvents() {
-  initPageEvent() // must come first
-  initExitEvent()
+export function initializeEvents() {
+  if (initialized) return
+  initialized = true
+  initPageAndExitEvent() // must come first
   initLinkEvent()
   initClipboardEvent()
-  initNavigateEvent()
-  // print event in ./print.js
+  initCopyButtonEvent()
+  initPrintEvent()
   // survey event in ./survey.js
   // experiment event in ./experiment.js
-  // search event in ./search.js
+  // search and search_result event in ./search.js
   // redirect event in middleware/record-redirect.js
   // preference event in ./display-tool-specific-content.js
 }
