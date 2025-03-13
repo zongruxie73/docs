@@ -4,7 +4,6 @@ shortTitle: Paying by invoice
 intro: 'If your company pays {% data variables.product.company_short %} by invoice, you can join the Sponsors for Companies service.'
 versions:
   fpt: '*'
-  ghec: '*'
 type: how_to
 topics:
   - Sponsors
@@ -19,3 +18,4 @@ Companies can use an invoice method to participate in the {% data variables.prod
 
 You can join this beta program by talking to your sales representative, or by [contacting us](https://support.github.com/contact/org-sponsors-waitlist).
 
+For information about receiving payments from the Sponsors for Companies service, see "[Receiving payments from Sponsors for Companies](/sponsors/receiving-sponsorships-through-github-sponsors/sponsors-for-companies)."

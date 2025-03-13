@@ -1,25 +1,23 @@
 ---
-title: Input objects
+title: 入力オブジェクト
 redirect_from:
   - /v4/input_object
   - /v4/reference/input_object
 versions:
-  fpt: '*'
-  ghec: '*'
-  ghes: '*'
-  ghae: '*'
+  free-pro-team: '*'
+  enterprise-server: '*'
+  github-ae: '*'
 topics:
   - API
 ---
 
-## About input objects
+### 入力オブジェクトについて
 
-[Input objects](https://graphql.github.io/graphql-spec/June2018/#sec-Input-Objects) can be described as "composable objects" because they include a set of input fields that define the object.
+[入力オブジェクト](https://graphql.github.io/graphql-spec/June2018/#sec-Input-Objects)は、オブジェクトを定義する入力フィールドの集合を含むことから、「構成可能オブジェクト」と呼ぶことができます。
 
-For example, [`CommitAuthor`](/graphql/reference/input-objects#commitauthor) takes a field called `emails`. Providing a value for `emails` transforms `CommitAuthor` into a list of `User` objects containing that email address. Note that [objects](/graphql/reference/objects) **may** have input objects, whereas [mutations](/graphql/reference/mutations) **require** input objects.
+たとえば、[` CommitAuthor`](/graphql/reference/input-objects#commitauthor)は`emails`というフィールドを取ります。 `emails`に値を提供すると、`CommitAuthor`はそのメールアドレスを含む`User`オブジェクトのリストに変換されます。 [オブジェクト](/graphql/reference/objects)は入力オブジェクトを持つ**こともある**のに対して、[ミューテーション](/graphql/reference/mutations)は入力オブジェクトを**必要**とすることに注意してください。
 
-For more information, see "[About mutations](/graphql/guides/forming-calls-with-graphql#about-mutations)."
+詳しい情報については「[ミューテーションについて](/graphql/guides/forming-calls-with-graphql#about-mutations)」を参照してください。
 
-{% data reusables.projects.graphql-ghes %}
-
-<!-- Content after this section is automatically generated -->
+<!-- this page is pre-rendered by scripts because it's too big to load dynamically -->
+<!-- see lib/graphql/static/prerendered-input-objects.json -->

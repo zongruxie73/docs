@@ -1,6 +1,7 @@
 import { GetServerSideProps } from 'next'
 
 import { MainContextT, MainContext, getMainContext } from 'components/context/MainContext'
+import { Breadcrumbs } from 'components/Breadcrumbs'
 import { DefaultLayout } from 'components/DefaultLayout'
 import { useEffect, useRef } from 'react'
 
@@ -9,7 +10,7 @@ type Props = {
   graphqlExplorerUrl: string
 }
 export default function GQLExplorer({ mainContext, graphqlExplorerUrl }: Props) {
-  const { page } = mainContext
+  const { page, airGap } = mainContext
   const graphiqlRef = useRef<HTMLIFrameElement>(null)
 
   useEffect(() => {
@@ -22,20 +23,26 @@ export default function GQLExplorer({ mainContext, graphqlExplorerUrl }: Props) 
     <MainContext.Provider value={mainContext}>
       <DefaultLayout>
         <div className="container-xl px-3 px-md-6 my-4 my-lg-4">
+          <Breadcrumbs />
+
           <h1>{page.title}</h1>
         </div>
 
         <div>
-          {/* eslint-disable-next-line jsx-a11y/iframe-has-title */}
-          <iframe
-            ref={graphiqlRef}
-            style={{ height: 715 }}
-            className="border width-full"
-            scrolling="no"
-            src={graphqlExplorerUrl}
-          >
-            <p>You must have iframes enabled to use this feature.</p>
-          </iframe>
+          {airGap ? (
+            <p>GraphQL explorer is not available on this environment.</p>
+          ) : (
+            /* eslint-disable-next-line jsx-a11y/iframe-has-title */
+            <iframe
+              ref={graphiqlRef}
+              style={{ height: 715 }}
+              className="border width-full"
+              scrolling="no"
+              src={graphqlExplorerUrl}
+            >
+              <p>You must have iframes enabled to use this feature.</p>
+            </iframe>
+          )}
         </div>
       </DefaultLayout>
     </MainContext.Provider>
@@ -45,15 +52,11 @@ export default function GQLExplorer({ mainContext, graphqlExplorerUrl }: Props) 
 export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
   const req = context.req as any
   const res = context.res as any
-  const graphqlExplorerUrl =
-    process.env.NODE_ENV === 'production'
-      ? 'https://graphql.github.com/explorer'
-      : 'http://localhost:3000'
 
   return {
     props: {
-      mainContext: await getMainContext(req, res),
-      graphqlExplorerUrl,
+      mainContext: getMainContext(req, res),
+      graphqlExplorerUrl: req.context.graphql.explorerUrl,
     },
   }
 }

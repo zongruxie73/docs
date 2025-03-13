@@ -1,76 +1,57 @@
 import { useRouter } from 'next/router'
-import dynamic from 'next/dynamic'
+import cx from 'classnames'
 
 import { ZapIcon, InfoIcon } from '@primer/octicons-react'
 import { Callout } from 'components/ui/Callout'
 
 import { Link } from 'components/Link'
 import { DefaultLayout } from 'components/DefaultLayout'
+import { ArticleTopper } from 'components/article/ArticleTopper'
 import { ArticleTitle } from 'components/article/ArticleTitle'
 import { useArticleContext } from 'components/context/ArticleContext'
 import { useTranslation } from 'components/hooks/useTranslation'
 import { LearningTrackNav } from './LearningTrackNav'
-import { MarkdownContent } from 'components/ui/MarkdownContent'
-import { Lead } from 'components/ui/Lead'
+import { ArticleContent } from './ArticleContent'
 import { ArticleGridLayout } from './ArticleGridLayout'
-import { PlatformPicker } from 'components/article/PlatformPicker'
-import { ToolPicker } from 'components/article/ToolPicker'
-import { MiniTocs } from 'components/ui/MiniTocs'
-import { ClientSideHighlight } from 'components/ClientSideHighlight'
-
-const ClientSideRefresh = dynamic(() => import('components/ClientSideRefresh'), {
-  ssr: false,
-})
-const isDev = process.env.NODE_ENV === 'development'
 
 // Mapping of a "normal" article to it's interactive counterpart
 const interactiveAlternatives: Record<string, { href: string }> = {
-  '/codespaces/setting-up-your-project-for-codespaces/setting-up-your-nodejs-project-for-codespaces':
-    {
-      href: '/codespaces/setting-up-your-project-for-codespaces/setting-up-your-project-for-codespaces?langId=nodejs',
-    },
-  '/codespaces/setting-up-your-project-for-codespaces/setting-up-your-dotnet-project-for-codespaces':
-    {
-      href: '/codespaces/setting-up-your-project-for-codespaces/setting-up-your-project-for-codespaces?langId=dotnet',
-    },
-  '/codespaces/setting-up-your-project-for-codespaces/setting-up-your-java-project-for-codespaces':
-    {
-      href: '/codespaces/setting-up-your-project-for-codespaces/setting-up-your-project-for-codespaces?langId=java',
-    },
-  '/codespaces/setting-up-your-project-for-codespaces/setting-up-your-python-project-for-codespaces':
-    {
-      href: '/codespaces/setting-up-your-project-for-codespaces/setting-up-your-project-for-codespaces?langId=py',
-    },
+  '/actions/guides/building-and-testing-nodejs': {
+    href: '/actions/guides/building-and-testing-nodejs-or-python?langId=nodejs',
+  },
+  '/actions/guides/building-and-testing-python': {
+    href: '/actions/guides/building-and-testing-nodejs-or-python?langId=python',
+  },
 }
 
 export const ArticlePage = () => {
-  const { asPath } = useRouter()
+  const router = useRouter()
   const {
     title,
     intro,
-    effectiveDate,
     renderedPage,
     contributor,
     permissions,
     includesPlatformSpecificContent,
-    includesToolSpecificContent,
+    defaultPlatform,
     product,
     miniTocItems,
     currentLearningTrack,
   } = useArticleContext()
   const { t } = useTranslation('pages')
-  const currentPath = asPath.split('?')[0]
+  const currentPath = router.asPath.split('?')[0]
 
   return (
     <DefaultLayout>
-      {isDev && <ClientSideRefresh />}
-      <ClientSideHighlight />
+      <div className="container-xl px-3 px-md-6 my-4 my-lg-4">
+        <ArticleTopper />
 
-      <div className="container-xl px-3 px-md-6 my-4">
         <ArticleGridLayout
-          topper={<ArticleTitle>{title}</ArticleTitle>}
-          intro={
+          className="mt-7"
+          head={
             <>
+              <ArticleTitle>{title}</ArticleTitle>
+
               {contributor && (
                 <Callout variant="info" className="mb-3">
                   <p>
@@ -83,20 +64,48 @@ export const ArticlePage = () => {
               )}
 
               {intro && (
-                <Lead data-testid="lead" data-search="lead">
-                  {intro}
-                </Lead>
+                <div
+                  className="lead-mktg markdown-body mb-3"
+                  dangerouslySetInnerHTML={{ __html: intro }}
+                />
               )}
 
               {permissions && (
-                <div className="permissions-statement pl-3 my-4">
-                  <div className="text-bold pr-2">{t('permissions_statement')}</div>
-                  <div dangerouslySetInnerHTML={{ __html: permissions }} />
-                </div>
+                <div
+                  className="permissions-statement"
+                  dangerouslySetInnerHTML={{ __html: permissions }}
+                />
               )}
 
-              {includesPlatformSpecificContent && <PlatformPicker />}
-              {includesToolSpecificContent && <ToolPicker />}
+              {includesPlatformSpecificContent && (
+                <nav
+                  className="UnderlineNav my-3"
+                  data-default-platform={defaultPlatform || undefined}
+                >
+                  <div className="UnderlineNav-body">
+                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                    <a href="#" className="UnderlineNav-item platform-switcher" data-platform="mac">
+                      Mac
+                    </a>
+                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                    <a
+                      href="#"
+                      className="UnderlineNav-item platform-switcher"
+                      data-platform="windows"
+                    >
+                      Windows
+                    </a>
+                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                    <a
+                      href="#"
+                      className="UnderlineNav-item platform-switcher"
+                      data-platform="linux"
+                    >
+                      Linux
+                    </a>
+                  </div>
+                </nav>
+              )}
 
               {product && (
                 <Callout
@@ -118,22 +127,33 @@ export const ArticlePage = () => {
                 </div>
               )}
               {miniTocItems.length > 1 && (
-                <MiniTocs pageTitle={title} miniTocItems={miniTocItems} />
+                <>
+                  <h2 id="in-this-article" className="f5 mb-2">
+                    <a className="Link--primary" href="#in-this-article">
+                      {t('miniToc')}
+                    </a>
+                  </h2>
+                  <ul className="list-style-none pl-0 f5 mb-0">
+                    {miniTocItems.map((item) => {
+                      return (
+                        <li
+                          key={item.contents}
+                          className={cx(
+                            `ml-${item.indentationLevel * 3}`,
+                            item.platform,
+                            'mb-2 lh-condensed'
+                          )}
+                          dangerouslySetInnerHTML={{ __html: item.contents }}
+                        />
+                      )
+                    })}
+                  </ul>
+                </>
               )}
             </>
           }
         >
-          <div id="article-contents">
-            <MarkdownContent>{renderedPage}</MarkdownContent>
-            {effectiveDate && (
-              <div className="mt-4" id="effectiveDate">
-                Effective as of:{' '}
-                <time dateTime={new Date(effectiveDate).toISOString()}>
-                  {new Date(effectiveDate).toDateString()}
-                </time>
-              </div>
-            )}
-          </div>
+          <ArticleContent>{renderedPage}</ArticleContent>
         </ArticleGridLayout>
 
         {currentLearningTrack?.trackName ? (

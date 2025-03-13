@@ -1,6 +1,6 @@
 ---
 title: GitHub Sponsors 文档
-shortTitle: GitHub Sponsors
+shortTitle: GitHub 赞助者
 intro: '投资于您依赖的开源项目，支持数字基础设施，并通过赞助开放源码贡献者及其项目实现开放源码事业。 创建 {% data variables.product.prodname_sponsors %} 个人资料并为您的开源工作获得补偿。'
 introLinks:
   quickstart: /sponsors/getting-started-with-github-sponsors/quickstart-for-finding-contributors-to-sponsor
@@ -9,7 +9,6 @@ redirect_from:
   - /github/supporting-the-open-source-community-with-github-sponsors
 changelog:
   label: sponsors
-examples_source: data/product-examples/sponsors/user-examples.yml
 featuredLinks:
   guides:
     - /sponsors/sponsoring-open-source-contributors/managing-your-sponsorship
@@ -27,24 +26,15 @@ featuredLinks:
     - /sponsors/about-github-sponsors-for-open-source-contributors
 layout: product-landing
 versions:
-  fpt: '*'
-  ghec: '*'
-communityRedirect:
-  name: Provide GitHub Feedback
-  href: 'https://github.com/orgs/community/discussions/categories/sponsors'
+  free-pro-team: '*'
 children:
   - /getting-started-with-github-sponsors
   - /sponsoring-open-source-contributors
   - /receiving-sponsorships-through-github-sponsors
   - /integrating-with-github-sponsors
   - /guides
-ms.openlocfilehash: 1878df4a6915a3e1336f79705d4ac4e70794e7ed
-ms.sourcegitcommit: ac00e2afa6160341c5b258d73539869720b395a4
-ms.translationtype: HT
-ms.contentlocale: zh-CN
-ms.lasthandoff: 09/09/2022
-ms.locfileid: '147876002'
 ---
+
 <!---->
 <!---->
 <!---->

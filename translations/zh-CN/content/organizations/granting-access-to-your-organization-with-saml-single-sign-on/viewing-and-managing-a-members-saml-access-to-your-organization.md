@@ -1,45 +1,33 @@
 ---
-title: Viewing and managing a member's SAML access to your organization
-intro: 'You can view and revoke an organization member''s linked identity, active sessions, and authorized credentials.'
+title: 查看和管理成员对组织的 SAML 访问
+intro: 您可以查看和撤销组织成员的链接身份、活动会话和授权凭据。
 permissions: Organization owners can view and manage a member's SAML access to an organization.
+product: '{% data reusables.gated-features.saml-sso %}'
 redirect_from:
   - /articles/viewing-and-revoking-organization-members-authorized-access-tokens
   - /github/setting-up-and-managing-organizations-and-teams/viewing-and-revoking-organization-members-authorized-access-tokens
   - /github/setting-up-and-managing-organizations-and-teams/viewing-and-managing-a-members-saml-access-to-your-organization
 versions:
-  ghec: '*'
+  free-pro-team: '*'
 topics:
   - Organizations
   - Teams
-shortTitle: Manage SAML access
 ---
 
-## About SAML access to your organization
+### 关于对组织的 SAML 访问
 
-When you enable SAML single sign-on for your organization, each organization member can link their external identity on your identity provider (IdP) to their existing account on {% data variables.location.product_location %}. To access your organization's resources on {% data variables.product.product_name %}, the member must have an active SAML session in their browser. To access your organization's resources using the API or Git, the member must use a {% data variables.product.pat_generic %} or SSH key that the member has authorized for use with your organization.
+对组织启用 SAML 单点登录时，每个组织成员都可以将其在身份提供程序 (IdP) 上的外部身份链接到其现有的 {% data variables.product.product_name %} 帐户。 要在 {% data variables.product.product_name %} 上访问组织的资源，成员必须在其浏览器中启动 SAML 会话。 要使用 API 或 Git 访问组织的资源，成员必须使用被授权用于组织的个人访问令牌或 SSH 密钥。
 
-You can view and revoke each member's linked identity, active sessions, and authorized credentials on the same page.
+您可以在同一页面上查看和撤销每个成员的链接身份、活动会话和授权凭据。
 
-## Viewing and revoking a linked identity
+### 查看和撤销链接的身份
 
-{% data reusables.saml.about-linked-identities %} 
-
-When available, the entry will include SCIM data. For more information, see "[About SCIM for organizations](/organizations/managing-saml-single-sign-on-for-your-organization/about-scim-for-organizations)."
-
-{% warning %}
-
-**Warning:** For organizations using SCIM:
-- Revoking a linked user identity on {% data variables.product.product_name %} will also remove the SAML and SCIM metadata. As a result, the identity provider will not be able to synchronize or deprovision the linked user identity.
-- An admin must revoke a linked identity through the identity provider.
-- To revoke a linked identity and link a different account through the identity provider, an admin can remove and re-assign the user to the {% data variables.product.product_name %} application. For more information, see your identity provider's documentation.
-
-{% endwarning %}
-
+{% data reusables.saml.about-linked-identities %}
 
 {% data reusables.identity-and-permissions.revoking-identity-team-sync %}
 
 {% data reusables.profile.access_org %}
-{% data reusables.user-settings.access_org %}
+{% data reusables.user_settings.access_org %}
 {% data reusables.organizations.people %}
 {% data reusables.saml.click-person-revoke-identity %}
 {% data reusables.saml.saml-identity-linked %}
@@ -47,22 +35,22 @@ When available, the entry will include SCIM data. For more information, see "[Ab
 {% data reusables.saml.revoke-sso-identity %}
 {% data reusables.saml.confirm-revoke-identity %}
 
-## Viewing and revoking an active SAML session
+### 查看和撤销活动的 SAML 会话
 
 {% data reusables.profile.access_org %}
-{% data reusables.user-settings.access_org %}
+{% data reusables.user_settings.access_org %}
 {% data reusables.organizations.people %}
 {% data reusables.saml.click-person-revoke-session %}
 {% data reusables.saml.saml-identity-linked %}
 {% data reusables.saml.view-saml-sessions %}
 {% data reusables.saml.revoke-saml-session %}
 
-## Viewing and revoking authorized credentials
+### 查看和撤销授权的凭据
 
 {% data reusables.saml.about-authorized-credentials %}
 
 {% data reusables.profile.access_org %}
-{% data reusables.user-settings.access_org %}
+{% data reusables.user_settings.access_org %}
 {% data reusables.organizations.people %}
 {% data reusables.saml.click-person-revoke-credentials %}
 {% data reusables.saml.saml-identity-linked %}
@@ -70,7 +58,7 @@ When available, the entry will include SCIM data. For more information, see "[Ab
 {% data reusables.saml.revoke-authorized-credentials %}
 {% data reusables.saml.confirm-revoke-credentials %}
 
-## Further reading
+### 延伸阅读
 
-- "[About identity and access management with SAML single sign-on](/articles/about-identity-and-access-management-with-saml-single-sign-on)"{% ifversion ghec %}
-- "[Viewing and managing a user's SAML access to your enterprise account](/admin/user-management/managing-users-in-your-enterprise/viewing-and-managing-a-users-saml-access-to-your-enterprise)"{% endif %}
+- "[关于使用 SAML 单点登录管理身份和访问](/articles/about-identity-and-access-management-with-saml-single-sign-on)"
+- "[查看和管理用户对企业帐户的 SAML 访问](/github/setting-up-and-managing-your-enterprise/viewing-and-managing-a-users-saml-access-to-your-enterprise-account)"

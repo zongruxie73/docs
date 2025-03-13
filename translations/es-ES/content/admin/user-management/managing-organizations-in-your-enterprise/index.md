@@ -1,37 +1,24 @@
 ---
-title: Managing organizations in your enterprise
+title: Administrar las organizaciones en tu empresa
 redirect_from:
-  - /enterprise/admin/articles/adding-users-and-teams
-  - /enterprise/admin/categories/admin-bootcamp
+  - /enterprise/admin/articles/adding-users-and-teams/
+  - /enterprise/admin/categories/admin-bootcamp/
   - /enterprise/admin/user-management/organizations-and-teams
   - /enterprise/admin/user-management/managing-organizations-in-your-enterprise
-  - /articles/managing-organizations-in-your-enterprise-account
-  - /github/setting-up-and-managing-your-enterprise-account/managing-organizations-in-your-enterprise-account
-  - /github/setting-up-and-managing-your-enterprise/managing-organizations-in-your-enterprise-account
-  - /admin/user-management/managing-organizations-in-your-enterprise/managing-unowned-organizations-in-your-enterprise
-  - /github/setting-up-and-managing-your-enterprise/managing-organizations-in-your-enterprise-account/managing-unowned-organizations-in-your-enterprise-account
-  - /github/setting-up-and-managing-your-enterprise-account/managing-unowned-organizations-in-your-enterprise-account
-  - /github/setting-up-and-managing-your-enterprise/managing-unowned-organizations-in-your-enterprise-account
-intro: 'You can use organizations to group users within your company, such as divisions or groups working on similar projects, and manage access to repositories.'
+intro: 'Las organizaciones son ideales para crear grupos diferentes de usuarios dentro de tu empresa, como divisiones o grupos trabajando en proyectos similares.  {% if currentVersion == "github-ae@latest" %}Los usuarios de otras organizaciones pueden acceder a los repositorios internos{% else %}públicos e internos{% endif %} que pertenezcan a una organización diferente, pero solo los miembros de la organización que hayan recibido acceso a los repositorios privados podrán acceder a ellos.'
 versions:
-  ghec: '*'
-  ghes: '*'
-  ghae: '*'
+  enterprise-server: '*'
+  github-ae: '*'
 topics:
   - Enterprise
 children:
-  - /adding-organizations-to-your-enterprise
   - /configuring-visibility-for-organization-membership
   - /preventing-users-from-creating-organizations
   - /requiring-two-factor-authentication-for-an-organization
   - /creating-teams
   - /adding-people-to-teams
-  - /managing-your-role-in-an-organization-owned-by-your-enterprise
   - /removing-users-from-teams-and-organizations
-  - /removing-organizations-from-your-enterprise
-  - /restoring-a-deleted-organization
   - /managing-projects-using-jira
   - /continuous-integration-using-jenkins
-shortTitle: Manage organizations
 ---
 

@@ -1,7 +1,6 @@
 import { RepoIcon } from '@primer/octicons-react'
 import { CodeExample } from 'components/context/ProductLandingContext'
-import { TruncateLines } from 'components/ui/TruncateLines'
-import { Label } from '@primer/react'
+import { TruncateLines } from 'components/TruncateLines'
 
 type Props = {
   example: CodeExample
@@ -9,32 +8,32 @@ type Props = {
 export const CodeExampleCard = ({ example }: Props) => {
   return (
     <a
-      className="Box d-flex flex-column flex-justify-between height-full color-shadow-medium hover-shadow-large no-underline color-fg-default"
+      className="Box d-flex flex-column flex-justify-between height-full color-shadow-medium hover-shadow-large no-underline color-text-primary"
       data-testid="code-example-card"
       href={`https://github.com/${example.href}`}
     >
       <div className="p-4">
-        <h3 className="f4" dangerouslySetInnerHTML={{ __html: example.title }} />
-        <p
-          className="mt-2 mb-4 color-fg-muted"
-          dangerouslySetInnerHTML={{ __html: example.description }}
-        />
+        <h4 dangerouslySetInnerHTML={{ __html: example.title }} />
+        <p className="mt-2 mb-4 color-text-tertiary">{example.description}</p>
         <div className="d-flex flex-wrap">
           {example.tags.map((tag) => {
             return (
-              <Label key={tag} variant="accent" sx={{ mb: 1, mr: 2 }}>
+              <span
+                key={tag}
+                className="IssueLabel color-text-inverse color-bg-info-inverse mr-2 mb-1"
+              >
                 {tag}
-              </Label>
+              </span>
             )
           })}
         </div>
       </div>
-      <footer className="border-top p-4 color-fg-muted d-flex flex-items-center">
-        <RepoIcon aria-label="repository URL" className="flex-shrink-0" />
+      <footer className="border-top p-4 color-text-secondary d-flex flex-items-center">
+        <RepoIcon className="flex-shrink-0" />
         <TruncateLines
           as="span"
           maxLines={1}
-          className="ml-2 text-mono text-small color-fg-accent line-break-anywhere"
+          className="ml-2 text-mono text-small color-text-link line-break-anywhere"
         >
           {example.href}
         </TruncateLines>

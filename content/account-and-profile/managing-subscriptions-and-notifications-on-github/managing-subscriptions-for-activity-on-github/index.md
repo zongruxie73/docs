@@ -7,7 +7,6 @@ versions:
   fpt: '*'
   ghes: '*'
   ghae: '*'
-  ghec: '*'
 topics:
   - Notifications
 children:

@@ -1,4 +1,3 @@
-import { afterEach } from '@jest/globals'
 import nock from 'nock'
 import Hydro from '../../lib/hydro.js'
 
@@ -6,14 +5,7 @@ describe('hydro', () => {
   let hydro, params
 
   beforeEach(() => {
-    hydro = new Hydro({
-      secret: '123',
-      endpoint: 'https://real-hydro.com',
-      // When jest tests run, `NODE_ENV==='test'` so the actualy `got()`
-      // calls inside the Hydro class would be prevented.
-      // Setting this to true will prevent that second-layer protection.
-      forceDisableMock: true,
-    })
+    hydro = new Hydro({ secret: '123', endpoint: 'https://real-hydro.com' })
 
     nock(hydro.endpoint, {
       reqheaders: {
@@ -29,11 +21,6 @@ describe('hydro', () => {
       })
   })
 
-  afterEach(() => {
-    // Gotta always clean up after activating `nock`.
-    nock.cleanAll()
-  })
-
   describe('#publish', () => {
     it('publishes a single event to Hydro', async () => {
       await hydro.publish('event-name', { pizza: true })
@@ -42,6 +29,30 @@ describe('hydro', () => {
           {
             schema: 'event-name',
             value: JSON.stringify({ pizza: true }),
+            cluster: 'potomac',
+          },
+        ],
+      })
+    })
+  })
+
+  describe('#publishMany', () => {
+    it('publishes multiple events to Hydro', async () => {
+      await hydro.publishMany([
+        { schema: 'event-name', value: { pizza: true } },
+        { schema: 'other-name', value: { salad: false } },
+      ])
+
+      expect(params).toEqual({
+        events: [
+          {
+            schema: 'event-name',
+            value: JSON.stringify({ pizza: true }),
+            cluster: 'potomac',
+          },
+          {
+            schema: 'other-name',
+            value: JSON.stringify({ salad: false }),
             cluster: 'potomac',
           },
         ],

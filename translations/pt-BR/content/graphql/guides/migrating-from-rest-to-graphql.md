@@ -1,48 +1,44 @@
 ---
-title: Migrating from REST to GraphQL
-intro: 'Learn best practices and considerations for migrating from {% data variables.product.prodname_dotcom %}''s REST API to {% data variables.product.prodname_dotcom %}''s GraphQL API.'
+title: Fazer a migração de REST para o GraphQL
+intro: 'Aprenda as melhores práticas e considerações para fazer a migração da API REST do {% data variables.product.prodname_dotcom %} para a API do GraphQL do {% data variables.product.prodname_dotcom %}.'
 redirect_from:
   - /v4/guides/migrating-from-rest
   - /graphql/guides/migrating-from-rest
 versions:
-  fpt: '*'
-  ghec: '*'
-  ghes: '*'
-  ghae: '*'
+  free-pro-team: '*'
+  enterprise-server: '*'
+  github-ae: '*'
 topics:
   - API
-shortTitle: Migrate from REST to GraphQL
 ---
 
-## Differences in API logic
+### Diferenças na lógica da API
 
-{% data variables.product.company_short %} provides two APIs: a REST API and a GraphQL API. For more information about {% data variables.product.company_short %}'s APIs, see "[About {% data variables.product.company_short %}'s APIs](/developers/overview/about-githubs-apis)."
+Fazer a migração da REST para o GraphQL representa uma mudança significativa na lógica da API. As diferenças entre a REST como um estilo e o GraphQL como uma especificação tornam difícil &mdash;e, muitas vezes indesejável&mdash;substituir as chamadas da API REST por consultas da API do GraphQL individualmente. Incluímos abaixo exemplos específicos de migração.
 
-Migrating from REST to GraphQL represents a significant shift in API logic. The differences between REST as a style and GraphQL as a specification make it difficult&mdash;and often undesirable&mdash;to replace REST API calls with GraphQL API queries on a one-to-one basis. We've included specific examples of migration below.
+Para fazer a migração do seu código da [API REST](/rest) para a API do GraphQL:
 
-To migrate your code from the [REST API](/rest) to the GraphQL API:
+- Revise a [especificação do GraphQL](https://graphql.github.io/graphql-spec/June2018/)
+- Revise o [esquema do GraphQL](/graphql/reference) do GitHub
+- Considere como qualquer código existente que você tem atualmente interage com a API REST do GitHub
+- Use [IDs dos nó global](/graphql/guides/using-global-node-ids) para fazer referência a objetos entre as versões da API
 
-- Review the [GraphQL spec](https://graphql.github.io/graphql-spec/June2018/)
-- Review GitHub's [GraphQL schema](/graphql/reference)
-- Consider how any existing code you have currently interacts with the GitHub REST API
-- Use [Global Node IDs](/graphql/guides/using-global-node-ids) to reference objects between API versions
+As vantagens significativas do GraphQL incluem:
 
-Significant advantages of GraphQL include:
+- [Obter os dados de que você precisa e somente isso](#example-getting-the-data-you-need-and-nothing-more)
+- [Campos aninhados](#example-nesting)
+- [Digitação não flexível](#example-strong-typing)
 
-- [Getting the data you need and nothing more](#example-getting-the-data-you-need-and-nothing-more)
-- [Nested fields](#example-nesting)
-- [Strong typing](#example-strong-typing)
+Aqui estão exemplos de cada um.
 
-Here are examples of each.
+## Exemplo: Obter os dados de que você precisa e somente isso
 
-## Example: Getting the data you need and nothing more
-
-A single REST API call retrieves a list of your organization's members:
+Uma única chamada da REST API recupera uma lista dos membros da sua organização:
 ```shell
-curl -v {% data variables.product.api_url_pre %}/orgs/:org/members
+curl -v {% data variables.product.api_url_pre %}/orgs/:org/membros
 ```
 
-The REST payload contains excessive data if your goal is to retrieve only member names and links to avatars. However, a GraphQL query returns only what you specify:
+A carga da REST contém dados excessivos se seu objetivo é recuperar apenas nomes de integrantes e links para avatares. No entanto, uma consulta do GraphQL retorna apenas o que você especifica:
 
 ```graphql
 query {
@@ -59,17 +55,17 @@ query {
 }
 ```
 
-Consider another example: retrieving a list of pull requests and checking if each one is mergeable. A call to the REST API retrieves a list of pull requests and their [summary representations](/rest#summary-representations):
+Considere outro exemplo: recuperar uma lista de pull requests e verificar se cada um é mesclável. Uma chamada para a API REST recupera uma lista de pull requests e suas [representações resumidas](/rest#summary-representations):
 ```shell
 curl -v {% data variables.product.api_url_pre %}/repos/:owner/:repo/pulls
 ```
 
-Determining if a pull request is mergeable requires retrieving each pull request individually for its [detailed representation](/rest#detailed-representations) (a large payload) and checking whether its `mergeable` attribute is true or false:
+Determinar se um pull request pode ser mesclado demanda recuperar cada pull request individualmente para sua [representação detalhada](/rest#detailed-representations) (uma grande carga), bem como verificar seu atributo `mesclável` é verdadeiro ou falso:
 ```shell
 curl -v {% data variables.product.api_url_pre %}/repos/:owner/:repo/pulls/:number
 ```
 
-With GraphQL, you could retrieve only the `number` and `mergeable` attributes for each pull request:
+Com o GraphQL, você pode recuperar apenas os atributos `número` e `mesclável` para cada pull request:
 
 ```graphql
 query {
@@ -86,9 +82,9 @@ query {
 }
 ```
 
-## Example: Nesting
+## Exemplo: Aninhamento
 
-Querying with nested fields lets you replace multiple REST calls with fewer GraphQL queries. For example, retrieving a pull request along with its commits, non-review comments, and reviews using the **REST API** requires four separate calls:
+Fazer consulta com campos aninhados permite substituir várias chamadas de REST por menos consultas do GraphQL. Por exemplo, recuperar um pull request junto com seus commits, comentários que não são de revisão e revisões usando a **API REST** exige quatro chamadas separadas:
 ```shell
 curl -v {% data variables.product.api_url_pre %}/repos/:owner/:repo/pulls/:number
 curl -v {% data variables.product.api_url_pre %}/repos/:owner/:repo/pulls/:number/commits
@@ -96,7 +92,7 @@ curl -v {% data variables.product.api_url_pre %}/repos/:owner/:repo/issues/:numb
 curl -v {% data variables.product.api_url_pre %}/repos/:owner/:repo/pulls/:number/reviews
 ```
 
-Using the **GraphQL API**, you can retrieve the data with a single query using nested fields:
+Ao usar a **API do GraphQL**, você pode recuperar os dados com uma única consulta usando campos aninhados:
 
 ```graphql
 {
@@ -134,17 +130,17 @@ Using the **GraphQL API**, you can retrieve the data with a single query using n
 }
 ```
 
-You can also extend the power of this query by [substituting a variable](/graphql/guides/forming-calls-with-graphql#working-with-variables) for the pull request number.
+Você também pode estender o poder dessa consulta se [substitui uma variável](/graphql/guides/forming-calls-with-graphql#working-with-variables) para o número do pull request.
 
-## Example: Strong typing
+## Exemplo: Digitação não flexível
 
-GraphQL schemas are strongly typed, making data handling safer.
+Os esquemas do GraphQL são digitados de modo rígido, o que torna o gerenciamento dos dados mais seguro.
 
-Consider an example of adding a comment to an issue or pull request using a GraphQL [mutation](/graphql/reference/mutations), and mistakenly specifying an integer rather than a string for the value of [`clientMutationId`](/graphql/reference/mutations#addcomment):
+Considere um exemplo de adição de um comentário a um problema ou pull request usando uma [mutação ](/graphql/reference/mutations) do GraphQL e especificando por engano um número inteiro em vez de uma string para o valor de [`clientMutationId`](/graphql/reference/mutations#addcomment):
 
 ```graphql
 mutation {
-  addComment(input:{clientMutationId: 1234, subjectId: "MDA6SXNzdWUyMjcyMDA2MTT=", body: "Looks good to me!"}) {
+  addComment(input:{clientMutationId: 1234, subjectId: "MDA6SXNzdWUyMjcyMDA2MTT=", body: "Looks good to me!"}) "Looks good to me!"}) {
     clientMutationId
     commentEdge {
       node {
@@ -163,7 +159,7 @@ mutation {
 }
 ```
 
-Executing this query returns errors specifying the expected types for the operation:
+Executar esta consulta retorna erros especificando os tipos esperados para a operação:
 
 ```json
 {
@@ -191,7 +187,7 @@ Executing this query returns errors specifying the expected types for the operat
 }
 ```
 
-Wrapping `1234` in quotes transforms the value from an integer into a string, the expected type:
+Colocar `1234` entre aspas transforma o valor de um inteiro em uma string, o tipo esperado:
 
 ```graphql
 mutation {

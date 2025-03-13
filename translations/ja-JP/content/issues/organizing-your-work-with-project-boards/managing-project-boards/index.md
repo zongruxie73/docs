@@ -1,9 +1,11 @@
 ---
-title: '{% data variables.product.prodname_projects_v1 %} の管理'
-shortTitle: 'Managing {% data variables.product.prodname_projects_v1 %}'
-intro: '{% data variables.projects.projects_v1_boards %} を作成および管理する方法について説明します'
+title: プロジェクトボードを管理する
+shortTitle: プロジェクトボードを管理する
+intro: プロジェクトボードの作成と管理の方法を学んでください
 versions:
-  feature: projects-v1
+  free-pro-team: '*'
+  enterprise-server: '*'
+  github-ae: '*'
 topics:
   - Issues
   - Projects
@@ -21,12 +23,5 @@ children:
   - /deleting-a-project-board
 redirect_from:
   - /github/managing-your-work-on-github/managing-project-boards
-allowTitleToDifferFromFilename: true
-ms.openlocfilehash: b4034bc9c9ffd29709ac491c6729787c958dd50b
-ms.sourcegitcommit: f638d569cd4f0dd6d0fb967818267992c0499110
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 10/25/2022
-ms.locfileid: '148109571'
 ---
-{% data reusables.projects.project_boards_old %}
+

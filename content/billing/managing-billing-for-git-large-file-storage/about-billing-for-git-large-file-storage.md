@@ -7,7 +7,6 @@ redirect_from:
   - /github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-git-large-file-storage/about-billing-for-git-large-file-storage
 versions:
   fpt: '*'
-  ghec: '*'
 type: overview
 topics:
   - LFS
@@ -20,7 +19,7 @@ shortTitle: About Git LFS billing
 
 {% data reusables.large_files.owner_quota_only %}
 
-{% data reusables.user-settings.context_switcher %}
+{% data reusables.user_settings.context_switcher %}
 
 ## Purchasing additional storage and bandwidth
 

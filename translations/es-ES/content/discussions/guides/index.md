@@ -1,18 +1,25 @@
 ---
 title: Guías de los debates
-shortTitle: Guides
+shortTitle: Guías
 intro: Descubre las trayectorias para iniciar o aprende las mejores prácticas para participar o monitorear los debates de tu comunidad.
 versions:
-  feature: discussions
+  free-pro-team: '*'
 children:
   - /best-practices-for-community-conversations-on-github
-  - /finding-your-discussions
+  - /finding-discussions-across-multiple-repositories
   - /granting-higher-permissions-to-top-contributors
-ms.openlocfilehash: 771770d2e67d21fc180f400685faf5c9a436cf68
-ms.sourcegitcommit: 47bd0e48c7dba1dde49baff60bc1eddc91ab10c5
-ms.translationtype: HT
-ms.contentlocale: es-ES
-ms.lasthandoff: 09/05/2022
-ms.locfileid: '147410055'
 ---
 
+{% data reusables.discussions.beta %}
+### Iniciar con los debates
+
+ <!--
+ -->
+### Administrar los debates
+
+<!--<!-- Commenting out what is only nice to have for discussions release
+-->
+
+<!--
+### Discussions and open source projects
+-->

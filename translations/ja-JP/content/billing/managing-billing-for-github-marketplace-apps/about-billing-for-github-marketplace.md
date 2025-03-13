@@ -4,28 +4,22 @@ intro: '{% data variables.product.prodname_marketplace %}に有料のアプリ�
 redirect_from:
   - /github/setting-up-and-managing-billing-and-payments-on-github/about-billing-for-github-marketplace
   - /articles/about-billing-for-github-marketplace
+  - /github/setting-up-and-managing-billing-and-payments-on-github/about-billing-for-github-marketplace
   - /github/setting-up-and-managing-billing-and-payments-on-github/managing-billing-for-github-marketplace-apps/about-billing-for-github-marketplace
 versions:
-  fpt: '*'
-  ghec: '*'
+  free-pro-team: '*'
 type: overview
 topics:
   - Marketplace
-shortTitle: Billing for GitHub Marketplace
-ms.openlocfilehash: 815303fa5c0c1a006a0bd4bd017039cf1e035f15
-ms.sourcegitcommit: fcf3546b7cc208155fb8acdf68b81be28afc3d2d
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 09/10/2022
-ms.locfileid: '145088044'
 ---
+
 {% data variables.product.prodname_marketplace %}には、無料及び有料の価格プランのアプリケーションが含まれます。 アプリケーションを購入してインストールした後、アップグレード、ダウングレード、キャンセルはいつでもできます。
 
 {% data reusables.marketplace.marketplace-apps-only %}
 
 {% data reusables.marketplace.marketplace-org-perms %}
 
-## {% data variables.product.prodname_marketplace %}での購入に関する支払い方法と支払いサイクル
+### {% data variables.product.prodname_marketplace %}での購入に関する支払い方法と支払いサイクル
 
 {% data variables.product.prodname_dotcom %}に対してすべての有料プランは同じ支払い方法になります。
 
@@ -46,13 +40,11 @@ ms.locfileid: '145088044'
 - 他の有料プランを持っているなら、14 日の無料トライアルが終了すると、ファイル上の支払い方法に対して次の支払日までの時間に応じて比例配分された額が即座に課金されます。
 - 他の有料プランを持っているなら、次の支払日に有料の {% data variables.product.prodname_dotcom %} プランとアプリケーションのプランへの課金が領収リストに記載されます。
 
-{% data reusables.user-settings.context_switcher %}
+### 単位を入力する必要があるプランの制限
 
-## 単位を入力する必要があるプランの制限
+単位を入力する必要があるプラン (たとえばユーザごとに課金されるプラン) を選択しており、支払いをしている単位を超えた場合、インテグレーターはアプリケーションをアップグレードするまでアクセスを無効化することがあります。 詳しい情報については「<[{% data variables.product.prodname_marketplace %} アプリケーションの支払いプランをアップグレードする](/articles/upgrading-the-billing-plan-for-a-github-marketplace-app)」を参照してください。
 
-単位を入力する必要があるプラン (たとえばユーザごとに課金されるプラン) を選択しており、支払いをしている単位を超えた場合、インテグレーターはアプリケーションをアップグレードするまでアクセスを無効化することがあります。 詳細については、「[{% data variables.product.prodname_marketplace %} アプリの課金プランのアップグレード](/articles/upgrading-the-billing-plan-for-a-github-marketplace-app)」を参照してください。
-
-## {% data variables.product.prodname_marketplace %} アプリケーションをダウングレードする
+### {% data variables.product.prodname_marketplace %} アプリケーションをダウングレードする
 
 アプリケーションのプランを安価なプランへとダウングレードする場合、あるいはアプリケーションの有料プランをキャンセルする場合、課金は現在の支払いサイクルの終わりまで有効になります。 プランは次の支払日に新しいプランに移行されます。
 
@@ -60,10 +52,10 @@ Free プランのアプリケーションをキャンセルした場合、その
 
 {% data reusables.marketplace.downgrade-marketplace-only %}
 
-有料プランの無料トライアルをキャンセルした場合、プランは即座にキャンセルされ、アプリケーションにはアクセスできなくなります。 詳細については、「[{% data variables.product.prodname_marketplace %} アプリのキャンセル](/articles/canceling-a-github-marketplace-app)」を参照してください。
+有料プランの無料トライアルをキャンセルした場合、プランは即座にキャンセルされ、アプリケーションにはアクセスできなくなります。 詳細は「[{% data variables.product.prodname_marketplace %} アプリケーションをキャンセルする](/articles/canceling-a-github-marketplace-app)」を参照してください。
 
-## 参考資料
+### 参考リンク
 
-- 「[{% data variables.product.prodname_marketplace %} について](/articles/about-github-marketplace)」
-- 「[{% data variables.product.prodname_marketplace %} でのアプリの購入とインストール](/articles/purchasing-and-installing-apps-in-github-marketplace)」
-- 「[{% data variables.product.prodname_marketplace %} のサポート](/articles/github-marketplace-support)」
+- [{% data variables.product.prodname_marketplace %}について](/articles/about-github-marketplace)
+- [{% data variables.product.prodname_marketplace %}でのアプリケーションの購入とインストール](/articles/purchasing-and-installing-apps-in-github-marketplace)
+- [{% data variables.product.prodname_marketplace %}のサポート](/articles/github-marketplace-support)

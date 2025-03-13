@@ -1,6 +1,10 @@
-{% ifversion ghae %}
+{% ifversion ghes = 2.22 %}
 
-<!-- Remove this reusable and all references for GA release -->
+{% note %}
+
+**Note:** {% data variables.product.prodname_code_scanning_capc %} is in beta in {% data variables.product.prodname_ghe_server %} 2.22. For the generally available release of code scanning, upgrade to the latest release of {% data variables.product.prodname_ghe_server %}.
+
+{% endnote %}
 
 {% elsif ghae %}
 

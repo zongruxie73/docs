@@ -1,45 +1,33 @@
 ---
-title: Viewing and managing a member's SAML access to your organization
-intro: 'You can view and revoke an organization member''s linked identity, active sessions, and authorized credentials.'
+title: 組織へのメンバーの SAML アクセスの表示と管理
+intro: Organization のメンバーのリンクされたアイデンティティ、アクティブなセッション、認可されたクレデンシャルの表示と取り消しが可能です。
 permissions: Organization owners can view and manage a member's SAML access to an organization.
+product: '{% data reusables.gated-features.saml-sso %}'
 redirect_from:
   - /articles/viewing-and-revoking-organization-members-authorized-access-tokens
   - /github/setting-up-and-managing-organizations-and-teams/viewing-and-revoking-organization-members-authorized-access-tokens
   - /github/setting-up-and-managing-organizations-and-teams/viewing-and-managing-a-members-saml-access-to-your-organization
 versions:
-  ghec: '*'
+  free-pro-team: '*'
 topics:
   - Organizations
   - Teams
-shortTitle: Manage SAML access
 ---
 
-## About SAML access to your organization
+### Organization への SAML アクセスについて
 
-When you enable SAML single sign-on for your organization, each organization member can link their external identity on your identity provider (IdP) to their existing account on {% data variables.location.product_location %}. To access your organization's resources on {% data variables.product.product_name %}, the member must have an active SAML session in their browser. To access your organization's resources using the API or Git, the member must use a {% data variables.product.pat_generic %} or SSH key that the member has authorized for use with your organization.
+Organization に対する SAML シングルサインオンを有効にすると、各 Organization メンバーは ID プロバイダ (IdP) での外部アイデンティティを、既存の {% data variables.product.product_name %} アカウントにリンクできます。 {% data variables.product.product_name %}上の Organizationのリソースにアクセスするには、メンバーはアクティブなSAMLセッションをブラウザーに持っていなければなりません。 OrganizationのリソースにAPIまたはGitを使ってアクセスするには、メンバーは、メンバーがOrganizationでの利用のために認可した個人アクセストークンもしくはSSHキーを使わなければなりません。
 
-You can view and revoke each member's linked identity, active sessions, and authorized credentials on the same page.
+各メンバーのリンクされたアイデンティティ、アクティブなセッション、同じページで認可されたクレデンシャルの表示と取り消しが可能です。
 
-## Viewing and revoking a linked identity
+### リンクされているアイデンティティの表示と取り消し
 
-{% data reusables.saml.about-linked-identities %} 
-
-When available, the entry will include SCIM data. For more information, see "[About SCIM for organizations](/organizations/managing-saml-single-sign-on-for-your-organization/about-scim-for-organizations)."
-
-{% warning %}
-
-**Warning:** For organizations using SCIM:
-- Revoking a linked user identity on {% data variables.product.product_name %} will also remove the SAML and SCIM metadata. As a result, the identity provider will not be able to synchronize or deprovision the linked user identity.
-- An admin must revoke a linked identity through the identity provider.
-- To revoke a linked identity and link a different account through the identity provider, an admin can remove and re-assign the user to the {% data variables.product.product_name %} application. For more information, see your identity provider's documentation.
-
-{% endwarning %}
-
+{% data reusables.saml.about-linked-identities %}
 
 {% data reusables.identity-and-permissions.revoking-identity-team-sync %}
 
 {% data reusables.profile.access_org %}
-{% data reusables.user-settings.access_org %}
+{% data reusables.user_settings.access_org %}
 {% data reusables.organizations.people %}
 {% data reusables.saml.click-person-revoke-identity %}
 {% data reusables.saml.saml-identity-linked %}
@@ -47,22 +35,22 @@ When available, the entry will include SCIM data. For more information, see "[Ab
 {% data reusables.saml.revoke-sso-identity %}
 {% data reusables.saml.confirm-revoke-identity %}
 
-## Viewing and revoking an active SAML session
+### アクティブな SAML セッションの表示と取り消し
 
 {% data reusables.profile.access_org %}
-{% data reusables.user-settings.access_org %}
+{% data reusables.user_settings.access_org %}
 {% data reusables.organizations.people %}
 {% data reusables.saml.click-person-revoke-session %}
 {% data reusables.saml.saml-identity-linked %}
 {% data reusables.saml.view-saml-sessions %}
 {% data reusables.saml.revoke-saml-session %}
 
-## Viewing and revoking authorized credentials
+### 認可されたクレデンシャルの表示と取り消し
 
 {% data reusables.saml.about-authorized-credentials %}
 
 {% data reusables.profile.access_org %}
-{% data reusables.user-settings.access_org %}
+{% data reusables.user_settings.access_org %}
 {% data reusables.organizations.people %}
 {% data reusables.saml.click-person-revoke-credentials %}
 {% data reusables.saml.saml-identity-linked %}
@@ -70,7 +58,7 @@ When available, the entry will include SCIM data. For more information, see "[Ab
 {% data reusables.saml.revoke-authorized-credentials %}
 {% data reusables.saml.confirm-revoke-credentials %}
 
-## Further reading
+### 参考リンク
 
-- "[About identity and access management with SAML single sign-on](/articles/about-identity-and-access-management-with-saml-single-sign-on)"{% ifversion ghec %}
-- "[Viewing and managing a user's SAML access to your enterprise account](/admin/user-management/managing-users-in-your-enterprise/viewing-and-managing-a-users-saml-access-to-your-enterprise)"{% endif %}
+- [SAML シングルサインオンを使うアイデンティティおよびアクセス管理について](/articles/about-identity-and-access-management-with-saml-single-sign-on)
+- [Enterprise アカウントへのユーザの SAML アクセスの表示および管理](/github/setting-up-and-managing-your-enterprise/viewing-and-managing-a-users-saml-access-to-your-enterprise-account)

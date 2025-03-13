@@ -1,17 +1,20 @@
 import { fileURLToPath } from 'url'
 import path from 'path'
-import { get, isPlainObject } from 'lodash-es'
+import fs from 'fs'
+import { get, isPlainObject, has } from 'lodash-es'
 import flat from 'flat'
-import walkSync from 'walk-sync'
-import { ParseError } from 'liquidjs'
 import loadSiteData from '../../lib/site-data.js'
 import patterns from '../../lib/patterns.js'
 import { liquid } from '../../lib/render-content/index.js'
+import walkSync from 'walk-sync'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 describe('siteData module (English)', () => {
-  const data = loadSiteData()
+  let data
+  beforeAll(async () => {
+    data = await loadSiteData()
+  })
 
   test('makes an object', async () => {
     expect(isPlainObject(data)).toBe(true)
@@ -19,6 +22,7 @@ describe('siteData module (English)', () => {
 
   test('sets a top-level key for each language', async () => {
     expect('en' in data).toEqual(true)
+    expect('ja' in data).toEqual(true)
   })
 
   test('includes English variables', async () => {
@@ -34,33 +38,52 @@ describe('siteData module (English)', () => {
     expect(reusable).toBe('1. Change the current working directory to your local repository.')
   })
 
-  test('all Liquid tags are valid', async () => {
+  test('includes Japanese variables', async () => {
+    const prodName = get(data, 'ja.site.data.variables.product.prodname_dotcom')
+    expect(prodName).toBe('GitHub')
+  })
+
+  test('includes Japanese reusables', async () => {
+    const reusable = get(data, 'ja.site.data.reusables.audit_log.octicon_icon')
+    expect(reusable.includes('任意のページの左上で')).toBe(true)
+  })
+
+  // TODO: re-enable once Janky flakyness is resolved
+  test.skip('backfills missing translated site data with English values', async () => {
+    const newFile = path.join(__dirname, '../../data/newfile.yml')
+    await fs.writeFile(newFile, 'newvalue: bar')
+    const data = await loadSiteData()
+    expect(get(data, 'en.site.data.newfile.newvalue')).toEqual('bar')
+    expect(get(data, 'ja.site.data.newfile.newvalue')).toEqual('bar')
+    await fs.unlink(newFile)
+  })
+
+  test('all Liquid templating is valid', async () => {
     const dataMap = flat(data)
     for (const key in dataMap) {
       const value = dataMap[key]
       if (!patterns.hasLiquid.test(value)) continue
+      let message = `${key} contains a malformed Liquid expression`
+      let result = null
       try {
-        await liquid.parseAndRender(value)
+        result = await liquid.parseAndRender(value)
       } catch (err) {
-        if (err instanceof ParseError) {
-          console.warn('value that failed to parse:', value)
-          console.warn('data file:', key)
-          throw new Error(`Unable to parse with Liquid: ${err.message}`)
-        }
-        // Note, the parseAndRender() might throw other errors. For
-        // example errors about the the data. But at least it
-        // managed to get paste the Liquid parsing phase.
+        console.trace(err)
+        message += `: ${err.message}`
       }
+      expect(typeof result, message).toBe('string')
     }
   })
 
   test('includes markdown files as data', async () => {
-    const reusable = get(data, 'en.site.data.reusables.support.submit-a-ticket')
+    const reusable = get(
+      data,
+      'en.site.data.reusables.enterprise_enterprise_support.submit-support-ticket-first-section'
+    )
     expect(typeof reusable).toBe('string')
     expect(reusable.includes('1. ')).toBe(true)
   })
 
-  // Docs Engineering issue: 965
   test.skip('encodes bracketed parentheses to prevent them from becoming links', async () => {
     const reusable = get(data, 'ja.site.data.reusables.organizations.team_name')
     const expectation = `reusable should contain a bracket followed by a space. Actual value: ${reusable}`
@@ -77,5 +100,18 @@ describe('siteData module (English)', () => {
       '\n'
     )}`
     expect(yamlReusables.length, message).toBe(0)
+  })
+
+  test('all non-English data has matching English data', async () => {
+    for (const languageCode of Object.keys(data)) {
+      if (languageCode === 'en') continue
+
+      const nonEnglishKeys = Object.keys(flat(data[languageCode]))
+      for (const key of nonEnglishKeys) {
+        if (!has(data.en, key)) {
+          throw new Error(`matching data not found for ${languageCode}.${key}`)
+        }
+      }
+    }
   })
 })

@@ -1,7 +1,6 @@
-import languages, { languageKeys } from '../lib/languages.js'
+import libLanguages from '../lib/languages.js'
 import parser from 'accept-language-parser'
-
-import { PREFERRED_LOCALE_COOKIE_NAME } from '../lib/constants.js'
+const languageCodes = Object.keys(libLanguages)
 
 const chineseRegions = ['CN', 'HK']
 
@@ -9,7 +8,7 @@ function translationExists(language) {
   if (language.code === 'zh') {
     return chineseRegions.includes(language.region)
   }
-  return languageKeys.includes(language.code)
+  return languageCodes.includes(language.code)
 }
 
 function getLanguageCode(language) {
@@ -18,44 +17,32 @@ function getLanguageCode(language) {
 
 function getUserLanguage(browserLanguages) {
   try {
+    let userLanguage = getLanguageCode(browserLanguages[0])
     let numTopPreferences = 1
     for (let lang = 0; lang < browserLanguages.length; lang++) {
       // If language has multiple regions, Chrome adds the non-region language to list
       if (lang > 0 && browserLanguages[lang].code !== browserLanguages[lang - 1].code)
         numTopPreferences++
       if (translationExists(browserLanguages[lang]) && numTopPreferences < 3) {
-        return getLanguageCode(browserLanguages[lang])
+        userLanguage = getLanguageCode(browserLanguages[lang])
+        break
       }
     }
+    return userLanguage
   } catch {
     return undefined
   }
 }
 
-function getUserLanguageFromCookie(req) {
-  const value = req.cookies[PREFERRED_LOCALE_COOKIE_NAME]
-  if (value && languages[value]) {
-    return value
-  }
-}
-
-// determine language code from a path. Default to en if no valid match
-export function getLanguageCodeFromPath(path) {
-  const maybeLanguage = (path.split('/')[path.startsWith('/_next/data/') ? 4 : 1] || '').slice(0, 2)
-  return languageKeys.includes(maybeLanguage) ? maybeLanguage : 'en'
-}
-
-export function getLanguageCodeFromHeader(req) {
-  const browserLanguages = parser.parse(req.headers['accept-language'])
-  return getUserLanguage(browserLanguages)
-}
-
 export default function detectLanguage(req, res, next) {
-  req.language = getLanguageCodeFromPath(req.path)
+  // determine language code from first part of URL, or default to English
+  // /en/articles/foo
+  //  ^^
+  const firstPartOfPath = req.path.split('/')[1]
+
+  req.language = languageCodes.includes(firstPartOfPath) ? firstPartOfPath : 'en'
   // Detecting browser language by user preference
-  req.userLanguage = getUserLanguageFromCookie(req)
-  if (!req.userLanguage) {
-    req.userLanguage = getLanguageCodeFromHeader(req)
-  }
+  const browserLanguages = parser.parse(req.headers['accept-language'])
+  req.userLanguage = getUserLanguage(browserLanguages)
   return next()
 }

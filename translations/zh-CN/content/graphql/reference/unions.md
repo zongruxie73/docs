@@ -1,25 +1,24 @@
 ---
-title: Unions
+title: 并集
 redirect_from:
   - /v4/union
   - /v4/reference/union
 versions:
-  fpt: '*'
-  ghec: '*'
-  ghes: '*'
-  ghae: '*'
+  free-pro-team: '*'
+  enterprise-server: '*'
+  github-ae: '*'
 topics:
   - API
 ---
 
-## About unions
+### 关于并集
 
-A [union](https://graphql.github.io/graphql-spec/June2018/#sec-Unions) is a type of object representing many objects.
+[并集](https://graphql.github.io/graphql-spec/June2018/#sec-Unions)是一种表示多个对象的对象类型。
 
-For example, a field marked as an [`ProjectCardItem`](/graphql/reference/unions#projectcarditem) could be an [`Issue`](/graphql/reference/objects#issue) or a [`PullRequest`](/graphql/reference/objects#pullrequest) because each of those objects can be inside a project card. Using a union instead of an object gives you flexibility.
+例如，标记为 [`ProjectCardItem`](/graphql/reference/unions#projectcarditem) 的字段可能是 [`Issue`](/graphql/reference/objects#issue) 或 [`PullRequest`](/graphql/reference/objects#pullrequest)，因为每个对象都可能在项目卡内。 使用并集代替对象可以带来灵活性。
 
-For more information, see "[Introduction to GraphQL](/graphql/guides/introduction-to-graphql)."
+更多信息请参阅“[GraphQL 简介](/graphql/guides/introduction-to-graphql)”。
 
-{% data reusables.projects.graphql-ghes %}
-
-<!-- Content after this section is automatically generated -->
+{% for item in graphql.schemaForCurrentVersion.unions %}
+  {% include graphql-union %}
+{% endfor %}

@@ -1,7 +1,5 @@
-You can either create a repository or choose an existing repository for your site.
+如果站点是一个独立的项目，您可以创建新仓库来存储站点源代码。 如果您的站点与现有的项目关联，您可以添加站点的源代码添加{% if currentVersion == "free-pro-team@latest" or currentVersion ver_gt "enterprise-server@2.22" or currentVersion == "github-ae@latest" %}到该项目仓库的默认分支或其他分支上的 `/docs` 文件夹中。{% else %}到 `gh-pages` 分支或该项目仓库 `master` 分支上的 `docs` 文件夹中。{% endif %} 例如，如果您创建站点来发布已经在 {% data variables.product.product_name %} 中的项目文档， 您可能想要将站点的源代码存储在与项目相同的仓库中。
 
-If you want to create a {% data variables.product.prodname_pages %} site for a repository where not all of the files in the repository are related to the site, you will be able to configure a publishing source for your site. For example, you can have a dedicated branch and folder to hold your site source {% ifversion pages-custom-workflow %}files, or you can use a custom {% data variables.product.prodname_actions %} workflow to build and deploy your site source files. {% data reusables.actions.settings-ui.settings-actions-pages-custom-workflow %}{% else %}files.{% endif %}
+{% if currentversion == "free-proteam@latest" %}如果拥有仓库的帐户使用组织的 {% data variables.product.prodname_free_user %} 或 {% data variables.product.prodname_free_team %}，仓库必须是公共的。{% endif %}
 
-{% ifversion fpt or ghec %}If the account that owns the repository uses {% data variables.product.prodname_free_user %} or {% data variables.product.prodname_free_team %} for organizations, the repository must be public.{% endif %}
-
- If you want to create a site in an existing repository, skip to the "[Creating your site](#creating-your-site)" section.
+如果要在现有仓库中创建站点，请跳至“[创建站点](#creating-your-site)”一节。

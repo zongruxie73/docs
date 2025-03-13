@@ -1,4 +1,4 @@
-{% ifversion fpt or ghec %}
+{% ifversion fpt %}
 
 1. In the left sidebar, click **Enterprise licensing**.
   !["Enterprise licensing" tab in the enterprise account settings sidebar](/assets/images/help/enterprises/enterprise-licensing-tab.png)

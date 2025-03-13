@@ -1,66 +1,55 @@
 ---
-title: Accessing the management console
+title: Acceder a la consola de administración
 intro: '{% data reusables.enterprise_site_admin_settings.about-the-management-console %}'
 redirect_from:
-  - /enterprise/admin/articles/about-the-management-console
-  - /enterprise/admin/articles/management-console-for-emergency-recovery
-  - /enterprise/admin/articles/web-based-management-console
-  - /enterprise/admin/categories/management-console
-  - /enterprise/admin/articles/accessing-the-management-console
-  - /enterprise/admin/guides/installation/web-based-management-console
+  - /enterprise/admin/articles/about-the-management-console/
+  - /enterprise/admin/articles/management-console-for-emergency-recovery/
+  - /enterprise/admin/articles/web-based-management-console/
+  - /enterprise/admin/categories/management-console/
+  - /enterprise/admin/articles/accessing-the-management-console/
+  - /enterprise/admin/guides/installation/web-based-management-console/
   - /enterprise/admin/installation/accessing-the-management-console
   - /enterprise/admin/configuration/accessing-the-management-console
   - /admin/configuration/accessing-the-management-console
 versions:
-  ghes: '*'
+  enterprise-server: '*'
 type: how_to
 topics:
   - Enterprise
   - Fundamentals
-shortTitle: Access the management console
 ---
-## About the {% data variables.enterprise.management_console %}
 
-Use the {% data variables.enterprise.management_console %} for basic administrative activities:
-- **Initial setup**: Walk through the initial setup process when first launching {% data variables.location.product_location %} by visiting {% data variables.location.product_location %}'s IP address in your browser.
-- **Configuring authentication policies for the {% data variables.enterprise.management_console %}**: Set rate limits for login attempts, and the lockout duration if someone exceeds the rate limit. 
-- **Configuring basic settings for your instance**: Configure DNS, hostname, SSL, user authentication, email, monitoring services, and log forwarding on the Settings page.
-- **Scheduling maintenance windows**: Take {% data variables.location.product_location %} offline while performing maintenance using the {% data variables.enterprise.management_console %} or administrative shell.
-- **Troubleshooting**: Generate a support bundle or view high level diagnostic information.
-- **License management**: View or update your {% data variables.product.prodname_enterprise %} license.
+### Acerca de {% data variables.enterprise.management_console %}
 
-You can always reach the {% data variables.enterprise.management_console %} using {% data variables.location.product_location %}'s IP address, even when the instance is in maintenance mode, or there is a critical application failure or hostname or SSL misconfiguration.
+Utiliza {% data variables.enterprise.management_console %} para las actividades administrativas básicas:
+- **Configuración inicial**: Atraviesa el proceso de configuración inicial durante el primer lanzamiento {% data variables.product.product_location %} visitando la dirección IP de {% data variables.product.product_location %} en tu navegador.
+- **Establecer configuraciones básicas para tu instancia**: Configura DNS, nombre del host, SSL, autenticación de usuario, correo electrónico, servicios de monitoreo y redireccionamiento de registro en la página de Configuraciones.
+- **Programar ventanas de mantenimiento**: Trabaja sin conexión en {% data variables.product.product_location %} mientras realizas mantenimiento con {% data variables.enterprise.management_console %} o con el shell administrativo.
+- **Solucionar problemas**: Genera un paquete de soporte o visualiza la información de diagnóstico de alto nivel.
+- **Administración de licencias**: Visualiza o actualiza tu licencia {% data variables.product.prodname_enterprise %}.
 
-To access the {% data variables.enterprise.management_console %}, you must use the administrator password established during initial setup of {% data variables.location.product_location %}. You must also be able to connect to the virtual machine host on port 8443. If you're having trouble reaching the {% data variables.enterprise.management_console %}, please check intermediate firewall and security group configurations. 
+También puedes acceder a {% data variables.enterprise.management_console %} utilizando la dirección IP de {% data variables.product.product_location %}, incluso cuando la instancia se encuentre en modo de mantenimiento o si ocurre una falla crítica en la aplicación o si están mal configurados el nombre del host o la SSL.
 
-The {% data variables.enterprise.management_console %} password hash is stored in `/data/user/common/secrets.conf`, and that file is automatically synced from the primary appliance to any high-availability replicas. Any change to the primary's password will automatically be replicated to high-availability replicas. For more information about high availability, see "[About high availability configuration](/admin/enterprise-management/configuring-high-availability/about-high-availability-configuration)."
+Para acceder a {% data variables.enterprise.management_console %}, debes utilizar la contraseña de administrador establecida durante la configuración inicial de {% data variables.product.product_location %}. También debes poder conectarte con el host de la máquina virtual en el puerto 8443. Si tienes problemas para acceder a {% data variables.enterprise.management_console %}, controla las configuraciones del firewall intermedio y del grupo de seguridad.
 
-## Accessing the {% data variables.enterprise.management_console %} as a site administrator
+### Acceder a la {% data variables.enterprise.management_console %} como administrador del sitio
 
-The first time that you access the {% data variables.enterprise.management_console %} as a site administrator, you must upload your {% data variables.product.prodname_enterprise %} license file to authenticate into the app. For more information, see "[Managing your license for {% data variables.product.prodname_enterprise %}](/billing/managing-your-license-for-github-enterprise)."
+La primera vez que accedas a la {% data variables.enterprise.management_console %} como administrador de sitio, deberás cargar tu archivo de licencia de {% data variables.product.prodname_enterprise %} para autenticarte en la app. Para obtener más información, consulta la sección "[Administrar tu licencia de {% data variables.product.prodname_enterprise %}](/enterprise/{{ currentVersion }}/admin/guides/installation/managing-your-github-enterprise-license)".
 
 {% data reusables.enterprise_site_admin_settings.access-settings %}
 {% data reusables.enterprise_site_admin_settings.management-console %}
 {% data reusables.enterprise_management_console.type-management-console-password %}
 
-## Accessing the {% data variables.enterprise.management_console %} as an unauthenticated user
+### Acceder a {% data variables.enterprise.management_console %} como usuario sin autenticación
 
-1. Visit this URL in your browser, replacing `hostname` with your actual {% data variables.product.prodname_ghe_server %} hostname or IP address:
+1. Visita esta URL en tu navegador, reemplazando el `nombre del host` por tu nombre del host o tu dirección IP actuales {% data variables.product.prodname_ghe_server %}:
   ```shell
   http(s)://HOSTNAME/setup
   ```
 {% data reusables.enterprise_management_console.type-management-console-password %}
 
-## Unlocking the {% data variables.enterprise.management_console %} after failed login attempts
+### Desbloquear {% data variables.enterprise.management_console %} después de los intentos de inicio de sesión fallidos
 
-The {% data variables.enterprise.management_console %} locks after {% ifversion enterprise-authentication-rate-limits %}the number of failed login attempts configured by your authentication policies. For more information, see "[Configuring authentication policy rate limits](/admin/configuration/configuring-your-enterprise/configuring-rate-limits#configuring-authentication-policy-rate-limits)".{% else %}ten failed login attempts are made in the span of ten minutes. You must wait for the login screen to automatically unlock before attempting to log in again. The login screen automatically unlocks as soon as the previous ten minute period contains fewer than ten failed login attempts. The counter resets after a successful login occurs.{% endif %}
+Los bloqueos de la {% data variables.enterprise.management_console %} después de diez intentos de inicio de sesión fallidos se hacen en el transcurso de diez minutos. Debes esperar para que la pantalla de inicio de sesión se desbloquee automáticamente antes de intentar iniciar sesión nuevamente. La pantalla de inicio de sesión se desbloquea automáticamente siempre que el período de diez minutos previo contenga menos de diez intentos de inicio de sesión fallidos. El contador se reinicia después de que ocurra un inicio de sesión exitoso.
 
-{% data reusables.enterprise_management_console.unlocking-management-console-with-shell %}
-
-## Troubleshooting failed connections to the {% data variables.enterprise.management_console %}
-
-If you cannot connect to the {% data variables.enterprise.management_console %} on {% data variables.location.product_location %}, you can review the following information to troubleshoot the problem.
-
-### Error: "Your session has expired" for connections through a load balancer
-
-If you access {% data variables.location.product_location %} through a load balancer and connections to the {% data variables.enterprise.management_console %} fail with a message that your session has expired, you may need to reconfigure your load balancer. For more information, see "[Using {% data variables.product.product_name %} with a load balancer](/admin/configuration/configuring-network-settings/using-github-enterprise-server-with-a-load-balancer#error-your-session-has-expired-for-connections-to-the-management-console)."
+Para desbloquear de inmediato la {% data variables.enterprise.management_console %}, utilice el comando `ghe-reactivate-admin-login` a través del shell administrativo. Para obtener más información, consulta "[Utilidades de la línea de comando](/enterprise/{{ currentVersion }}/admin/guides/installation/command-line-utilities#ghe-reactivate-admin-login)" y "[Acceder al shell administrativo (SSH)](/enterprise/{{ currentVersion }}/admin/guides/installation/accessing-the-administrative-shell-ssh/)."

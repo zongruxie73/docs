@@ -1,21 +1,16 @@
 ---
 title: Customizing your codespace
-intro: '{% data variables.product.prodname_github_codespaces %} is a dedicated environment for you. You can configure your repositories with a dev container to define their default {% data variables.product.prodname_github_codespaces %} environment, and personalize your development experience across all of your codespaces with dotfiles and Settings Sync.'
+intro: '{% data variables.product.prodname_codespaces %} is a dedicated environment for you. You can configure your repositories with a dev container to define their default Codespaces environment, and personalize your development experience across all of your codespaces with dotfiles and Settings Sync.'
 product: '{% data reusables.gated-features.codespaces %}'
 versions:
-  fpt: '*'
-  ghec: '*'
+  free-pro-team: '*'
 redirect_from:
   - /codespaces/setting-up-your-codespace
 topics:
   - Codespaces
 children:
-  - /personalizing-github-codespaces-for-your-account
-  - /renaming-a-codespace
-  - /changing-the-machine-type-for-your-codespace
-  - /setting-your-default-editor-for-github-codespaces
-  - /setting-your-default-region-for-github-codespaces
-  - /setting-your-timeout-period-for-github-codespaces
-  - /configuring-automatic-deletion-of-your-codespaces
+  - /configuring-codespaces-for-your-project
+  - /personalizing-codespaces-for-your-account
+  - /prebuilding-codespaces-for-your-project
 ---
  

@@ -7,7 +7,6 @@ redirect_from:
   - /github/building-a-strong-community/accessing-a-projects-community-profile
 versions:
   fpt: '*'
-  ghec: '*'
 topics:
   - Community
 shortTitle: Access community profiles

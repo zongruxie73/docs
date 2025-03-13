@@ -1,2 +1,2 @@
-When you create a repository with content on {% data variables.location.product_location %}, {% data variables.product.product_name %} creates the repository with a single branch. This first branch in the repository is the default branch.
+Cuando creas un repositorio con contenido en {% data variables.product.product_location %}, {% data variables.product.product_name %} crea el repositorio con una sola rama. Esta primera rama en el repositorio es la rama predeterminada.
 

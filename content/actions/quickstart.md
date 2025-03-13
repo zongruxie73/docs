@@ -8,7 +8,6 @@ versions:
   fpt: '*'
   ghes: '*'
   ghae: '*'
-  ghec: '*'
 type: quick_start
 topics:
   - Fundamentals
@@ -17,6 +16,7 @@ shortTitle: Quickstart
 
 {% data reusables.actions.enterprise-beta %}
 {% data reusables.actions.enterprise-github-hosted-runners %}
+{% data reusables.actions.ae-beta %}
 
 ## Introduction
 
@@ -27,34 +27,32 @@ The following example shows you how {% data variables.product.prodname_actions %
 ## Creating your first workflow
 
 1. Create a `.github/workflows` directory in  your repository on {% data variables.product.prodname_dotcom %} if this directory does not already exist.
-1. In the `.github/workflows` directory, create a file named `github-actions-demo.yml`. For more information, see "[Creating new files](/github/managing-files-in-a-repository/creating-new-files)."
-1. Copy the following YAML contents into the `github-actions-demo.yml` file:
+2. In the `.github/workflows` directory, create a file named `github-actions-demo.yml`. For more information, see "[Creating new files](/github/managing-files-in-a-repository/creating-new-files)."
+3. Copy the following YAML contents into the `github-actions-demo.yml` file:
+    {% raw %}
+    ```yaml{:copy}
+    name: GitHub Actions Demo
+    on: [push]
+    jobs:
+      Explore-GitHub-Actions:
+        runs-on: ubuntu-latest
+        steps:
+          - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+          - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+          - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+          - name: Check out repository code
+            uses: actions/checkout@v2
+          - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+          - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+          - name: List files in the repository
+            run: |
+              ls ${{ github.workspace }}
+          - run: echo "🍏 This job's status is ${{ job.status }}."
 
-   ```yaml{:copy}
-   name: GitHub Actions Demo
-   {%- ifversion actions-run-name %}
-   run-name: {% raw %}${{ github.actor }}{% endraw %} is testing out GitHub Actions 🚀
-   {%- endif %}
-   on: [push]
-   jobs:
-     Explore-GitHub-Actions:
-       runs-on: ubuntu-latest
-       steps:
-         - run: echo "🎉 The job was automatically triggered by a {% raw %}${{ github.event_name }}{% endraw %} event."
-         - run: echo "🐧 This job is now running on a {% raw %}${{ runner.os }}{% endraw %} server hosted by GitHub!"
-         - run: echo "🔎 The name of your branch is {% raw %}${{ github.ref }}{% endraw %} and your repository is {% raw %}${{ github.repository }}{% endraw %}."
-         - name: Check out repository code
-           uses: {% data reusables.actions.action-checkout %}
-         - run: echo "💡 The {% raw %}${{ github.repository }}{% endraw %} repository has been cloned to the runner."
-         - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-         - name: List files in the repository
-           run: |
-             ls {% raw %}${{ github.workspace }}{% endraw %}
-         - run: echo "🍏 This job's status is {% raw %}${{ job.status }}{% endraw %}."
-   ```
-1. Scroll to the bottom of the page and select **Create a new branch for this commit and start a pull request**. Then, to create a pull request, click **Propose new file**.
-
-   ![Commit workflow file](/assets/images/help/repository/actions-quickstart-commit-new-file.png)
+    ```
+    {% endraw %}
+3. Scroll to the bottom of the page and select **Create a new branch for this commit and start a pull request**. Then, to create a pull request, click **Propose new file**.
+    ![Commit workflow file](/assets/images/help/repository/actions-quickstart-commit-new-file.png)
 
 Committing the workflow file to a branch in your repository triggers the `push` event and runs your workflow.
 
@@ -77,13 +75,19 @@ Committing the workflow file to a branch in your repository triggers the `push` 
    
    For example, you can see the list of files in your repository:
    ![Example action detail](/assets/images/help/repository/actions-quickstart-log-detail.png)
-
-The example workflow you just added is triggered each time code is pushed to the branch, and shows you how {% data variables.product.prodname_actions %} can work with the contents of your repository. For an in-depth tutorial, see "[Understanding {% data variables.product.prodname_actions %}](/actions/learn-github-actions/understanding-github-actions)."
-
-## More starter workflows
+   
+## More workflow templates
 
 {% data reusables.actions.workflow-template-overview %}
 
 ## Next steps
 
-{% data reusables.actions.onboarding-next-steps %}
+The example workflow you just added runs each time code is pushed to the branch, and shows you how {% data variables.product.prodname_actions %} can work with the contents of your repository. But this is only the beginning of what you can do with {% data variables.product.prodname_actions %}:
+
+- Your repository can contain multiple workflows that trigger different jobs based on different events. 
+- You can use a workflow to install software testing apps and have them automatically test your code on {% data variables.product.prodname_dotcom %}'s runners. 
+
+{% data variables.product.prodname_actions %} can help you automate nearly every aspect of your application development processes. Ready to get started? Here are some helpful resources for taking your next steps with {% data variables.product.prodname_actions %}:
+
+- "[Learn {% data variables.product.prodname_actions %}](/actions/learn-github-actions)" for an in-depth tutorial.
+- "[Guides](/actions/guides)" for specific uses cases and examples.

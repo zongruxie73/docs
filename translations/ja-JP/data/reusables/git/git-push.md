@@ -1,5 +1,5 @@
-1. [Push the changes](/github/getting-started-with-github/pushing-commits-to-a-remote-repository/) in your local repository to {% data variables.location.product_location %}.
+1. {% data variables.product.product_location %} へ、ローカルリポジトリの[変更をプッシュ](/github/getting-started-with-github/pushing-commits-to-a-remote-repository/)します。
   ```shell
-  $ git push origin YOUR_BRANCH
-  # Pushes the changes in your local repository up to the remote repository you specified as the origin
+  $ git push origin <em>your-branch</em>
+# originとして指定したリモートリポジトリにローカルリポジトリの変更をプッシュ
   ```

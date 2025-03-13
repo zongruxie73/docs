@@ -1,89 +1,89 @@
 ---
-title: Quickstart for GitHub Actions
-intro: 'Try out the features of {% data variables.product.prodname_actions %} in 5 minutes or less.'
+title: GitHub Actions 快速入门
+intro: '在 5 分钟或更短的时间内尝试 {% data variables.product.prodname_actions %} 的功能。'
 allowTitleToDifferFromFilename: true
 redirect_from:
   - /actions/getting-started-with-github-actions/starting-with-preconfigured-workflow-templates
 versions:
-  fpt: '*'
-  ghes: '*'
-  ghae: '*'
-  ghec: '*'
+  free-pro-team: '*'
+  enterprise-server: '>=2.22'
+  github-ae: '*'
 type: quick_start
 topics:
   - Fundamentals
-shortTitle: Quickstart
 ---
 
 {% data reusables.actions.enterprise-beta %}
 {% data reusables.actions.enterprise-github-hosted-runners %}
+{% data reusables.actions.ae-beta %}
 
-## Introduction
+### 简介
 
-You only need a {% data variables.product.prodname_dotcom %} repository to create and run a {% data variables.product.prodname_actions %} workflow. In this guide, you'll add a workflow that demonstrates some of the essential features of {% data variables.product.prodname_actions %}. 
+您只需要 {% data variables.product.prodname_dotcom %} 仓库来创建和运行 {% data variables.product.prodname_actions %} 工作流程。 在本指南中，您将添加一个工作流程，演示 {% data variables.product.prodname_actions %} 的一些基本功能。
 
-The following example shows you how {% data variables.product.prodname_actions %} jobs can be automatically triggered, where they run, and how they can interact with the code in your repository.
+下面的示例显示 {% data variables.product.prodname_actions %} 作业如何自动触发、在哪里运行及其如何与仓库中的代码交互。
 
-## Creating your first workflow
+### 创建第一个工作流程
 
-1. Create a `.github/workflows` directory in  your repository on {% data variables.product.prodname_dotcom %} if this directory does not already exist.
-1. In the `.github/workflows` directory, create a file named `github-actions-demo.yml`. For more information, see "[Creating new files](/github/managing-files-in-a-repository/creating-new-files)."
-1. Copy the following YAML contents into the `github-actions-demo.yml` file:
+1. 从 {% data variables.product.prodname_dotcom %} 上的仓库，在 `.github/workflows` 目录中创建一个名为 `github-actions-demo.yml` 的新文件。 更多信息请参阅“[创建新文件](/github/managing-files-in-a-repository/creating-new-files)”。
+2. 将以下 YAML 内容复制到 `github-actions-demo.yml` 文件中：
+    {% raw %}
+    ```yaml{:copy}
+    name: GitHub Actions Demo
+    on: [push]
+    jobs:
+      Explore-GitHub-Actions:
+        runs-on: ubuntu-latest
+        steps:
+          - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+          - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+          - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+          - name: Check out repository code
+            uses: actions/checkout@v2
+          - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+          - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+          - name: List files in the repository
+            run: |
+              ls ${{ github.workspace }}
+          - run: echo "🍏 This job's status is ${{ job.status }}."
 
-   ```yaml{:copy}
-   name: GitHub Actions Demo
-   {%- ifversion actions-run-name %}
-   run-name: {% raw %}${{ github.actor }}{% endraw %} is testing out GitHub Actions 🚀
-   {%- endif %}
-   on: [push]
-   jobs:
-     Explore-GitHub-Actions:
-       runs-on: ubuntu-latest
-       steps:
-         - run: echo "🎉 The job was automatically triggered by a {% raw %}${{ github.event_name }}{% endraw %} event."
-         - run: echo "🐧 This job is now running on a {% raw %}${{ runner.os }}{% endraw %} server hosted by GitHub!"
-         - run: echo "🔎 The name of your branch is {% raw %}${{ github.ref }}{% endraw %} and your repository is {% raw %}${{ github.repository }}{% endraw %}."
-         - name: Check out repository code
-           uses: {% data reusables.actions.action-checkout %}
-         - run: echo "💡 The {% raw %}${{ github.repository }}{% endraw %} repository has been cloned to the runner."
-         - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-         - name: List files in the repository
-           run: |
-             ls {% raw %}${{ github.workspace }}{% endraw %}
-         - run: echo "🍏 This job's status is {% raw %}${{ job.status }}{% endraw %}."
-   ```
-1. Scroll to the bottom of the page and select **Create a new branch for this commit and start a pull request**. Then, to create a pull request, click **Propose new file**.
+    ```
+    {% endraw %}
+3. 滚动到页面底部，然后选择 **Create a new branch for this commit and start a pull request（为此提交创建一个新分支并开始拉取请求）**。 然后，若要创建拉取请求，请单击 **Propose new file（提议新文件）**。 ![提交工作流程文件](/assets/images/help/repository/actions-quickstart-commit-new-file.png)
 
-   ![Commit workflow file](/assets/images/help/repository/actions-quickstart-commit-new-file.png)
+向仓库的分支提交工作流程文件会触发 `push` 事件并运行工作流程。
 
-Committing the workflow file to a branch in your repository triggers the `push` event and runs your workflow.
-
-## Viewing your workflow results
+### 查看工作流程结果
 
 {% data reusables.repositories.navigate-to-repo %}
 {% data reusables.repositories.actions-tab %}
-1. In the left sidebar, click the workflow you want to see.
+1. 在左侧边栏中，单击您想要查看的工作流程。
 
-   ![Workflow list in left sidebar](/assets/images/help/repository/actions-quickstart-workflow-sidebar.png)
-1. From the list of workflow runs, click the name of the run you want to see.
+   ![左侧边栏中的工作流程列表](/assets/images/help/repository/actions-quickstart-workflow-sidebar.png)
+1. 从工作流程运行列表中，单击要查看的运行的名称。
 
-   ![Name of workflow run](/assets/images/help/repository/actions-quickstart-run-name.png)
-1. Under **Jobs** , click the **Explore-GitHub-Actions** job.
+   ![工作流程运行的名称](/assets/images/help/repository/actions-quickstart-run-name.png)
+1. 在 **Jobs（作业）**下，单击 **Explore-GitHub-Actions** 作业。
 
-   ![Locate job](/assets/images/help/repository/actions-quickstart-job.png)
-1. The log shows you how each of the steps was processed. Expand any of the steps to view its details.
+   ![查找作业](/assets/images/help/repository/actions-quickstart-job.png)
+1. 日志显示每个步骤的处理方式。 展开任何步骤以查看其细节。
 
-   ![Example workflow results](/assets/images/help/repository/actions-quickstart-logs.png)
-   
-   For example, you can see the list of files in your repository:
-   ![Example action detail](/assets/images/help/repository/actions-quickstart-log-detail.png)
+   ![示例工作流程结果](/assets/images/help/repository/actions-quickstart-logs.png)
 
-The example workflow you just added is triggered each time code is pushed to the branch, and shows you how {% data variables.product.prodname_actions %} can work with the contents of your repository. For an in-depth tutorial, see "[Understanding {% data variables.product.prodname_actions %}](/actions/learn-github-actions/understanding-github-actions)."
+   例如，您可以在仓库中看到文件列表： ![示例操作详细信息](/assets/images/help/repository/actions-quickstart-log-detail.png)
 
-## More starter workflows
+### 更多工作流程模板
 
 {% data reusables.actions.workflow-template-overview %}
 
-## Next steps
+### 后续步骤
 
-{% data reusables.actions.onboarding-next-steps %}
+每次将代码推送到分支时，您刚刚添加的示例工作流程都会运行，并显示 {% data variables.product.prodname_actions %} 如何处理仓库的内容。 但是，这只是您可以对 {% data variables.product.prodname_actions %} 执行操作的开始：
+
+- 您的仓库可以包含多个基于不同事件触发不同任务的工作流程。
+- 您可以使用工作流程安装软件测试应用程序，并让它们自动在 {% data variables.product.prodname_dotcom %} 的运行器上测试您的代码。
+
+{% data variables.product.prodname_actions %} 可以帮助您自动执行应用程序开发过程的几乎每个方面。 准备好开始了吗？ 以下是一些帮助您对 {% data variables.product.prodname_actions %} 执行后续操作的有用资源：
+
+- “[了解 {% data variables.product.prodname_actions %}](/actions/learn-github-actions)”，以获取深入教程
+- “[指南](/actions/guides)”，以获取特定用例和示例

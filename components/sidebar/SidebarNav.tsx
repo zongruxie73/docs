@@ -9,24 +9,23 @@ import { SidebarHomepage } from './SidebarHomepage'
 
 export const SidebarNav = () => {
   const router = useRouter()
-  const { error, currentProduct } = useMainContext()
+  const { error, relativePath } = useMainContext()
   const { t } = useTranslation('header')
 
   return (
     <div
-      className="d-none d-lg-block bg-primary position-sticky top-0 overflow-y-auto flex-shrink-0 pb-5 border-right"
-      style={{ width: 326, height: '100vh' }}
-      role="banner"
+      className="d-none d-lg-block color-bg-tertiary position-sticky top-0 overflow-y-auto flex-shrink-0 pb-5"
+      style={{ width: 286, height: '100vh' }}
     >
       <div
-        tabIndex={-1}
-        className="d-flex flex-items-center p-4 position-sticky top-0 color-bg-default"
+        className="d-flex flex-items-center p-4 position-sticky top-0 color-bg-tertiary"
         style={{ zIndex: 3 }}
         id="github-logo"
+        role="banner"
       >
         <Link
           href={`/${router.locale}`}
-          className="color-fg-default"
+          className="color-text-primary"
           aria-hidden="true"
           tabIndex={-1}
         >
@@ -34,17 +33,13 @@ export const SidebarNav = () => {
         </Link>
         <Link
           href={`/${router.locale}`}
-          className="f4 text-semibold color-fg-default no-underline no-wrap pl-2 flex-auto"
+          className="h4-mktg color-text-primary no-underline no-wrap pl-2 flex-auto"
         >
           {t('github_docs')}
         </Link>
       </div>
       <nav>
-        {error === '404' || !currentProduct || currentProduct.id === 'search' ? (
-          <SidebarHomepage />
-        ) : (
-          <SidebarProduct />
-        )}
+        {error === '404' || relativePath === 'index.md' ? <SidebarHomepage /> : <SidebarProduct />}
       </nav>
     </div>
   )

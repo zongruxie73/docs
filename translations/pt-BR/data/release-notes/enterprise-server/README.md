@@ -1,45 +1,37 @@
----
-ms.openlocfilehash: a43b7fac5396fcbdb1b7d9ec241af9879de7b2b8
-ms.sourcegitcommit: fb047f9450b41b24afc43d9512a5db2a2b750a2a
-ms.translationtype: HT
-ms.contentlocale: pt-BR
-ms.lasthandoff: 09/10/2022
-ms.locfileid: "145094553"
----
-# Notas de versão para o GitHub Enterprise Server
+# Release notes for GitHub Enterprise Server
 
-Renderizado aqui: https://docs.github.com/en/enterprise-server@latest/admin/release-notes
+Rendered here: https://docs.github.com/en/enterprise-server@latest/admin/release-notes
 
-## Como ele funciona
+## How it works
 
-### Arquivo de conteúdo do espaço reservado
+### Placeholder content file
 
-Há um arquivo de conteúdo em `content/admin/release-notes.md`. Ele tem uma propriedade `layout: release-notes` de frontmatter especial e nenhum conteúdo Markdown. A fonte das notas de versão vem dos dados do YAML.
+A content file exists in `content/admin/release-notes.md`. It has a special frontmatter property `layout: release-notes` and no Markdown content. The source of the release notes comes from YAML data.
 
-### Fonte YAML
+### YAML source
 
-Os dados de origem das notas sobre a versão se encontram neste diretório (`data/release-notes/enterprise-server`).
+The source data for the release notes lives in this directory (`data/release-notes/enterprise-server`).
 
-Os diretórios são nomeados pelo número de versão do GHES (com um hífen em vez de ponto).
+The directories are named by GHES release number (with a hyphen instead of a period).
 
-Os arquivos YAML em cada diretório são nomeados pelo número do patch. Alguns nomes de arquivos de patch podem terminar com `-rc<num>.yml`, o que significa que ele é uma versão Release Candidate. Um arquivo de versão Release Candidate também exige `release_candidate: true` nos dados YAML.
+The YAML files in each directory are named by patch number. Some patch filenames may end with `-rc<num>.yml`, which means it's a release candidate. A release candidate file also requires `release_candidate: true` in the YAML data.
 
-As notas sobre a versão das versões preteridas do GHES (confira `lib/enterprise-server-releases.js`) **não** são removidas do site e sempre serão exibidas com as versões atualmente compatíveis.
+Release notes of deprecated GHES versions (see `lib/enterprise-server-releases.js`) are **not** removed from the site and will always be displayed alongside currently supported versions.
 
-Observe que os arquivos de patch podem ser preteridos individualmente (ou seja, ocultos no site da documentação) por uma propriedade opcional `deprecated: true`.
+Note that patch files can be deprecated individually (i.e., hidden on the docs site) by an optional `deprecated: true` property.
 
-### Processamento de recursos intermediários
+### Middleware processing
 
-Os dados YAML são processados e classificados por `middleware/contextualizers/release-notes.js` e adicionados ao objeto `context`.
+The YAML data is processed and sorted by `middleware/contextualizers/release-notes.js` and added to the `context` object.
 
 ### Layouts
 
-Os dados do objeto `context` são renderizados por `components/release-notes`.
+The `context` object data is rendered by `layouts/release-notes.html` and `includes/enterprise-server-release-notes.html`.
 
-A página de notas sobre a versão tem um design personalizado com CSS em `stylesheets/release-notes.scss`.
+The release notes page has a custom design with CSS in `stylesheets/release-notes.scss` and client-side JavaScript in `javascripts/release-notes.js`.
 
 ### Esquema
 
-O esquema que valida os dados YAML se encontram em `tests/helpers/schemas/ghes-release-notes-schema.js`. Consulte o arquivo do esquema para descobrir as propriedades obrigatórias e opcionais.
+The schema that validates the YAML data lives in `tests/helpers/schemas/ghes-release-notes-schema.js`. See the schema file to find out the required and optional properties.
 
-O esquema é exercido por um teste em `tests/linting/lint-files.js`. O teste irá falhar se os dados não passarem na validação.
+The schema is exercised by a test in `tests/linting/lint-files.js`. The test will fail if the data does not pass validation.

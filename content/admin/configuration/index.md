@@ -1,11 +1,10 @@
 ---
 title: Configuring GitHub Enterprise
-shortTitle: Configure GitHub Enterprise
+shortTitle: Configuring GitHub Enterprise
 intro: You can configure your enterprise to suit your organization's needs.
 redirect_from:
   - /enterprise/admin/configuration
 versions:
-  ghec: '*'
   ghes: '*'
   ghae: '*'
 topics:
@@ -13,7 +12,7 @@ topics:
 children:
   - /configuring-your-enterprise
   - /configuring-network-settings
-  - /configuring-github-connect
+  - /managing-connections-between-github-enterprise-server-and-github-enterprise-cloud
 ---
 {% ifversion ghes %}
 {% note %}

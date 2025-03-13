@@ -8,7 +8,7 @@ import { LoadingIndicator } from './LoadingIndicator'
 import { ActionBar } from './ActionBar'
 
 import { CodeBlockRef, PlaygroundArticleT } from '../types'
-import { useTheme } from '@primer/react'
+import { useTheme } from '@primer/components'
 
 const getNormalizedHighlight = (
   highlight: Exclude<CodeBlockRef['highlight'], undefined>
@@ -74,9 +74,8 @@ export const Editor: React.FC<Props> = ({ article }) => {
           {editorFiles.map((file, i) => {
             return (
               <button
-                key={file.fileName}
                 className={cx('btn-link Link--secondary no-underline mr-2 f6 py-2 px-3', {
-                  'color-bg-subtle': i === selectedFileIndex,
+                  'color-bg-tertiary': i === selectedFileIndex,
                 })}
                 onClick={() => setSelectedFileIndex(i)}
               >
@@ -89,7 +88,7 @@ export const Editor: React.FC<Props> = ({ article }) => {
         <div className="border">
           {isEditorReady ? (
             <SyntaxHighlighter
-              style={theme.resolvedColorMode === 'night' ? vscDarkPlus : vs}
+              style={theme.colorMode === 'night' ? vscDarkPlus : vs}
               language={activeFile.language}
               PreTag="div"
               customStyle={{ margin: '0', padding: '1rem 0', border: 0 }}
@@ -99,12 +98,11 @@ export const Editor: React.FC<Props> = ({ article }) => {
                 let className = ''
                 for (const highlight of normalizedHighlight) {
                   if (lineNumber >= highlight[0] && lineNumber <= highlight[1]) {
-                    className = 'color-bg-accent'
+                    className = 'color-bg-info'
                   }
                 }
-                return { style: { display: 'block' }, className }
+                return { style: { display: 'block' }, class: className }
               }}
-              lineNumberStyle={{ minWidth: '3.25em' }}
             >
               {activeFile.code}
             </SyntaxHighlighter>

@@ -8,7 +8,6 @@ versions:
   fpt: '*'
   ghes: '*'
   ghae: '*'
-  ghec: '*'
 topics:
   - Webhooks
 shortTitle: Configure server for webhooks

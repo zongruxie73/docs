@@ -1,6 +1,1 @@
-1. Under your organization name, click {% octicon "person" aria-label="The Person icon" %} **People**.
-  {% ifversion fpt or ghes or ghec %}
-  ![The People tab](/assets/images/help/organizations/organization-people-tab-with-overview-tab.png)
-  {% else %}
-  ![The People tab](/assets/images/help/organizations/organization-people-tab.png)
-  {% endif %}
+1. Organization名の下で、{% octicon "organization" aria-label="The People icon" %} **People（人）**をクリックしてください。 ![人タブ](/assets/images/help/organizations/organization-people-tab.png)

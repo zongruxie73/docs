@@ -1,111 +1,74 @@
 ---
-title: Increasing CPU or memory resources
-intro: 'You can increase the CPU or memory resources for a {% data variables.product.prodname_ghe_server %} instance.'
+title: CPUあるいはメモリリソースの増加
+intro: '{% data variables.product.product_location_enterprise %}での処理が遅いなら、CPUあるいはメモリリソースを追加する必要があるかもしれません。'
 redirect_from:
   - /enterprise/admin/installation/increasing-cpu-or-memory-resources
   - /enterprise/admin/enterprise-management/increasing-cpu-or-memory-resources
   - /admin/enterprise-management/increasing-cpu-or-memory-resources
 versions:
-  ghes: '*'
+  enterprise-server: '*'
 type: how_to
 topics:
   - Enterprise
   - Infrastructure
   - Performance
-shortTitle: Increase CPU or memory
 ---
+
 {% data reusables.enterprise_installation.warning-on-upgrading-physical-resources %}
 
-{% note %}
-
-**Note:** Before increasing CPU or memory resources, put your instance in maintenance mode.{% ifversion ip-exception-list %} You can validate changes by configuring an IP exception list to allow access from specified IP addresses. {% endif %} For more information, see "[Enabling and scheduling maintenance mode](/enterprise/admin/guides/installation/enabling-and-scheduling-maintenance-mode)."
-
-{% endnote %}
-
-## Adding CPU or memory resources for AWS
+### AWSでのCPUあるいはメモリリソースの追加
 
 {% note %}
 
-**Note:** To add CPU or memory resources for AWS, you must be familiar with using either the AWS management console or the `aws ec2` command line interface to manage EC2 instances. For background and details on using the AWS tools of your choice to perform the resize, see the AWS documentation on [resizing an Amazon EBS-backed instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-resize.html).
+**ノート:** AWSでCPUあるいはメモリリソースを追加するには、EC2インスタンスを管理するためにAWSのマネージメントコンソールもしくは`aws ec2`コマンドラインインターフェースのいずれかの利用に慣れていなければなりません。 リサイズを行うための好みのAWSツールの利用の背景と詳細については、[Amazon EBS-Backed インスタンスのサイズ変更](https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/ec2-instance-resize.html)にあるAWSのドキュメンテーションを参照してください。
 
 {% endnote %}
 
-### Resizing considerations
+#### リサイズについての考慮
 
-Before increasing CPU or memory resources for {% data variables.location.product_location %}, review the following recommendations.
+{% data variables.product.product_location %} の CPU またはメモリリソースを増加させる前に、以下のことを行ってください:
 
-- **Scale your memory with CPUs**. {% data reusables.enterprise_installation.increasing-cpus-req %}
-- **Assign an Elastic IP address to the instance**. If you haven't assigned an Elastic IP to your instance, you'll have to adjust the DNS A records for your {% data variables.product.prodname_ghe_server %} host after the restart to account for the change in public IP address. Once your instance restarts, the instance keeps the Elastic IP if you launched the instance in a virtual private cloud (VPC). If you create the instance in an EC2-Classic network, you must manually reassign the Elastic IP to the instance.
+- **CPUでメモリをスケーリングします**。 {% data reusables.enterprise_installation.increasing-cpus-req %}
+- **Elastic IP アドレスをインスタンスに割り当てます**。 Elastic IP が割り当てられていない場合は、パブリック IP アドレスでの変更を考慮して、再起動後に {% data variables.product.prodname_ghe_server %} ホストの DNS A レコードを調整する必要があります。 インスタンスがVPC内で起動していれば、インスタンスが再起動してもElastic IP（EIP）は自動的に保持されます。 インスタンスがEC2-Classic内で起動されていれば、Elastic IPは手動で際割り当てが必要です。
 
-### Supported AWS instance types
+#### サポートされているAWSインスタンスタイプ
 
-You need to determine the instance type you would like to upgrade to based on CPU/memory specifications.
+アップグレードするインスタンスタイプは、CPU／メモリの仕様に基づいて決定しなければなりません。
 
 {% data reusables.enterprise_installation.warning-on-scaling %}
 
 {% data reusables.enterprise_installation.aws-instance-recommendation %}
 
-### Resizing for AWS
+#### AWSでのリサイズ
 
 {% note %}
 
-**Note:** For instances launched in EC2-Classic, write down both the Elastic IP address associated with the instance and the instance's ID. Once you restart the instance, re-associate the Elastic IP address.
+**ノート:**EC2-Classicで起動されたインスタンスについては、インスタンスに関連づけられたElastic IPアドレスとインスタンスIPの両方を書き留めておいてください。 インスタンスを再起動したなら、Elastic IPのアドレスを再割り当てしてください。
 
 {% endnote %}
 
-It's not possible to add CPU or memory resources to an existing AWS/EC2 instance. Instead, you must:
+既存の AWS/EC2 インスタンスに CPU またはメモリリソースを追加することはできません。 その代わりに、以下を行う必要があります:
 
-1. Stop the instance.
-2. Change the instance type.
-3. Start the instance.
+1. インスタンスを停止する。
+2. インスタンスタイプを変更する。
+3. インスタンスを起動します。
 {% data reusables.enterprise_installation.configuration-recognized %}
 
-## Adding CPU or memory resources on Microsoft Azure
+### OpenStack KVMでのCPUあるいはメモリリソースの追加
 
-{% note %}
+既存の OpenStack KVM インスタンスに CPU またはメモリリソースを追加することはできません。 その代わりに、以下を行う必要があります:
 
-**Note:** To add CPU or memory resources in Microsoft Azure, you must be familiar with using either the Azure Portal, Azure CLI or Azure PowerShell to manage VM instances. For background and details on using the Azure tools of your choice to perform the resize, please refer to the Azure documentation on [changing the size of a virtual machine](https://docs.microsoft.com/en-us/azure/virtual-machines/resize-vm).
+1. 現在のインスタンスのスナップショットを取る。
+2. インスタンスを停止する。
+3. 希望するCPUやメモリリソースを持つ新しいインスタンスフレーバーを選択する。
 
-{% endnote %}
-
-### Resizing considerations
-
-Before increasing CPU or memory resources for {% data variables.location.product_location %}, review the following recommendations.
-
-- **Scale your memory with CPUs**. {% data reusables.enterprise_installation.increasing-cpus-req %}
-- **Assign a static IP address to the instance**. If you haven't assigned a static IP to your instance, you might have to adjust the DNS A records for your {% data variables.product.prodname_ghe_server %} host after the restart to account for the change in IP address.
-
-### Supported Microsoft Azure instance sizes
-
-You need to determine the instance size you would like to upgrade to based on CPU/memory specifications.
-
-{% data reusables.enterprise_installation.warning-on-scaling %}
-
-{% data reusables.enterprise_installation.azure-instance-recommendation %}
-
-### Resizing for Microsoft Azure
-
-You can scale the VM up by changing the VM size. Changing its size will cause it to be restarted. In some cases, you must deallocate the VM first. This can happen if the new size is not available on the hardware cluster that is currently hosting the VM. 
-
-1. Refer to the Azure documentation on [changing the size of a virtual machine](https://docs.microsoft.com/en-us/azure/virtual-machines/resize-vm) for the required steps.
-{% data reusables.enterprise_installation.configuration-recognized %}
-
-## Adding CPU or memory resources for OpenStack KVM
-
-It's not possible to add CPU or memory resources to an existing OpenStack KVM instance. Instead, you must:
-
-1. Take a snapshot of the current instance.
-2. Stop the instance.
-3. Select a new instance flavor that has the desired CPU and/or memory resources.
-
-## Adding CPU or memory resources for VMware
+### VMware の CPU またはメモリリソースを追加する
 
 {% data reusables.enterprise_installation.increasing-cpus-req %}
 
-1. Use the vSphere Client to connect to the VMware ESXi host.
-2. Shut down {% data variables.location.product_location %}.
-3. Select the virtual machine and click **Edit Settings**.
-4. Under "Hardware", adjust the CPU and/or memory resources allocated to the virtual machine as needed:
-![VMware setup resources](/assets/images/enterprise/vmware/vsphere-hardware-tab.png)
-5. To start the virtual machine, click **OK**.
+1. vSphere Clientを使ってVMware ESXiホストに接続してください。
+2. {% data variables.product.product_location %}をシャットダウンしてください。
+3. 仮想マシンを選択し、 **Edit Settings（設定の編集）**をクリックしてください。
+4. "Hardware"の下で、必要に応じて仮想マシンに割り当てられたCPUやメモリリソースを調整してください。![VMWareのセットアップリソース](/assets/images/enterprise/vmware/vsphere-hardware-tab.png)
+5. 仮想マシンを起動するには、[**OK**] をクリックします。
 {% data reusables.enterprise_installation.configuration-recognized %}
