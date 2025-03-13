@@ -1,4 +1,4 @@
-1. Download the upgrade package to {% data variables.location.product_location %} using `curl `:
+1. Baixe o pacote de atualização para {% data variables.product.product_location %} usando `curl`:
 ```shell
-admin@HOSTNAME:~$ curl -L -O UPGRADE-PKG-URL
+admin@<em>HOSTNAME</em>:~$ curl -L -O <em>UPGRADE-PKG-URL</em>
 ```

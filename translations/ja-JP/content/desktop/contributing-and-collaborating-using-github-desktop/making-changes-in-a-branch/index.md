@@ -1,16 +1,14 @@
 ---
-title: Making changes in a branch
-intro: 'Use your favorite text editor, such as [{% data variables.product.prodname_vscode %}](https://code.visualstudio.com/), to make changes to your project, then use {% data variables.product.prodname_desktop %} to visualize useful commits.'
+title: ブランチでの変更
+intro: '[Atom](https://atom.io/)などお好みのテキストエディタを使用して、プロジェクトに変更を加え、{% data variables.product.prodname_desktop %}を使って有意義なコミットをビジュアル化します。'
 redirect_from:
   - /desktop/contributing-to-projects/making-changes-in-a-branch
 versions:
-  fpt: '*'
+  free-pro-team: '*'
 children:
   - /managing-branches
   - /committing-and-reviewing-changes-to-your-project
   - /stashing-changes
-  - /viewing-the-branch-history
   - /pushing-changes-to-github
-shortTitle: Make changes in a branch
+  - /viewing-the-branch-history
 ---
-

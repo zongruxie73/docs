@@ -1,21 +1,13 @@
 ---
-title: 関連項目
-intro: 'このセクションには、{% data variables.product.prodname_github_codespaces %} を正しく使用するためのリファレンスが含まれています'
+title: リファレンス
+intro: 'This section contains references that will allow you to be successful with {% data variables.product.prodname_codespaces %}'
 versions:
-  fpt: '*'
-  ghec: '*'
-product: '{% data reusables.gated-features.codespaces %}'
+  free-pro-team: '*'
 children:
+  - /about-billing-for-codespaces
+  - /troubleshooting-your-codespace
   - /allowing-your-codespace-to-access-a-private-image-registry
-  - /using-github-copilot-in-github-codespaces
-  - /using-the-vs-code-command-palette-in-codespaces
-  - /security-in-github-codespaces
-  - /disaster-recovery-for-github-codespaces
-ms.openlocfilehash: 3e3ebc7b7222afcb9505e1f535975feadb9515a7
-ms.sourcegitcommit: 47bd0e48c7dba1dde49baff60bc1eddc91ab10c5
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 09/05/2022
-ms.locfileid: '147110843'
+  - /using-the-command-palette-in-codespaces
 ---
 
+{% data reusables.codespaces.release-stage %}

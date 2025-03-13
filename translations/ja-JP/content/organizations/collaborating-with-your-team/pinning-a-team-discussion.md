@@ -6,25 +6,21 @@ redirect_from:
   - /github/building-a-strong-community/pinning-a-team-discussion
   - /github/setting-up-and-managing-organizations-and-teams/pinning-a-team-discussion
 versions:
-  fpt: '*'
-  ghes: '*'
-  ghae: '*'
-  ghec: '*'
+  free-pro-team: '*'
+  enterprise-server: '*'
+  github-ae: '*'
 topics:
   - Community
-ms.openlocfilehash: 7676a5a17d22d683f953d894b04e864497145a66
-ms.sourcegitcommit: 5b1461b419dbef60ae9dbdf8e905a4df30fc91b7
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 09/10/2022
-ms.locfileid: '147878772'
 ---
-{% data reusables.profile.access_org %} {% data reusables.user-settings.access_org %} {% data reusables.organizations.specific_team %} {% data reusables.organizations.team-discussions-tab %}
-5. ピン止めする Team ディスカッションの横にある {% octicon "pin" aria-label="The pin icon" %} をクリックします。 アイコンをクリックしてディスカッションのピン止めを解除することもできます。
-  ![ディスカッションをピン止めする](/assets/images/help/projects/pin-discussion-button.png)
 
-## 参考資料
+{% data reusables.profile.access_org %}
+{% data reusables.user_settings.access_org %}
+{% data reusables.organizations.specific_team %}
+{% data reusables.organizations.team-discussions-tab %}
+5. ピン止めする Team ディスカッションの横にある {% octicon "pin" aria-label="The pin icon" %} をクリックします。 アイコンをクリックしてディスカッションのピン止めを解除することもできます。 ![ディスカッションをピン止めする](/assets/images/help/projects/pin-discussion-button.png)
 
-  - 「[Team ディスカッションについて](/organizations/collaborating-with-your-team/about-team-discussions)」
-  - 「[Team ディスカッションの作成](/organizations/collaborating-with-your-team/creating-a-team-discussion)」
-  - 「[Team ディスカッションの編集または削除](/organizations/collaborating-with-your-team/editing-or-deleting-a-team-discussion)」
+### 参考リンク
+
+  - "[Team ディスカッションについて](/organizations/collaborating-with-your-team/about-team-discussions)"
+  - [Team ディスカッションの作成](/organizations/collaborating-with-your-team/creating-a-team-discussion)
+  - [Team ディスカッションの編集または削除](/organizations/collaborating-with-your-team/editing-or-deleting-a-team-discussion)

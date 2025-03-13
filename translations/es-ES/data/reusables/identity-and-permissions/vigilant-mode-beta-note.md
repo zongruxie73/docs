@@ -1,7 +1,5 @@
-{% ifversion ghes < 3.7 %}
 {% note %}
 
-**Note:** Vigilant mode is currently in beta and subject to change.
+**Nota:** El modo vigilante se encuentra actualmente en beta y está sujeto a cambios.
 
 {% endnote %}
-{% endif %}

@@ -10,7 +10,6 @@ redirect_from:
   - /github/building-a-strong-community/maintaining-your-safety-on-github
 versions:
   fpt: '*'
-  ghec: '*'
 topics:
   - Community
 children:

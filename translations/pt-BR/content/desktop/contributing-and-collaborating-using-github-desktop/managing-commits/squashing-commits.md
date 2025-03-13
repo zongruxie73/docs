@@ -1,57 +1,52 @@
 ---
-title: Combinação por squash de commits
-intro: 'Você pode usar {% data variables.product.prodname_desktop %} para fazer comunicação por squash de commits no histórico do seu branch.'
+title: Squashing commits
+intro: "You can use {% data variables.product.prodname_desktop %} to squash commits in your branch's history."
 versions:
-  fpt: '*'
-ms.openlocfilehash: fb8141710a99b52f1b9a93e1abc0429b5e29f116
-ms.sourcegitcommit: 47bd0e48c7dba1dde49baff60bc1eddc91ab10c5
-ms.translationtype: HT
-ms.contentlocale: pt-BR
-ms.lasthandoff: 09/05/2022
-ms.locfileid: '145095171'
+  free-pro-team: '*'
 ---
-## Sobre a combinação por squash de um commit
 
-A combinação por squash permite que você combine vários commits no histórico do seu branch em um único commit. Isso pode ajudar a manter a história do seu repositório mais legível e compreensível.
+## About squashing a commit
 
-## Combinação por squash de um commit
+Squashing allows you to combine multiple commits in your branch's history into a single commit. This can help keep your repository's history more readable and understandable.
+
+## Squashing a commit
 
 {% mac %}
 
 {% data reusables.desktop.current-branch-menu %}
-2. Na lista de branches, selecione o branch que possui os commits para o qual você deseja realizar a combinação por squash.
+2. In the list of branches, select the branch that has the commits that you want to squash.
 {% data reusables.desktop.history-tab %}
-4. Selecionar os commits para fazer a combinação por squash e solte-os no commit com o qual deseja combiná-los. Você pode selecionar um ou vários commits usando a tecla <kbd>Command</kbd> ou <kbd>SHIFT</kbd>.
-  ![mesclagem squash e arrastar e soltar](/assets/images/help/desktop/squash-drag-and-drop.png)
-5. Modifique a mensagem de commit de seu novo commit. As mensagens de commit dos commits selecionados que você deseja mesclar por squash são preenchidas previamente nos campos **Resumo** e **Descrição**.
-6. Clique em **Mesclar Commits por Squash**.
+4. Select the commits to squash and drop them on the commit you want to combine them with. You can select one commit or select multiple commits using <kbd>⌘</kbd> or <kbd>Shift</kbd>.
+  ![squash drag and drop](/assets/images/help/desktop/squash-drag-and-drop.png)
+5. Modify the commit message of your new commit. The commit messages of the selected commits you want to squash are pre-filled into the **Summary** and **Description** fields.
+6. Click **Squash Commmits**.
 
 {% endmac %}
 
 {% windows %}
 
 {% data reusables.desktop.current-branch-menu %}
-2. Na lista de branches, selecione o branch que possui os commits para o qual você deseja realizar a combinação por squash.
+2. In the list of branches, select the branch that has the commits that you want to squash.
 {% data reusables.desktop.history-tab %}
-4. Selecionar os commits para fazer a combinação por squash e solte-os no commit com o qual deseja combiná-los. Você pode selecionar um ou vários commits usando a tecla <kbd>CTRL</kbd> ou <kbd>SHIFT</kbd>.
-  ![mesclagem squash e arrastar e soltar](/assets/images/help/desktop/squash-drag-and-drop.png)
-5. Modifique a mensagem de commit de seu novo commit. As mensagens de commit dos commits selecionados que você deseja mesclar por squash são preenchidas previamente nos campos **Resumo** e **Descrição**.
-6. Clique em **Mesclar Commits por Squash**.
+4. Select the commits to squash and drop them on the commit you want to combine them with. You can select one commit or select multiple commits using <kbd>Ctrl</kbd> or <kbd>Shift</kbd>.
+  ![squash drag and drop](/assets/images/help/desktop/squash-drag-and-drop.png)
+5. Modify the commit message of your new commit. The commit messages of the selected commits you want to squash are pre-filled into the **Summary** and **Description** fields.
+6. Click **Squash Commmits**.
 
 {% endwindows %}
 
-## Mensagens de erro ao fazer combinação por squash dos commits
+## Error messages when squashing commits
 
-Ao fazer combinação por squash dos commits, você pode ver uma das seguintes notificações ou mensagens de erro.
+When you squash commits, you may see one of the following notifications or error messages.
 
-* Uma notificação afirma que a alteração solicitada no branch exigirá um push forçado para atualizar o branch remoto. O push forçado altera o histórico de commit do branch e afetará outros colaboradores que estão trabalhando nesse branch.  Selecione **Iniciar Mesclagem Squash** para iniciar a mesclagem squash e clique em **Forçar origem do push** para efetuar push das alterações.
+* A notification states that the requested change to the branch will require a force push to update the remote branch. Force pushing alters the commit history of the branch and will affect other collaborators who are working in that branch.  Select **Begin Squash** to start the squash, and then click **Force push origin** to push your changes.
 
-  ![diálogo de push forçado de combinação por squash](/assets/images/help/desktop/squash-force-push.png)
+  ![squash force push dialog](/assets/images/help/desktop/squash-force-push.png)
 
-* Um erro afirma que ocorreu uma falha na combinação por squash porque existe um commit de merge entre os commits que foram combinados por squash.
+* An error states that the squash failed because there is a merge commit among the squashed commits.
 
-  ![reordenar diálogo de confirmação de merge](/assets/images/help/desktop/squash-merge-commit-dialog.png)
+  ![reorder merge commit dialog](/assets/images/help/desktop/squash-merge-commit-dialog.png)
 
-* Uma notificação é exibida indicando que há alterações não confirmadas presentes no seu branch atual. Selecione **Fazer Stash das Alterações e Continuar** para armazenar as alterações e continuar ou **Fechar** para ignorar a mensagem e fazer commit das alterações. Quando não houver mais alterações não realizadas, você poderá fazer a combinação por squash dos seus commits.
+* A notification is shown indicating that there are uncommitted changes present on your current branch. Select **Stash Changes and Continue** to store the changes and proceed, or select **Close** to dismiss the message and commit the changes. When there are no longer any uncommitted changes you can squash your commits.
 
-  ![diálogo de stash de combinação por squash](/assets/images/help/desktop/squash-stash-dialog.png)
+  ![squash stash dialog](/assets/images/help/desktop/squash-stash-dialog.png)

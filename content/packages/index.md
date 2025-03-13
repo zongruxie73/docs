@@ -12,13 +12,11 @@ featuredLinks:
     - /packages/learn-github-packages/installing-a-package
   popular:
     - /packages/working-with-a-github-packages-registry/working-with-the-npm-registry
-    - '{% ifversion docker-ghcr-enterprise-migration %}/packages/working-with-a-github-packages-registry/migrating-to-the-container-registry-from-the-docker-registry{% endif %}'
+    - '{% ifversion fpt %}/packages/working-with-a-github-packages-registry/working-with-the-container-registry{% else %}/packages/working-with-a-github-packages-registry/working-with-the-docker-registry{% endif %}'
     - /packages/learn-github-packages
     - /packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry
   guideCards:
-    - '{% ifversion docker-ghcr-enterprise-migration %}/packages/working-with-a-github-packages-registry/migrating-to-the-container-registry-from-the-docker-registry{% endif %}'
-    - '{% ifversion fpt or ghec or ghes > 3.4 %}/packages/working-with-a-github-packages-registry/working-with-the-container-registry{% else %}/packages/working-with-a-github-packages-registry/working-with-the-docker-registry{% endif %}'
-    - '{% ifversion packages-npm-v2 %}/packages/working-with-a-github-packages-registry/working-with-the-npm-registry{% endif %}'
+    - '{% ifversion fpt %}/packages/working-with-a-github-packages-registry/working-with-the-container-registry{% else %}/packages/working-with-a-github-packages-registry/working-with-the-docker-registry{% endif %}'
     - /packages/working-with-a-github-packages-registry/working-with-the-rubygems-registry
 changelog:
   label: packages
@@ -32,7 +30,6 @@ versions:
   fpt: '*'
   ghes: '*'
   ghae: '*'
-  ghec: '*'
 children:
   - /quickstart
   - /learn-github-packages

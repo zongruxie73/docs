@@ -1,1 +1,1 @@
-Rate limits for {% data variables.product.prodname_github_apps %} and {% data variables.product.prodname_oauth_apps %} help control the rate of traffic to {% data variables.location.product_location %}. 
+GitHub 应用程序的速率限制有助于控制流量。

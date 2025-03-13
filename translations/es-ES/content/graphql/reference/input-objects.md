@@ -1,25 +1,23 @@
 ---
-title: Input objects
+title: Objetos de entrada
 redirect_from:
   - /v4/input_object
   - /v4/reference/input_object
 versions:
-  fpt: '*'
-  ghec: '*'
-  ghes: '*'
-  ghae: '*'
+  free-pro-team: '*'
+  enterprise-server: '*'
+  github-ae: '*'
 topics:
   - API
 ---
 
-## About input objects
+### Acerca de los objetos de entrada
 
-[Input objects](https://graphql.github.io/graphql-spec/June2018/#sec-Input-Objects) can be described as "composable objects" because they include a set of input fields that define the object.
+Los [objetos de entrada](https://graphql.github.io/graphql-spec/June2018/#sec-Input-Objects) pueden describirse como "objetos estructurables" ya que incluyen un conjunto de campos de entrada que definen al objeto.
 
-For example, [`CommitAuthor`](/graphql/reference/input-objects#commitauthor) takes a field called `emails`. Providing a value for `emails` transforms `CommitAuthor` into a list of `User` objects containing that email address. Note that [objects](/graphql/reference/objects) **may** have input objects, whereas [mutations](/graphql/reference/mutations) **require** input objects.
+Por ejemplo, [`CommitAuthor`](/graphql/reference/input-objects#commitauthor) toma un campo llamado `emails`. Proporcionar un valor para `emails` transforma a `CommitAuthor` en una lista de objetos `User` que contienen esa dirección de correo electrónico. Nota que los [objetos](/graphql/reference/objects) **podrían** tener objetos de entrada, mientras que las [mutaciones](/graphql/reference/mutations) **requieren** objetos de entrada.
 
-For more information, see "[About mutations](/graphql/guides/forming-calls-with-graphql#about-mutations)."
+Para obtener más información, consulta la sección "[Acerca de las mutaciones](/graphql/guides/forming-calls-with-graphql#about-mutations)".
 
-{% data reusables.projects.graphql-ghes %}
-
-<!-- Content after this section is automatically generated -->
+<!-- this page is pre-rendered by scripts because it's too big to load dynamically -->
+<!-- see lib/graphql/static/prerendered-input-objects.json -->

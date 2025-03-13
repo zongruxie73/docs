@@ -1,75 +1,53 @@
 ---
 title: Administrar usuarios inactivos
 redirect_from:
-  - /enterprise/admin/articles/dormant-users
-  - /enterprise/admin/articles/viewing-dormant-users
-  - /enterprise/admin/articles/determining-whether-a-user-account-is-dormant
+  - /enterprise/admin/articles/dormant-users/
+  - /enterprise/admin/articles/viewing-dormant-users/
+  - /enterprise/admin/articles/determining-whether-a-user-account-is-dormant/
   - /enterprise/admin/user-management/managing-dormant-users
   - /admin/user-management/managing-dormant-users
-intro: '{% data reusables.enterprise-accounts.dormant-user-activity-threshold %}'
+intro: 'Se considera una cuenta de usuario como durmiente si no ha tenido actividad por lo menos en todo un mes.{% if enterpriseServerVersions contains currentVersion %} Puedes elegir suspender a los usuarios durmientes para liberar licencias de usuario.{% endif %}'
 versions:
-  ghec: '*'
-  ghes: '*'
-  ghae: '*'
+  enterprise-server: '*'
+  github-ae: '*'
 type: how_to
 topics:
   - Accounts
   - Enterprise
   - Licensing
-ms.openlocfilehash: 7594a0fc22bef10e84334727ad9e79aa02cd1da6
-ms.sourcegitcommit: 47bd0e48c7dba1dde49baff60bc1eddc91ab10c5
-ms.translationtype: HT
-ms.contentlocale: es-ES
-ms.lasthandoff: 09/05/2022
-ms.locfileid: '146680929'
 ---
-{% ifversion ghec %} {% data reusables.enterprise-accounts.dormant-user-release-phase %} {% endif %}
 
-## Acerca de los usuarios inactivos
+"Actividad" incluye, entre otros:
+- Iniciar sesión en {% data variables.product.product_name %}.
+- Comentar en propuestas y en solicitudes de extracción.
+- Crear, eliminar, observar y destacar repositorios.
+- Subida de confirmaciones.{% if currentVersion ver_gt "enterprise-server@2.21" or currentVersion == "github-ae@latest" %}
+- Acceder a los recursos utilizando un token de acceso personal o llave de SSH.{% endif %}
 
-{% data reusables.enterprise-accounts.dormant-user-activity %}
+### Visualizar usuarios inactivos
 
-{% ifversion ghes or ghae%}
-## Visualizar usuarios inactivos
-
-{% data reusables.enterprise-accounts.viewing-dormant-users %}
+Puedes ver una lista de todos los usuarios inactivos que no han sido suspendidos y que no son administradores del sitio.
 
 {% data reusables.enterprise_site_admin_settings.access-settings %}
-3. En la barra lateral izquierda, haga clic en **Usuarios inactivos**.
-![Pestaña Usuarios inactivos](/assets/images/enterprise/site-admin-settings/dormant-users-tab.png){% ifversion ghes %}
-4. Para suspender todos los usuarios inactivos de esta lista, hag clic en **Suspender todos**, en la parte superior de la página.
-![Botón Suspender todos](/assets/images/enterprise/site-admin-settings/suspend-all.png){% endif %}
+3. En la barra lateral de la izquierda, haz clic en **Usuarios inactivos**. ![Dormant users tab](/assets/images/enterprise/site-admin-settings/dormant-users-tab.png){% if enterpriseServerVersions contains currentVersion %}
+4. Para suspender todos los usuarios inactivos de esta lista, haz clic en **Suspender todos**, en la parte superior de la página. ![Suspend all button](/assets/images/enterprise/site-admin-settings/suspend-all.png){% endif %}
 
-## Determinar si un usuario está inactivo
+### Determinar si un usuario está inactivo
 
-{% data reusables.enterprise_site_admin_settings.access-settings %} {% data reusables.enterprise_site_admin_settings.search-user %} {% data reusables.enterprise_site_admin_settings.click-user %}
-5. En la sección **Información del usuario**, un punto de color rojo con la palabra "Inactivo" indica que la cuenta del usuario está inactiva, y un punto de color verde con la palabra "Activo" indica que está activa.
-![Cuenta de usuario inactiva](/assets/images/enterprise/stafftools/dormant-user.png)
-![Cuenta de usuario activa](/assets/images/enterprise/stafftools/active-user.png)
+{% data reusables.enterprise_site_admin_settings.access-settings %}
+{% data reusables.enterprise_site_admin_settings.search-user %}
+{% data reusables.enterprise_site_admin_settings.click-user %}
+5. En la sección **Información del usuario**, un punto rojo con la palabra "Inactiva" indica que la cuenta del usuario está inactiva, y un punto verde con la palabra "Activa" indica que la cuenta del usuario está activa. ![Cuenta de usuario inactiva](/assets/images/enterprise/stafftools/dormant-user.png) ![Cuenta de usuario activa](/assets/images/enterprise/stafftools/active-user.png)
 
-## Configurar el umbral de inactividad
+### Configurar el umbral de inactividad
 
 {% data reusables.enterprise_site_admin_settings.dormancy-threshold %}
 
-{% data reusables.enterprise-accounts.access-enterprise %} {% data reusables.enterprise-accounts.policies-tab %} {% data reusables.enterprise-accounts.options-tab %}
-4. En "Umbral de inactividad", usa el menú desplegable y haz clic en el umbral de inactividad deseado.
-![Menú desplegable Umbral de inactividad](/assets/images/enterprise/site-admin-settings/dormancy-threshold-menu.png)
-
+{% data reusables.enterprise-accounts.access-enterprise %}
+{% if currentVersion ver_gt "enterprise-server@2.21" or currentVersion == "github-ae@latest" %}
+{% data reusables.enterprise-accounts.policies-tab %}
+{% else %}
+{% data reusables.enterprise-accounts.settings-tab %}
 {% endif %}
-
-{% ifversion ghec %}
-## Descargar el reporte de usuarios inactivos desde tu cuenta empresarial
-
-{% data reusables.enterprise-accounts.access-enterprise %} {% data reusables.enterprise-accounts.enterprise-accounts-compliance-tab %}
-1. Para descargar el informe de usuarios inactivos (beta) como un archivo CSV, en "Otros", haga clic en {% octicon "download" aria-label="The Download icon" %} **Descargar**.
-  ![Botón Descargar en "Otros" en la página Cumplimiento](/assets/images/help/business-accounts/dormant-users-download-button.png)
-
-{% tip %}
-
-**Sugerencia**: Para evaluar la inactividad del usuario, la actividad del usuario se limita a incluir solo su actividad vinculada a organizaciones, repositorios o eventos de inicio de sesión asociados a la empresa. Por ejemplo, si un usuario ha comentado recientemente una incidencia en un repositorio público no asociado a la empresa, puede considerarse inactivo. Pero si ha comentado recientemente una incidencia en un repositorio público asociado a una organización de tu empresa, no se considerará inactivo y no aparecerá en el informe "Usuario inactivo".
-
-En el caso de eventos de inicio de sesión web, solo los eventos de inicio de sesión mediante un dominio de SSO vinculado a la empresa se consideran actividades de usuario asociadas a la empresa.
-
-{% endtip %}
-
-{% endif %}
+{% data reusables.enterprise-accounts.options-tab %}
+4. En "Umbral de inactividad", usa el menú desplegable y haz clic en el umbral de inactividad deseado. ![Menú desplegable Umbral de inactividad](/assets/images/enterprise/site-admin-settings/dormancy-threshold-menu.png)

@@ -10,7 +10,6 @@ versions:
   fpt: '*'
   ghes: '*'
   ghae: '*'
-  ghec: '*'
 topics:
   - Pages
 shortTitle: Create site with Jekyll
@@ -32,7 +31,6 @@ Before you can use Jekyll to create a {% data variables.product.prodname_pages %
 
 {% data reusables.repositories.create_new %}
 {% data reusables.repositories.owner-drop-down %}
-{% indented_data_reference reusables.pages.emu-org-only spaces=3 %}
 {% data reusables.pages.create-repo-name %}
 {% data reusables.repositories.choose-repo-visibility %}
 
@@ -45,17 +43,17 @@ Before you can use Jekyll to create a {% data variables.product.prodname_pages %
 {% data reusables.command_line.open_the_multi_os_terminal %}
 1. If you don't already have a local copy of your repository, navigate to the location where you want to store your site's source files, replacing _PARENT-FOLDER_ with the folder you want to contain the folder for your repository.
   ```shell
-  $ cd PARENT-FOLDER
+  $ cd <em>PARENT-FOLDER</em>
   ```
 1. If you haven't already, initialize a local Git repository, replacing _REPOSITORY-NAME_ with the name of your repository.
   ```shell
-  $ git init REPOSITORY-NAME
+  $ git init <em>REPOSITORY-NAME</em>
   > Initialized empty Git repository in /Users/octocat/my-site/.git/
   # Creates a new folder on your computer, initialized as a Git repository
   ```
   4. Change directories to the repository.
   ```shell
-  $ cd REPOSITORY-NAME
+  $ cd <em>REPOSITORY-NAME</em>
   # Changes the working directory
   ```
 {% data reusables.pages.decide-publishing-source %}
@@ -69,9 +67,7 @@ Before you can use Jekyll to create a {% data variables.product.prodname_pages %
  If you chose to publish your site from the `gh-pages` branch, create and checkout the `gh-pages` branch.
  ```shell
  $ git checkout --orphan gh-pages
- # Creates a new branch, with no history or contents, called gh-pages, and switches to the gh-pages branch
- $ git rm -rf .
- # Removes the contents from your default branch from the working directory
+ # Creates a new branch, with no history or contents, called gh-pages and switches to the gh-pages branch
  ```
 1. To create a new Jekyll site, use the `jekyll new` command:
    ```shell
@@ -103,25 +99,25 @@ Before you can use Jekyll to create a {% data variables.product.prodname_pages %
 git add .
 git commit -m 'Initial GitHub pages site with Jekyll'
 ```
-1. Add your repository on {% ifversion ghae %}{% data variables.product.product_name %}{% else %}{% data variables.location.product_location %}{% endif %} as a remote, replacing {% ifversion ghes or ghae %}_HOSTNAME_ with your enterprise's hostname,{% endif %} _USER_ with the account that owns the repository{% ifversion ghes or ghae %},{% endif %} and _REPOSITORY_ with the name of the repository.
+1. Add your {% data variables.product.product_name %} repository as a remote, replacing {% ifversion ghes or ghae %}_HOSTNAME_ with your enterprise's hostname,{% endif %} _USER_ with the account that owns the repository{% ifversion ghes or ghae %},{% endif %} and _REPOSITORY_ with the name of the repository.
 ```shell
-{% ifversion fpt or ghec %}
-$ git remote add origin https://github.com/USER/REPOSITORY.git
+{% ifversion fpt %}
+$ git remote add origin https://github.com/<em>USER</em>/<em>REPOSITORY</em>.git
 {% else %}
-$ git remote add origin https://HOSTNAME/USER/REPOSITORY.git
+$ git remote add origin https://<em>HOSTNAME</em>/<em>USER</em>/<em>REPOSITORY</em>.git
 {% endif %}
 ```
 1. Push the repository to {% data variables.product.product_name %}, replacing _BRANCH_ with the name of the branch you're working on.
    ```shell
-   $ git push -u origin BRANCH
+   $ git push -u origin <em>BRANCH</em>
    ```
 {% data reusables.pages.configure-publishing-source %}
 {% data reusables.pages.navigate-site-repo %}
 {% data reusables.repositories.sidebar-settings %}
 {% data reusables.pages.sidebar-pages %}
-{% data reusables.pages.choose-visibility %}
+{% ifversion fpt %}
+{% data reusables.pages.choose-visibility %}{% endif %}
 {% data reusables.pages.visit-site %}
-{% data reusables.pages.check-workflow-run %}
 
 {% data reusables.pages.admin-must-push %}
 

@@ -1,4 +1,4 @@
-import HomePage from '../index'
+import LandingPage from '../index'
 export { getServerSideProps } from '../index'
 
-export default HomePage
+export default LandingPage

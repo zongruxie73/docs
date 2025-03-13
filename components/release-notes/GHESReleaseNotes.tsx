@@ -1,36 +1,65 @@
 import { SyntheticEvent, useState } from 'react'
 import cx from 'classnames'
-import { ChevronDownIcon, LinkExternalIcon } from '@primer/octicons-react'
+import {
+  ChevronDownIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  LinkExternalIcon,
+} from '@primer/octicons-react'
 import { useMainContext } from 'components/context/MainContext'
 import dayjs from 'dayjs'
-import { useRouter } from 'next/router'
 
 import { Link } from 'components/Link'
-import { MarkdownContent } from 'components/ui/MarkdownContent'
 import { GHESReleaseNotesContextT } from './types'
 import { GHESReleaseNotePatch } from './GHESReleaseNotePatch'
-
-import styles from './PatchNotes.module.scss'
-import { PlainLink } from './PlainLink'
 
 type Props = {
   context: GHESReleaseNotesContextT
 }
-
 export function GHESReleaseNotes({ context }: Props) {
-  const router = useRouter()
-  const { currentProduct } = useMainContext()
+  const { currentLanguage, currentProduct } = useMainContext()
   const [focusedPatch, setFocusedPatch] = useState('')
-  const { latestPatch, latestRelease, currentVersion, releaseNotes, releases, message } = context
+  const {
+    prevRelease,
+    nextRelease,
+    latestPatch,
+    latestRelease,
+    currentVersion,
+    releaseNotes,
+    releases,
+    message,
+  } = context
   return (
     <div className="d-flex">
       <article className="min-width-0 flex-1">
-        <div className="d-flex flex-items-center flex-justify-center color-bg-default text-bold px-5 py-2">
+        <div className="d-flex flex-items-center flex-justify-between color-bg-primary text-bold px-5 py-2">
+          {prevRelease ? (
+            <Link
+              className="btn btn-outline"
+              href={`/${currentLanguage}/${currentVersion.plan}@${prevRelease}/${currentProduct?.id}/release-notes`}
+            >
+              <ChevronLeftIcon /> {prevRelease}
+            </Link>
+          ) : (
+            <div />
+          )}
+
           <h1 className="f4 py-3 m-0">
             {currentVersion.planTitle} {currentVersion.currentRelease} release notes
           </h1>
+
+          {nextRelease ? (
+            <Link
+              className="btn btn-outline"
+              href={`/${currentLanguage}/${currentVersion.plan}@${nextRelease}/${currentProduct?.id}/release-notes`}
+            >
+              {nextRelease} <ChevronRightIcon />
+            </Link>
+          ) : (
+            <div />
+          )}
         </div>
-        <MarkdownContent data-search="article-content">
+        <div className="markdown-body">
           {releaseNotes.map((patch) => {
             return (
               <GHESReleaseNotePatch
@@ -46,71 +75,58 @@ export function GHESReleaseNotes({ context }: Props) {
               />
             )
           })}
-        </MarkdownContent>
+        </div>
       </article>
 
       <aside
-        className={cx(
-          'position-sticky d-none d-md-block border-left no-print color-bg-default flex-shrink-0',
-          styles.aside
-        )}
+        className="markdown-body position-sticky top-0 d-none d-md-block border-left no-print color-bg-primary flex-shrink-0"
+        style={{ width: 260, height: '100vh' }}
       >
         <nav className="height-full overflow-auto">
-          <MarkdownContent data-search="article-content">
-            <ul className="list-style-none pl-0 text-bold">
-              {releases.map((release) => {
-                const releaseLink = `/${router.locale}/${currentVersion.plan}@${release.version}/${currentProduct?.id}/release-notes`
+          <ul className="list-style-none pl-0 text-bold">
+            {releases.map((release) => {
+              const releaseLink = `/${currentLanguage}/${currentVersion.plan}@${release.version}/${currentProduct?.id}/release-notes`
 
-                // Use client-side router link component only if it's a supported release.
-                // Otherwise, it will trigger a NextJS data XHR fetch for releases
-                // that are deprecated when in fact you should load it regularly
-                // so it's read as a proxy from the archive.
-                const LinkComponent = currentVersion.releases.includes(release.version)
-                  ? Link
-                  : PlainLink
-
-                if (!release.patches || release.patches.length === 0) {
-                  return (
-                    <li key={release.version} className="border-bottom">
-                      <LinkComponent
-                        href={releaseLink}
-                        className="Link--primary no-underline px-3 py-4 my-0 d-flex flex-items-center flex-justify-between"
-                      >
-                        {release.version}
-                        <LinkExternalIcon />
-                      </LinkComponent>
-                    </li>
-                  )
-                }
-
-                if (release.version === currentVersion.currentRelease) {
-                  return (
-                    <CollapsibleReleaseSection
-                      key={release.version}
-                      release={release}
-                      focusedPatch={focusedPatch}
-                      releaseLink={releaseLink}
-                    />
-                  )
-                }
-
+              if (!release.patches || release.patches.length === 0) {
                 return (
                   <li key={release.version} className="border-bottom">
-                    <LinkComponent
-                      className="px-3 py-4 my-0 d-flex flex-items-center flex-justify-between"
+                    <Link
                       href={releaseLink}
+                      className="Link--primary no-underline px-3 py-4 my-0 d-flex flex-items-center flex-justify-between"
                     >
                       {release.version}
-                      <span className="color-fg-muted text-small text-normal mr-1">
-                        {release.patches.length}{' '}
-                        {release.patches.length === 1 ? 'release' : 'releases'}
-                      </span>
-                    </LinkComponent>
+                      <LinkExternalIcon />
+                    </Link>
                   </li>
                 )
-              })}
-            </ul>
-          </MarkdownContent>
+              }
+
+              if (release.version === currentVersion.currentRelease) {
+                return (
+                  <CollapsibleReleaseSection
+                    key={release.version}
+                    release={release}
+                    focusedPatch={focusedPatch}
+                    releaseLink={releaseLink}
+                  />
+                )
+              }
+
+              return (
+                <li key={release.version} className="border-bottom">
+                  <Link
+                    className="px-3 py-4 my-0 d-flex flex-items-center flex-justify-between"
+                    href={releaseLink}
+                  >
+                    {release.version}
+                    <span className="color-text-tertiary text-mono text-small text-normal mr-1">
+                      {release.patches.length} releases
+                    </span>
+                  </Link>
+                </li>
+              )
+            })}
+          </ul>
         </nav>
       </aside>
     </div>
@@ -141,29 +157,26 @@ const CollapsibleReleaseSection = ({
         open={defaultIsOpen}
         onToggle={onToggle}
       >
-        <summary className="px-3 py-4 my-0 d-flex flex-items-center flex-justify-between outline-none">
+        <summary className="px-3 py-4 my-0 d-flex flex-items-center flex-justify-between">
           {release.version}
           <div className="d-flex">
-            <span className="color-fg-muted text-small text-normal mr-1">
-              {release.patches.length} {release.patches.length === 1 ? 'release' : 'releases'}
+            <span className="color-text-tertiary text-mono text-small text-normal mr-1">
+              {release.patches.length} releases
             </span>
             <ChevronDownIcon className={isOpen ? 'rotate-180' : ''} />
           </div>
         </summary>
-        <ul className="color-bg-subtle border-top list-style-none py-4 px-0 my-0">
+        <ul className="color-bg-tertiary border-top list-style-none py-4 px-0 my-0">
           {release.patches.map((patch) => {
             const isActive = patch.version === focusedPatch
             return (
-              <li
-                key={patch.version}
-                className={cx('px-3 my-0 py-1', isActive && 'color-bg-accent')}
-              >
+              <li key={patch.version} className={cx('px-3 my-0 py-1', isActive && 'color-bg-info')}>
                 <Link
                   href={`${releaseLink}#${patch.version}`}
                   className="d-flex flex-items-center flex-justify-between"
                 >
                   {patch.version}
-                  <span className="color-fg-muted text-mono text-small text-normal">
+                  <span className="color-text-tertiary text-mono text-small text-normal">
                     {dayjs(patch.date).format('MMMM DD, YYYY')}
                   </span>
                 </Link>

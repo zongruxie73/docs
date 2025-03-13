@@ -6,7 +6,6 @@ versions:
   fpt: '*'
   ghes: '*'
   ghae: '*'
-  ghec: '*'
 children:
   - /publishing-and-installing-a-package-with-github-actions
   - /example-workflows-for-publishing-a-package

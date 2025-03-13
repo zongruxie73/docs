@@ -8,7 +8,6 @@ versions:
   fpt: '*'
   ghes: '*'
   ghae: '*'
-  ghec: '*'
 topics:
   - Community
 shortTitle: Add support resources
@@ -17,9 +16,9 @@ To direct people to specific support resources, you can add a SUPPORT file to yo
 
 ![Support guidelines](/assets/images/help/issues/support_guidelines_in_issue.png)
 
-{% ifversion fpt or ghes or ghec %}
+{% ifversion fpt or ghes %}
 
-You can create default support resources for your organization or personal account. For more information, see "[Creating a default community health file](/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file)."
+You can create default support resources for your organization or user account. For more information, see "[Creating a default community health file](/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file)."
 
 {% endif %}
 

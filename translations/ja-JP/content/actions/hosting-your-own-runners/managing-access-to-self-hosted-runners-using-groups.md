@@ -4,74 +4,116 @@ intro: ポリシーを使用して、Organization または Enterprise に追加
 redirect_from:
   - /actions/hosting-your-own-runners/managing-access-to-self-hosted-runners
 versions:
-  fpt: '*'
-  ghes: '*'
-  ghae: '*'
-  ghec: '*'
+  free-pro-team: '*'
+  enterprise-server: '>=2.22'
+  github-ae: '*'
 type: tutorial
-shortTitle: Using runner groups
-ms.openlocfilehash: 8e4c5669c1579fa635534b2f4466c7645033fc0c
-ms.sourcegitcommit: 478f2931167988096ae6478a257f492ecaa11794
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 09/09/2022
-ms.locfileid: '147763588'
 ---
-{% data reusables.actions.enterprise-beta %} {% data reusables.actions.enterprise-github-hosted-runners %}
 
-## ランナー グループについて
+{% data reusables.actions.ae-self-hosted-runners-notice %}
+{% data reusables.actions.enterprise-beta %}
+{% data reusables.actions.enterprise-github-hosted-runners %}
+{% data reusables.actions.ae-beta %}
 
-{% data reusables.actions.about-runner-groups %} {% ifversion fpt %}詳しくは、[{% data variables.product.prodname_ghe_cloud %} のドキュメント](/enterprise-cloud@latest/actions/hosting-your-own-runners/managing-access-to-self-hosted-runners-using-groups)をご覧ください。{% endif %}
+### セルフホストランナーのグループについて
 
-{% ifversion ghec or ghes or ghae %}
+{% if currentVersion == "free-pro-team@latest" %}
+{% note %}
 
-## Organization のセルフホストランナーグループを作成する
+**注釈:** すべての Organization には、単一のデフォルトのセルフホストランナーグループがあります。 追加のセルフホストランナーグループの作成と管理は、Enterprise アカウント、および Enterprise アカウントが所有する Organization でのみ使用できます。
 
-{%- ifversion ghec or ghes %}
-
-{% data reusables.actions.self-hosted-runner-security-admonition %}
-
-{%- endif %}
-
-{% data reusables.actions.creating-a-runner-group-for-an-organization %}
-
-## Enterprise のセルフホストランナーグループを作成する
-
- {%- ifversion ghec or ghes %}
-
-{% data reusables.actions.self-hosted-runner-security-admonition %}
-
-{%- endif %}
-
-{% data reusables.actions.creating-a-runner-group-for-an-enterprise %}
-
+{% endnote %}
 {% endif %}
 
-## セルフホストランナーグループのアクセスポリシーを変更する
+セルフホストランナーグループは、Organization レベルおよび Enterprise レベルでセルフホストランナーへのアクセスを制御するために使用されます。 Enterprise の管理者は、Enterprise 内のどの Organization がランナーグループにアクセスできるかを制御するアクセスポリシーを設定できます。 Organization の管理者は、Organization 内のどのリポジトリがランナーグループにアクセスできるかを制御するアクセスポリシーを設定できます。
 
-{%- ifversion fpt or ghec or ghes %}
+Enterprise の管理者が Organization にランナーグループへのアクセスを許可すると、Organization の管理者は、Organization のセルフホストランナー設定にリストされたランナーグループを表示できます。 Organization の管理者は、追加の詳細なリポジトリアクセスポリシーを Enterprise ランナーグループに割り当てることができます。
 
-{% data reusables.actions.self-hosted-runner-security-admonition %}
+新しいランナーが作成されると、それらは自動的にデフォルトグループに割り当てられます。 ランナーは一度に1つのグループにのみ参加できます。 ランナーはデフォルトグループから別のグループに移動できます。 詳しい情報については、「[セルフホストランナーをグループに移動する](#moving-a-self-hosted-runner-to-a-group)」を参照してください。
 
-{%- endif %}
+### Organization のセルフホストランナーグループを作成する
 
-{% data reusables.actions.changing-the-access-policy-of-a-runner-group %}
+すべての Organization には、単一のデフォルトのセルフホストランナーグループがあります。 Enterprise アカウント内の Organization は、追加のセルフホストグループを作成できます。 Organization の管理者は、個々のリポジトリにランナーグループへのアクセスを許可できます。
 
-## ランナー グループの名前を変更する
+セルフホストランナーは、作成時にデフォルトグループに自動的に割り当てられ、一度に 1 つのグループのメンバーになることができます。 ランナーはデフォルトグループから作成した任意のグループに移動できます。
 
-{% data reusables.actions.changing-the-name-of-a-runner-group %}
+グループを作成する場合、ランナーグループにアクセスできるリポジトリを定義するポリシーを選択する必要があります。
 
-{% ifversion ghec or ghes or ghae %}
-## セルフホスト ランナーをグループに自動的に追加する
+{% data reusables.organizations.navigate-to-org %}
+{% data reusables.organizations.org_settings %}
+{% data reusables.github-actions.settings-sidebar-actions-runners %}
+1. {% if currentVersion == "free-pro-team@latest" %}[Runners]{% else %}[Self-hosted runners]{% endif %} セクションで、[**Add new**]、[**New group**] の順にクリックします。
 
-{% data reusables.actions.automatically-adding-a-runner-to-a-group %}
+    ![新しいランナーを追加](/assets/images/help/settings/actions-org-add-runner-group.png)
+1. ランナーグループの名前を入力し、リポジトリアクセスのポリシーを割り当てます。
 
-## セルフホストランナーをグループに移動する
+   {% if currentVersion == "free-pro-team@latest" or currentVersion ver_gt "enterprise-server@2.22" or currentVersion == "github-ae@latest" %} リポジトリの特定のリスト、または Organization 内のすべてのリポジトリにアクセスできるようにランナーグループを設定できます。 デフォルトでは、プライベートリポジトリのみがランナーグループ内のランナーにアクセスできますが、これをオーバーライドできます。{% elsif currentVersion == "enterprise-server@2.22"%} リポジトリの特定のリスト、すべてのプライベートリポジトリ、または Organization 内のすべてのリポジトリにアクセスできるようにランナーグループを設定できます。{% endif %}
 
-{% data reusables.actions.moving-a-runner-to-a-group %}
+   {% warning %}
 
-## セルフホストランナーグループを削除する
+   **Warning**
 
-{% data reusables.actions.removing-a-runner-group %}
+   {% indented_data_reference reusables.github-actions.self-hosted-runner-security spaces=3 %}
 
-{% endif %}
+   詳しい情報については「[セルフホストランナーについて](/actions/hosting-your-own-runners/about-self-hosted-runners#self-hosted-runner-security-with-public-repositories)」を参照してください。
+
+   {% endwarning %}
+
+   ![ランナーグループのオプションを追加](/assets/images/help/settings/actions-org-add-runner-group-options.png)
+1. [**Save group**] をクリックしてグループを作成し、ポリシーを適用します。
+
+### Enterprise のセルフホストランナーグループを作成する
+
+Enterprise は、セルフホストランナーをグループに追加して、アクセス管理を行うことができます。 Enterprise は、Enterprise アカウント内の特定の Organization がアクセスできるセルフホストランナーのグループを作成できます。 Organization の管理者は、追加の詳細なリポジトリアクセスポリシーを Enterprise ランナーグループに割り当てることができます。
+
+セルフホストランナーは、作成時にデフォルトグループに自動的に割り当てられ、一度に 1 つのグループのメンバーになることができます。 登録処理中にランナーを特定のグループに割り当てることも、後でランナーをデフォルトグループからカスタムグループに移動することもできます。
+
+グループを作成するときは、ランナーグループにアクセスできる Organization を定義するポリシーを選択する必要があります。
+
+{% data reusables.enterprise-accounts.access-enterprise %}
+{% data reusables.enterprise-accounts.policies-tab %}
+{% data reusables.enterprise-accounts.actions-tab %}
+{% data reusables.enterprise-accounts.actions-runners-tab %}
+1. [**Add new**] をクリックしてから、[**New group**] をクリックします。
+
+    ![新しいランナーを追加](/assets/images/help/settings/actions-enterprise-account-add-runner-group.png)
+1. ランナーグループの名前を入力し、Organization アクセスのポリシーを割り当てます。
+
+   {% if currentVersion == "free-pro-team@latest" or currentVersion ver_gt "enterprise-server@2.22" or currentVersion == "github-ae@latest" %} ランナーグループを設定して、特定の Organization のリスト、または Enterprise 内のすべての Organization にアクセスできるようにすることができます。 デフォルトでは、プライベートリポジトリのみがランナーグループ内のランナーにアクセスできますが、これをオーバーライドできます。{% elsif currentVersion == "enterprise-server@2.22"%} Enterprise 内のすべての Organization がアクセスできるようにランナーグループを設定することも、特定の Organization を選択することもできます。{% endif %}
+
+   {% warning %}
+
+   **Warning**
+
+   {% indented_data_reference reusables.github-actions.self-hosted-runner-security spaces=3 %}
+
+   詳しい情報については「[セルフホストランナーについて](/actions/hosting-your-own-runners/about-self-hosted-runners#self-hosted-runner-security-with-public-repositories)」を参照してください。
+
+   {% endwarning %}
+
+    ![ランナーグループのオプションを追加](/assets/images/help/settings/actions-enterprise-account-add-runner-group-options.png)
+1. [**Save group**] をクリックしてグループを作成し、ポリシーを適用します。
+
+### セルフホストランナーグループのアクセスポリシーを変更する
+
+ランナーグループのアクセスポリシーを更新したり、ランナーグループの名前を変更したりすることができます。
+
+{% data reusables.github-actions.self-hosted-runner-configure-runner-group-access %}
+
+### セルフホストランナーをグループに移動する
+
+新しいセルフホストランナーは自動的にデフォルトグループに割り当てられ、その後、別のグループに移動できます。
+
+1. {% if currentVersion == "free-pro-team@latest" %}[Runners]{% else %}[Self-hosted runners]{% endif %} セクションで、移動するランナーの現在のグループを見つけて、グループメンバーのリストを展開します。 ![ランナーグループのメンバーを表示](/assets/images/help/settings/actions-org-runner-group-members.png)
+1. セルフホストランナーの横にあるチェックボックスを選択し、[**Move to group**] をクリックして、利用可能な移動先を確認します。 ![ランナーグループのメンバーを移動](/assets/images/help/settings/actions-org-runner-group-member-move.png)
+1. 移動先のグループをクリックして、ランナーを移動します。 ![ランナーグループのメンバーを移動](/assets/images/help/settings/actions-org-runner-group-member-move-destination.png)
+
+### セルフホストランナーグループを削除する
+
+セルフホストランナーは、グループが削除されると自動的にデフォルトグループに戻ります。
+
+1. 設定ページの {% if currentVersion == "free-pro-team@latest" %}[Runners]{% else %}[Self-hosted runners]{% endif %} セクションで、削除するグループを見つけて、{% octicon "kebab-horizontal" aria-label="The horizontal kebab icon" %} ボタンをクリックします。 ![ランナーグループの設定を表示](/assets/images/help/settings/actions-org-runner-group-kebab.png)
+
+1. グループを削除するには、[**Remove group**] をクリックします。 ![ランナーグループの設定を表示](/assets/images/help/settings/actions-org-runner-group-remove.png)
+
+1. 確認プロンプトを確認し、[**Remove this runner group**] をクリックします。

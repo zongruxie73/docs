@@ -1,7 +1,2 @@
-1. On {% data variables.product.prodname_dotcom %}, navigate to the main page of your organization.
-2. Under your organization name, click **Packages**.
-  {% ifversion fpt or ghes or ghec %}
-  ![Packages tab on org landing page](/assets/images/help/package-registry/org-tab-for-packages-with-overview-tab.png)
-  {% else %}
-  ![Packages tab on org landing page](/assets/images/help/package-registry/org-tab-for-packages.png)
-  {% endif %}
+1. {% data variables.product.prodname_dotcom %}で、Organizationのメインページにアクセスしてください。
+2. Organization名の下で、**Packages（パッケージ）**をクリックしてください。 ![コンテナアクセス権の招待ボタン](/assets/images/help/package-registry/org-tab-for-packages.png)

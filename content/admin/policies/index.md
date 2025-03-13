@@ -5,7 +5,6 @@ redirect_from:
   - /enterprise/admin/developer-workflow
   - /enterprise/admin/policies
 versions:
-  ghec: '*'
   ghes: '*'
   ghae: '*'
 topics:

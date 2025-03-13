@@ -1,21 +1,23 @@
-### Resolving conversations
+### Resolver conversaciones
 
-You can resolve a conversation in a pull request if you opened the pull request or if you have write access to the repository where the pull request was opened.
+Puedes resolver una conversación en una solicitud de extracción si abriste la solicitud de extracción o si tienes acceso de escritura al repositorio en el que se abrió la solicitud de extracción.
 
-To indicate that a conversation on the **Files changed** tab is complete, click **Resolve conversation**.
+Para indicar que se completó una conversación en la pestaña de **Archivos cambiados**, da clic en **Resolver conversación**.
 
-![Pull request conversation with Resolve conversation button](/assets/images/help/pull_requests/conversation-with-resolve-button.png)
+![Conversación de solicitud de extracción con botón Resolve conversation (Resolver conversación)](/assets/images/help/pull_requests/conversation-with-resolve-button.png)
 
-The entire conversation will be collapsed and marked as resolved, making it easier to find conversations that still need to be addressed.
+Toda la conversación se colapsará y se marcará como resuelta, y será más sencillo encontrar conversaciones que se deban seguir considerando.
 
-![Resolved conversation](/assets/images/help/pull_requests/resolved-conversation.png)
+![Conversación resuelta](/assets/images/help/pull_requests/resolved-conversation.png)
 
-If the suggestion in a comment is out of your pull request's scope, you can open a new issue that tracks the feedback and links back to the original comment. For more information, see "[Opening an issue from a comment](/github/managing-your-work-on-github/opening-an-issue-from-a-comment)."
+Si la sugerencia en un comentario está fuera del alcance de tu solicitud de extracción, puedes abrir un nuevo informe de problemas que rastree la retroalimientación y se vincule con el comentario original. Para obtener más información, consulte la sección "[Abrir un informe de problemas desde un comentario](/github/managing-your-work-on-github/opening-an-issue-from-a-comment)".
 
-#### Discovering and navigating conversations
+{% if currentVersion == "free-pro-team@latest" or currentVersion ver_gt "enterprise-server@3.1" %}
+#### Descubrir y navegar por los debates
 
-You can discover and navigate to all the conversations in your pull request using the **Conversations** menu that's shown at the top of the **Files Changed** tab.
+Puedes descubrir un navegar por todos los debates dentro de tu solicitud de cambios utilizando el menú de **Conversaciones** que se muestra en la parte superior de la pestaña **Archivos que cambiaron**.
 
-From this view, you can see which conversations are unresolved, resolved, and outdated. This makes it easy to discover and resolve conversations.
+Desde esta vista puedes ver qué debates están aún sin resolver, resueltos y desactualizados. Esto te facilita descubrirlos y resolverlos.
 
-![Showing the conversations menu](/assets/images/help/pull_requests/conversations-menu.png)
+![Mostrar el menú de debates](/assets/images/help/pull_requests/conversations-menu.png)
+{% endif %}

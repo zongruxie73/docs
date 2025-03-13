@@ -3,7 +3,6 @@ title: Unpublishing your GitHub Sponsors profile
 intro: 'If you don''t have any sponsors, you can unpublish your {% data variables.product.prodname_sponsors %} profile.'
 versions:
   fpt: '*'
-  ghec: '*'
 type: how_to
 topics:
   - Open Source

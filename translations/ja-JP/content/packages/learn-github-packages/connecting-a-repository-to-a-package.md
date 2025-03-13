@@ -1,85 +1,76 @@
 ---
-title: Connecting a repository to a package
-intro: 'You can connect a repository to a container image on {% data variables.location.product_location %}.'
+title: リポジトリのパッケージへの接続
+intro: 'リポジトリを{% data variables.product.prodname_dotcom %}上のコンテナイメージに接続できます。'
 product: '{% data reusables.gated-features.packages %}'
 redirect_from:
   - /packages/managing-container-images-with-github-container-registry/connecting-a-repository-to-a-container-image
   - /packages/guides/connecting-a-repository-to-a-container-image
 versions:
-  fpt: '*'
-  ghec: '*'
-  ghes: '*'
-shortTitle: Connect a repository
+  free-pro-team: '*'
 ---
 
-By connecting a repository to a package, the package landing page will show information and links from the repository, such as the README.
+リポジトリをパッケージに接続することによって、パッケージのランディングページには、READMEなどのリポジトリからの情報やリンクが表示されるようになります。
 
-## Connecting a repository to a user-owned package on {% data variables.product.prodname_dotcom %}
+### リポジトリを{% data variables.product.prodname_dotcom %}上のユーザが所有するパッケージに接続する
 
 {% data reusables.package_registry.package-settings-from-user-level %}
 
 {% data reusables.package_registry.repository_connection_steps %}
 
-## Connecting a repository to an organization-owned package on {% data variables.product.prodname_dotcom %}
+### リポジトリを{% data variables.product.prodname_dotcom %}上のOrganizationが所有するパッケージに接続する
 
 {% data reusables.package_registry.package-settings-from-org-level %}
 
 {% data reusables.package_registry.repository_connection_steps %}
 
-{% ifversion fpt or ghec or ghes > 3.4 %}
-## Connecting a repository to a container image using the command line
+### コマンドラインを使ってリポジトリをコンテナイメージに接続する
 
-{% ifversion ghes > 3.4 %}
-{% data reusables.package_registry.container-registry-ghes-beta %}
-{% endif %}
-
-1. In your Dockerfile, add this line, replacing {% ifversion ghes %}`HOSTNAME`, {% endif %}`OWNER` and `REPO` with your details:
+1. Dockerfile に以下の行を追加します。`OWNER` と `REPO` は、あなたの情報に置き換えてください。
 
  ```shell
- LABEL org.opencontainers.image.source=https://{% ifversion fpt or ghec %}github.com{% else %}HOSTNAME{% endif %}/OWNER/REPO
+ LABEL org.opencontainers.image.source=https://github.com/<em>OWNER</em>/<em>REPO</em>
  ```
- For example, if you're the user `monalisa` and own `my-repo`, and {% data variables.location.product_location %} hostname is `github.companyname.com`, you would add this line to your Dockerfile:
+ たとえば、あなたのユーザ名が `monalisa` で、`my-repo` を所有している場合は、以下の行を Dockerfile に追加します。
  ```shell
- LABEL org.opencontainers.image.source=https://{% ifversion fpt or ghec %}github.com{% else %}{% data reusables.package_registry.container-registry-example-hostname %}{% endif %}/monalisa/my-repo
+ LABEL org.opencontainers.image.source=https://github.com/monalisa/my-repo
  ```
- For more information, see "[LABEL](https://docs.docker.com/engine/reference/builder/#label)" in the official Docker documentation and "[Pre-defined Annotation Keys](https://github.com/opencontainers/image-spec/blob/master/annotations.md#pre-defined-annotation-keys)" in the `opencontainers/image-spec` repository.
+ 詳しい情報については、公式の Docker ドキュメンテーションの「[LABEL](https://docs.docker.com/engine/reference/builder/#label)」、および `opencontainers/image-spec` リポジトリの「[事前定義されたアノテーションキー](https://github.com/opencontainers/image-spec/blob/master/annotations.md#pre-defined-annotation-keys)」を参照してください。
 
-2. Build your container image. This example builds an image from the Dockerfile in the current directory and assigns the image name `hello_docker`.
+2. あなたのコンテナイメージを構築します。 この連では、カレントディレクトリ内の Dockerfile からイメージを構築し、イメージ名を `hello_docker` とします。
 
   ```shell
   $ docker build -t hello_docker .
   ```
-3. Optionally, review details for the Docker image you want to tag.
+3. 必要に応じて、タグ付けする Docker イメージの情報を確認します。
   ```shell
   $ docker images
-  > REPOSITORY                                                    TAG                 IMAGE ID            CREATED             SIZE
-  > {% data reusables.package_registry.container-registry-example-hostname %}/my-org/hello_docker         latest              38f737a91f39        47 hours ago        91.7MB
-  > {% data reusables.package_registry.container-registry-example-hostname %}/my-username/hello_docker    latest              38f737a91f39        47 hours ago        91.7MB
-  > hello-world                                                   latest              fce289e99eb9        16 months ago       1.84kB
+  > REPOSITORY                                            TAG                 IMAGE ID            CREATED             SIZE
+  > ghcr.io/my-org/hello_docker         latest              38f737a91f39        47 hours ago        91.7MB
+  > ghcr.io/my-username/hello_docker    latest              38f737a91f39        47 hours ago        91.7MB
+  > hello-world                                           latest              fce289e99eb9        16 months ago       1.84kB
   ```
 
-4. Tag your Docker image with your desired image name and hosting destination.
+4. Docker イメージを任意のイメージ名とホスティング先でタグ付けします。
   ```shell
-  $ docker tag IMAGE_NAME {% data reusables.package_registry.container-registry-hostname %}/OWNER/NEW_IMAGE_NAME:TAG
+  $ docker tag IMAGE_NAME ghcr.io/OWNER/NEW_IMAGE_NAME:TAG
   ```
-  For example:
+  例:
   ```shell
-  $ docker tag 38f737a91f39 {% data reusables.package_registry.container-registry-example-hostname %}/monalisa/hello_docker:latest
+  $ docker tag 38f737a91f39 ghcr.io/monalisa/hello_docker:latest
   ```
 
-5. If you haven't already, authenticate to the {% data variables.product.prodname_container_registry %}. For more information, see "[Authenticating to the {% data variables.product.prodname_container_registry %}](/packages/managing-container-images-with-github-container-registry/pushing-and-pulling-docker-images#authenticating-to-the-container-registry)."
+5. まだ{% data variables.product.prodname_container_registry %}で認証を受けていなければ、受けてください。 詳しい情報については「[{% data variables.product.prodname_container_registry %}で認証を受ける](/packages/managing-container-images-with-github-container-registry/pushing-and-pulling-docker-images#authenticating-to-the-container-registry)」を参照してください。
     {% raw %}
     ```shell
-    $ echo $CR_PAT | docker login {% endraw %}{% data reusables.package_registry.container-registry-hostname %}{% raw %} -u USERNAME --password-stdin
+    $ echo $CR_PAT | docker login ghcr.io -u USERNAME --password-stdin
     > Login Succeeded
     ```
     {% endraw %}
-6. Push your container image to the {% data variables.product.prodname_container_registry %}.
+6. コンテナイメージを{% data variables.product.prodname_container_registry %}にプッシュしてください。
   ```shell
-  $ docker push {% data reusables.package_registry.container-registry-hostname %}/OWNER/IMAGE-NAME:TAG
+  $ docker push ghcr.io/OWNER/IMAGE-NAME:TAG
   ```
-  For example:
+  例:
   ```shell
-  $ docker push {% data reusables.package_registry.container-registry-example-hostname %}/monalisa/hello_docker:latest
+  $ docker push ghcr.io/monalisa/hello_docker:latest
   ```
-{% endif %}

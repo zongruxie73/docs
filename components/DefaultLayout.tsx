@@ -3,31 +3,16 @@ import Head from 'next/head'
 import { SidebarNav } from 'components/sidebar/SidebarNav'
 import { Header } from 'components/page-header/Header'
 import { SmallFooter } from 'components/page-footer/SmallFooter'
-import { ScrollButton } from 'components/ui/ScrollButton'
+import { ScrollButton } from 'components/ScrollButton'
 import { SupportSection } from 'components/page-footer/SupportSection'
 import { DeprecationBanner } from 'components/page-header/DeprecationBanner'
-import { RestBanner } from 'components/page-header/RestBanner'
 import { useMainContext } from 'components/context/MainContext'
-import { useTranslation } from 'components/hooks/useTranslation'
-import { useRouter } from 'next/router'
+import { useTranslation } from './hooks/useTranslation'
 
 type Props = { children?: React.ReactNode }
 export const DefaultLayout = (props: Props) => {
-  const {
-    page,
-    error,
-    isHomepageVersion,
-    currentPathWithoutLanguage,
-    currentVersion,
-    currentProduct,
-    relativePath,
-    fullUrl,
-    status,
-  } = useMainContext()
-  const { t } = useTranslation(['errors', 'meta', 'scroll_button'])
-  const router = useRouter()
-  const metaDescription = page.introPlainText ? page.introPlainText : t('default_description')
-
+  const { page, error, isHomepageVersion, currentPathWithoutLanguage, fullUrl, status } = useMainContext()
+  const { t } = useTranslation('errors')
   return (
     <div className="d-lg-flex">
       <Head>
@@ -39,8 +24,13 @@ export const DefaultLayout = (props: Props) => {
         ) : null}
 
         {/* For Google and Bots */}
-        <meta name="description" content={metaDescription} />
+        {page.introPlainText && <meta name="description" content={page.introPlainText} />}
+
+        {/* For local site search indexing */}
+        {page.topics.length > 0 && <meta name="keywords" content={page.topics.join(',')} />}
+
         {page.hidden && <meta name="robots" content="noindex" />}
+
         {page.languageVariants.map((languageVariant) => {
           return (
             <link
@@ -52,24 +42,11 @@ export const DefaultLayout = (props: Props) => {
           )
         })}
 
-        {/* For local site search indexing */}
-        {page.topics.length > 0 && <meta name="keywords" content={page.topics.join(',')} />}
-
         {/* For analytics events */}
-        {router.locale && <meta name="path-language" content={router.locale} />}
-        {currentVersion && <meta name="path-version" content={currentVersion} />}
-        {currentProduct && <meta name="path-product" content={currentProduct.id} />}
-        {relativePath && (
-          <meta
-            name="path-article"
-            content={relativePath.replace('/index.md', '').replace('.md', '')}
-          />
-        )}
+        {status && <meta name="status" content={status.toString()} />}
         {page.type && <meta name="page-type" content={page.type} />}
         {page.documentType && <meta name="page-document-type" content={page.documentType} />}
-        {status && <meta name="status" content={status.toString()} />}
 
-        {/* OpenGraph data */}
         {page.fullTitle && (
           <>
             <meta property="og:site_name" content="GitHub Docs" />
@@ -83,29 +60,18 @@ export const DefaultLayout = (props: Props) => {
           </>
         )}
       </Head>
-      <a href="#main-content" className="sr-only">
-        Skip to main content
-      </a>
       <SidebarNav />
-      {/* Need to set an explicit height for sticky elements since we also
-          set overflow to auto */}
-      <div className="flex-column flex-1">
-        <Header />
-        <main id="main-content" style={{ scrollMarginTop: '5rem' }}>
-          <DeprecationBanner />
-          <RestBanner />
 
-          {props.children}
-        </main>
-        <footer>
-          <SupportSection />
-          <SmallFooter />
-          <ScrollButton
-            className="position-fixed bottom-0 mb-4 right-0 mr-4 z-1"
-            ariaLabel={t('scroll_to_top')}
-          />
-        </footer>
-      </div>
+      <main className="flex-1 min-width-0">
+        <Header />
+        <DeprecationBanner />
+
+        {props.children}
+
+        <SupportSection />
+        <SmallFooter />
+        <ScrollButton />
+      </main>
     </div>
   )
 }

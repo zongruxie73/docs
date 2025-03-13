@@ -1,8 +1,6 @@
 import murmur from 'imurmurhash'
 import { getUserEventsId, sendEvent, EventType } from './events'
 
-let initialized = false
-
 const TREATMENT = 'TREATMENT'
 const CONTROL = 'CONTROL'
 
@@ -21,9 +19,7 @@ export function sendSuccess(test: string) {
   })
 }
 
-export function initializeExperiments() {
-  if (initialized) return
-  initialized = true
+export default function experiment() {
   // *** Example test code ***
   // const testName = '$test-name$'
   // const xbucket = bucket(testName)

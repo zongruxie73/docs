@@ -1,60 +1,51 @@
 ---
-title: Quickstart for configuring your MinIO storage bucket for GitHub Packages
-intro: 'Configure your custom MinIO storage bucket for use with {% data variables.product.prodname_registry %}.'
+title: Guía de inicio rápido para configurar tu bucket de almacenamiento de MinIO para GitHub Packages
+intro: 'Configura tu bucket de almacenamiento de MinIO personalizado para utilizarlo con {% data variables.product.prodname_registry %}.'
 versions:
-  ghes: '*'
+  enterprise-server: '>=2.22'
 type: quick_start
 topics:
   - Packages
   - Enterprise
   - Storage
-shortTitle: Quickstart for MinIO
 ---
 
 {% data reusables.package_registry.packages-ghes-release-stage %}
 
-Before you can enable and configure {% data variables.product.prodname_registry %} on {% data variables.location.product_location_enterprise %}, you need to prepare your third-party storage solution.
+Antes de que puedas habilitar y configurar el {% data variables.product.prodname_registry %} en {% data variables.product.product_location_enterprise %}, deberás preparar tu solución de almacenamiento externo.
 
-MinIO offers object storage with support for the S3 API and {% data variables.product.prodname_registry %} on your enterprise.
+MinIO ofrece almacenamiento de objetos con soporte para la API de S3 y para {% data variables.product.prodname_registry %} en tu empresa.
 
-This quickstart shows you how to set up MinIO using Docker for use with {% data variables.product.prodname_registry %} but you have other options for managing MinIO besides Docker. For more information about MinIO, see the official [MinIO docs](https://docs.min.io/).
+Esta guía de inicio rápido te muestra cómo configurar MinIO utilizando Docker para usarlo con el {% data variables.product.prodname_registry %}, peto tienes otras opciones para administrar MinIO aparte de Docker. Para obtener más información acerca de MinIO, consulta los [documentos oficiales de MinIO](https://docs.min.io/).
 
-## 1. Choose a MinIO mode for your needs
+### 1. Elige un modo de MinIO de acuerdo con tus necesidades
 
-| MinIO mode | Optimized for | Storage infrastructure required |
-|----|----|----|
-| Standalone MinIO (on a single host) | Fast setup |  N/A |
-| MinIO as a NAS gateway |  NAS (Network-attached storage)| NAS devices |
-| Clustered MinIO (also called Distributed MinIO)|  Data security | Storage servers running in a cluster |
+| Modo de MinIO                                            | Optimizado para                                                 | Infraestructura de almacenamiento requerida                     |
+| -------------------------------------------------------- | --------------------------------------------------------------- | --------------------------------------------------------------- |
+| MinIO Autónomo (en un solo host)                         | Configuración rápida                                            | N/A                                                             |
+| MinIO como una puerta de enlace de NAS                   | NAS (Almacenamiento adjunto a la red, por sus siglas en inglés) | Dispositivos NAS                                                |
+| MinIO Agrupado (también conocido como MinIO distribuído) | Seguridad de datos                                              | Servidores de almacenamiento que se ejecutan en un agrupamiento |
 
-For more information about your options, see the official [MinIO docs](https://docs.min.io/).
+Para obtener más información acerca las opciones que tienes, consulta los [documentos oficiales de MinIO](https://docs.min.io/).
 
-{% warning %}
+### 2. Instala, ejecuta e inicia sesión en MinIO
 
-**Warning**: MinIO has announced removal of MinIO Gateways. Starting June 1st, 2022, support and bug fixes for the current MinIO NAS Gateway implementation will only be available for paid customers via their LTS support contract. If you want to continue using MinIO Gateways with {% data variables.product.prodname_registry %}, we recommend moving to MinIO LTS support. For more information, see [Scheduled removal of MinIO Gateway for GCS, Azure, HDFS](https://github.com/minio/minio/issues/14331) in the minio/minio repository.
+1. Configura tus variables de ambiente preferidas para MinIO.
 
-Other modes of MinIO remain available with standard support.
-
-{% endwarning %}
-
-## 2. Install, run, and sign in to MinIO
-
-1. Set up your preferred environment variables for MinIO.
-
-    These examples use `MINIO_DIR`:
+    Estos ejemplos utilizan `MINIO_DIR`:
     ```shell
     $ export MINIO_DIR=$(pwd)/minio
     $ mkdir -p $MINIO_DIR
     ```
 
-2. Install MinIO.
+2. Instala MinIO.
 
     ```shell
     $ docker pull minio/minio
     ```
-    For more information, see the official "[MinIO Quickstart Guide](https://docs.min.io/docs/minio-quickstart-guide)."
+    Para obtener más información, consulta la [Guía de inicio rápido oficial de MinIO](https://docs.min.io/docs/minio-quickstart-guide)".
 
-3. Sign in to MinIO using your MinIO access key and secret.
+3. Inicia sesión en MinIO utilizando tu llave de acceso y secreto de MinIO.
 
     {% linux %}
     ```shell
@@ -72,16 +63,16 @@ Other modes of MinIO remain available with standard support.
     ```
     {% endmac %}
 
-    You can access your MinIO keys using the environment variables:
+    Puedes acceder a tus llaves de MinIO utilizando las variables de ambiente:
 
     ```shell
     $ echo $MINIO_ACCESS_KEY
     $ echo $MINIO_SECRET_KEY
     ```
 
-4. Run MinIO in your chosen mode.
+4. Ejecuta MinIO en el modo que hayas elegido.
 
-   * Run MinIO using Docker on a single host:
+   * Ejecuta MinIO utilizando Docker en un host único:
 
      ```shell
      $ docker run -p 9000:9000 \
@@ -91,11 +82,11 @@ Other modes of MinIO remain available with standard support.
              minio/minio server /data
      ```
 
-     For more information, see "[MinIO Docker Quickstart guide](https://docs.min.io/docs/minio-docker-quickstart-guide.html)."
+     Para obtener más información, consulta la "[Guía de inicio rápido de Docker para MinIO](https://docs.min.io/docs/minio-docker-quickstart-guide.html)".
 
-   * Run MinIO using Docker as a NAS gateway:
+   * Ejecuta MinIO utilizando Docker como una puerta de enlace de NAS:
 
-     This setup is useful for deployments where there is already a NAS you want to use as the backup storage for {% data variables.product.prodname_registry %}.
+     Esta configuración es útil para los despliegues en donde ya exista una NAS que quieras utilizar como respaldo de almacenamiento para el {% data variables.product.prodname_registry %}.
 
      ```shell
      $ docker run -p 9000:9000 \
@@ -105,40 +96,42 @@ Other modes of MinIO remain available with standard support.
              minio/minio gateway nas /data
      ```
 
-   * Run MinIO using Docker as a cluster. This MinIO deployment uses several hosts and MinIO's erasure coding for the strongest data protection. To run MinIO in a cluster mode, see the "[Distributed MinIO Quickstart Guide](https://docs.min.io/docs/distributed-minio-quickstart-guide.html)."
+     Para obtener más información, consulta la sección "[Puerta de enlace de MinIO para NAS](https://docs.min.io/docs/minio-gateway-for-nas.html)".
 
-## 3. Create your MinIO bucket for {% data variables.product.prodname_registry %}
+   * Ejecuta MinIO utilizando Docker como un agrupamiento. Este despliegue de MinIO utiliza diversos hosts y el código de borrado de MinIO para tener la mayor protección de los datos. Para ejecutar MinIO en modo de agrupamiento, consulta la "[Guía Rápida para MinIO Distribuído](https://docs.min.io/docs/distributed-minio-quickstart-guide.html).
 
-1. Install the MinIO client.  
+### 3. Crea tu bucket de MinIO para {% data variables.product.prodname_registry %}
+
+1. Instala el cliente de MinIO.
 
     ```shell
     $ docker pull minio/mc
     ```
 
-2. Create a bucket with a host URL that {% data variables.product.prodname_ghe_server %} can access.
+2. Crea un bucket con una URL de host a la que {% data variables.product.prodname_ghe_server %} pueda acceder.
 
-   * Local deployments example:
+   * Ejemplos de despliegues locales:
 
      ```shell
      $ export MC_HOST_minio="http://${MINIO_ACCESS_KEY}:${MINIO_SECRET_KEY} @localhost:9000"
-     $ docker run minio/mc BUCKET-NAME
+     $ docker run minio/mc <em>BUCKET-NAME</em>
      ```
 
-     This example can be used for MinIO standalone or MinIO as a NAS gateway.
+     Este ejemplo puede utilizarse para la versión autónoma de MinIO o para MinIO como puerta de enlace de NAS.
 
-   * Clustered deployments example:
+   * Ejemplo de despliegues en agrupamiento:
 
      ```shell
      $ export MC_HOST_minio="http://${MINIO_ACCESS_KEY}:${MINIO_SECRET_KEY} @minioclustername.example.com:9000"
      $ docker run minio/mc mb packages
      ```
 
-## Next steps
+### Pasos siguientes
 
-To finish configuring storage for {% data variables.product.prodname_registry %}, you'll need to copy the MinIO storage URL:
+Para terminar de configurar el almacenamiento para el {% data variables.product.prodname_registry %}, necesitarás copiar la URL de almacenamiento de MinIO:
 
   ```
   echo "http://${MINIO_ACCESS_KEY}:${MINIO_SECRET_KEY}@minioclustername.example.com:9000"
   ```
 
-For the next steps, see "[Enabling {% data variables.product.prodname_registry %} with  MinIO](/admin/packages/enabling-github-packages-with-minio)."
+Para los pasos siguientes, consulta la sección "[Habilitar el {% data variables.product.prodname_registry %} con MinIO](/admin/packages/enabling-github-packages-with-minio)".

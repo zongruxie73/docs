@@ -5,7 +5,6 @@ redirect_from:
   - /v4/reference/object
 versions:
   fpt: '*'
-  ghec: '*'
   ghes: '*'
   ghae: '*'
 topics:
@@ -20,6 +19,5 @@ For example, the [`Repository`](/graphql/reference/objects#repository) object ha
 
 For more information, see "[Introduction to GraphQL](/graphql/guides/introduction-to-graphql)."
 
-{% data reusables.projects.graphql-ghes %}
-
-<!-- Content after this section is automatically generated -->
+<!-- this page is pre-rendered by scripts because it's too big to load dynamically -->
+<!-- see lib/graphql/static/prerendered-objects.json -->

@@ -1,56 +1,44 @@
 ---
-title: 'Organization の {% data variables.product.prodname_project_v1_caps %} へのアクセス許可'
-intro: 'Organization オーナーと、{% data variables.projects.projects_v1_board %} の管理者アクセス許可を持つユーザーは、Organization の {% data variables.projects.projects_v1_boards %} への読み取り、書き込み、管理アクセス許可を持つユーザーをカスタマイズできます。'
+title: Organization のプロジェクトボード権限
+intro: Organization のオーナーと、プロジェクトボード管理者権限を持つユーザーは、Organization のプロジェクトボードに対する読み取り、書き込み、管理の各権限を誰が持つかをカスタマイズすることができます。
 redirect_from:
   - /articles/project-board-permissions-for-an-organization
   - /github/setting-up-and-managing-organizations-and-teams/project-board-permissions-for-an-organization
 versions:
-  fpt: '*'
-  ghes: '*'
-  ghae: '*'
-  ghec: '*'
+  free-pro-team: '*'
+  enterprise-server: '*'
+  github-ae: '*'
 topics:
   - Organizations
   - Teams
-shortTitle: '{% data variables.product.prodname_project_v1_caps %} permissions'
-allowTitleToDifferFromFilename: true
-ms.openlocfilehash: fbc3ec7db52d6b4a417a4e9e93aea9ae717e2fca
-ms.sourcegitcommit: 47bd0e48c7dba1dde49baff60bc1eddc91ab10c5
-ms.translationtype: HT
-ms.contentlocale: ja-JP
-ms.lasthandoff: 09/05/2022
-ms.locfileid: '147614208'
 ---
-{% data reusables.projects.project_boards_old %}
 
-## アクセス許可の概要
+### 権限の概要
 
-ユーザーおよび Team の {% data variables.projects.projects_v1_board %} に対するアクセス許可には、次の 3 つのレベルがあります。
+ユーザーと Team のプロジェクトボードに対する権限には、次の 3 つのレベルがあります:
 
 {% data reusables.project-management.project-board-permissions %}
 
-Organization オーナーと、管理者アクセス許可を持つユーザーは、外部コラボレーターまたは Organization メンバーとして、または Team や Organization のメンバーシップを通じて、Organization の {% data variables.projects.projects_v1_board %} に対するアクセス権をユーザーに個別に付与できます。 外部コラボレーターとは、Organization のメンバーではないが、Organization でコラボレーションの権限を付与されたユーザーのことです。
+Organization のオーナーと、管理者権限を持つユーザーは、外部コラボレーターまたは Organization メンバーとして、または Team や Organization のメンバーシップを通じて、Organization のプロジェクトボードに対するユーザーのアクセス権を個々に付与することができます。 外部コラボレーターとは、Organization のメンバーではないが、Organization でコラボレーションの権限を付与されたユーザーのことです。
 
-Organization オーナーと、{% data variables.projects.projects_v1_board %} への管理者アクセス許可を持つユーザーは、次の操作を行うこともできます。
+Organization のオーナーと、プロジェクトボードに対する管理者権限を持つユーザーは、次の操作を実行できます:
 - すべての Organization メンバーに対して、デフォルトのプロジェクトボード権限を設定する。
-- Organization メンバー、Team、外部コラボレーターについてプロジェクトボードへのアクセスを管理する。 詳しい情報については、「[Organization の {% data variables.product.prodname_project_v1 %} へのアクセスを管理する](/articles/managing-team-access-to-an-organization-project-board)」、「[Organization の {% data variables.product.prodname_project_v1 %} への個人のアクセスを管理する](/articles/managing-an-individual-s-access-to-an-organization-project-board)」、または「[Organization メンバーの {% data variables.product.prodname_project_v1 %} へのアクセスを管理する](/articles/managing-access-to-a-project-board-for-organization-members)」を参照してください。
-- プロジェクトボードの可視性を管理する。 詳しい情報については、「[Organization メンバーの {% data variables.product.prodname_project_v1 %} へのアクセスを管理する](/articles/managing-access-to-a-project-board-for-organization-members)」を参照してください。
+- Organization メンバー、Team、外部コラボレーターについてプロジェクトボードへのアクセスを管理する。 詳細は「[Organization のプロジェクトボードに対するチームのアクセスを管理する](/articles/managing-team-access-to-an-organization-project-board)」、「[Organization のプロジェクトボードに対する個々のアクセスを管理する](/articles/managing-an-individual-s-access-to-an-organization-project-board)」、「[Organization メンバーのプロジェクトボードへのアクセスを管理する](/articles/managing-access-to-a-project-board-for-organization-members)」を参照してください。
+- プロジェクトボードの可視性を管理する。 詳細は「[Organization メンバーのプロジェクトボードへのアクセスを管理する](/articles/managing-access-to-a-project-board-for-organization-members)」を参照してください。
 
-## {% data variables.projects.projects_v1_boards %} のアクセス許可のカスケード
+### プロジェクトボードに対するカスケード権限
 
 {% data reusables.project-management.cascading-permissions %}
 
-たとえば、Organization オーナーが {% data variables.projects.projects_v1_board %} への読み取りアクセス許可をすべての Organization メンバーに付与しており、{% data variables.projects.projects_v1_board %} 管理者が個別のコラボレーターとしてそのボードへの書き込みアクセス許可を Organization メンバーに付与した場合、そのメンバーは、{% data variables.projects.projects_v1_board %} への書き込みアクセス許可を持つことになります。
+たとえば、Organization のオーナーが、あるプロジェクトボードに対する読み取り権限を Organization のすべてのメンバーに付与しており、プロジェクトボードの管理者が個別のコラボレーターとして、同じボードに対する書き込み権限を Organization のメンバーに付与している場合、そのユーザーはそのプロジェクトボードに対する書き込み権限を持つことになります。
 
-## {% data variables.projects.projects_v1_board_caps %} の可視性
+### プロジェクトボードの可視性
 
-{% ifversion classic-project-visibility-permissions %}{% data reusables.projects.owners-can-limit-visibility-permissions %}{% endif %}
+{% data reusables.project-management.project-board-visibility %}プロジェクトボードの表示をプライベートから{% if currentVersion == "github-ae@latest" %}内部{% else %}パブリック{% endif %}に変更したり、元に戻したりすることができます。 詳細は「[プロジェクトボードの可視性を変更する](/articles/changing-project-board-visibility)」を参照してください。
 
-{% data reusables.project-management.project-board-visibility %} {% data variables.projects.projects_v1_board %} の可視性をプライベートから{% ifversion ghae %}内部{% else %}パブリック{% endif %}に変更したり、元に戻したりすることができます。 詳しい情報については、「[{% data variables.product.prodname_project_v1 %} の可視性の変更](/articles/changing-project-board-visibility)」を参照してください。
+### 参考リンク
 
-## 参考資料
-
-- 「[{% data variables.product.prodname_project_v1 %} の可視性の変更](/articles/changing-project-board-visibility)」
-- 「[Organization の {% data variables.product.prodname_project_v1 %} への個人のアクセスを管理する](/articles/managing-an-individual-s-access-to-an-organization-project-board)」
-- 「[Organization の {% data variables.product.prodname_project_v1 %} への Team のアクセスを管理する](/articles/managing-team-access-to-an-organization-project-board)」
-- 「[Organization メンバーの {% data variables.product.prodname_project_v1 %} へのアクセスを管理する](/articles/managing-access-to-a-project-board-for-organization-members)」
+- 「[プロジェクトボードの可視性を変更する](/articles/changing-project-board-visibility)」
+- 「[Organization のプロジェクトボードに対する個々のアクセスを管理する](/articles/managing-an-individual-s-access-to-an-organization-project-board)」
+- 「[Organization のプロジェクトボードに対するチームのアクセスを管理する](/articles/managing-team-access-to-an-organization-project-board)」
+- [Organization メンバーのプロジェクトボードへのアクセスを管理する](/articles/managing-access-to-a-project-board-for-organization-members)

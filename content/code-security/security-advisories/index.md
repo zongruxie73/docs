@@ -1,19 +1,27 @@
 ---
-title: Working with security advisories
+title: Managing security advisories for vulnerabilities in your project
 shortTitle: Security advisories
-intro: 'Learn how to work with security advisories on {% data variables.product.prodname_dotcom %},{% ifversion fpt or ghec %} whether you want to contribute to an existing global advisory, or create a security advisory for a repository,{% endif %} improving collaboration between repository maintainers and security researchers.'
+intro: 'Discuss, fix, and disclose security vulnerabilities in your repositories using security advisories.'
+redirect_from:
+  - /articles/managing-security-vulnerabilities-in-your-project
+  - /github/managing-security-vulnerabilities/managing-security-vulnerabilities-in-your-project
 versions:
   fpt: '*'
-  ghec: '*'
-  ghes: '*'
-  ghae: '*'
 topics:
   - Security advisories
   - Vulnerabilities
   - Repositories
   - CVEs
 children:
-- /global-security-advisories
-- /repository-security-advisories
-- /guidance-on-reporting-and-writing
+  - /about-coordinated-disclosure-of-security-vulnerabilities
+  - /about-github-security-advisories
+  - /permission-levels-for-security-advisories
+  - /creating-a-security-advisory
+  - /adding-a-collaborator-to-a-security-advisory
+  - /removing-a-collaborator-from-a-security-advisory
+  - /collaborating-in-a-temporary-private-fork-to-resolve-a-security-vulnerability
+  - /publishing-a-security-advisory
+  - /editing-a-security-advisory
+  - /withdrawing-a-security-advisory
 ---
+

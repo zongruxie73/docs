@@ -1,4 +1,4 @@
-{% ifversion fpt or ghec %}
+{% ifversion fpt %}
 
 {% note %}
 

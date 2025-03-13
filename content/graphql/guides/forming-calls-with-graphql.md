@@ -6,7 +6,6 @@ redirect_from:
   - /graphql/guides/forming-calls
 versions:
   fpt: '*'
-  ghec: '*'
   ghes: '*'
   ghae: '*'
 topics:
@@ -16,13 +15,11 @@ shortTitle: Form calls with GraphQL
 
 ## Authenticating with GraphQL
 
-{% data reusables.user-settings.graphql-classic-pat-only %}
+To communicate with the GraphQL server, you'll need an OAuth token with the right scopes.
 
-To communicate with the GraphQL server, you'll need a {% data variables.product.pat_generic %} with the right scopes.
+Follow the steps in "[Creating a personal access token](/github/authenticating-to-github/creating-a-personal-access-token)" to create a token. The scopes you require depends on the type of data you're trying to request. For example, select the **User** scopes to request user data. If you need access to repository information, select the appropriate **Repository** scopes.
 
-Follow the steps in "[Creating a {% data variables.product.pat_generic %}](/github/authenticating-to-github/creating-a-personal-access-token)" to create a token. The scopes you require depends on the type of data you're trying to request. For example, select the **User** scopes to request user data. If you need access to repository information, select the appropriate **Repository** scopes.
-
-{% ifversion fpt or ghec %}
+{% ifversion fpt %}
 
 To match the behavior of the [GraphQL Explorer](/graphql/guides/using-the-explorer), request the following scopes:
 
@@ -34,14 +31,14 @@ The following scopes are recommended:
 
 
 ```
+user{% ifversion not ghae %}
+public_repo{% endif %}
 repo
-read:packages
+repo_deployment
+repo:status
+read:repo_hook
 read:org
 read:public_key
-read:repo_hook
-user
-read:discussion
-read:enterprise
 read:gpg_key
 ```
 
@@ -64,7 +61,7 @@ In REST, [HTTP verbs](/rest#http-verbs) determine the operation performed. In Gr
 To query GraphQL using cURL, make a `POST` request with a JSON payload. The payload must contain a string called `query`:
 
 ```shell
-curl -H "Authorization: bearer TOKEN" -X POST -d " \
+curl -H "Authorization: bearer <em>token</em>" -X POST -d " \
  { \
    \"query\": \"query { viewer { login }}\" \
  } \
@@ -92,7 +89,7 @@ GraphQL queries return only the data you specify. To form a query, you must spec
 Queries are structured like this:
 
 <pre>query {
-  JSON-OBJECT-TO-RETURN
+  <em>JSON objects to return</em>
 }</pre>
 
 For a real-world example, see "[Example query](#example-query)."
@@ -108,8 +105,8 @@ To form a mutation, you must specify three things:
 Mutations are structured like this:
 
 <pre>mutation {
-  MUTATION-NAME(input: {MUTATION-NAME-INPUT!}) {
-    MUTATION-NAME-PAYLOAD
+  <em>mutationName</em>(input: {<em>MutationNameInput!</em>}) {
+    <em>MutationNamePayload</em>
   }
 }</pre>
 

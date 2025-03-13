@@ -2,7 +2,7 @@
 title: Getting changes from a remote repository
 intro: You can use common Git commands to access remote repositories.
 redirect_from:
-  - /articles/fetching-a-remote
+  - /articles/fetching-a-remote/
   - /articles/getting-changes-from-a-remote-repository
   - /github/using-git/getting-changes-from-a-remote-repository
   - /github/getting-started-with-github/getting-changes-from-a-remote-repository
@@ -11,7 +11,6 @@ versions:
   fpt: '*'
   ghes: '*'
   ghae: '*'
-  ghec: '*'
 shortTitle: Get changes from a remote
 ---
 ## Options for getting changes
@@ -23,7 +22,7 @@ These commands are very useful when interacting with [a remote repository](/gith
 To grab a complete copy of another user's repository, use `git clone` like this:
 
 ```shell
-$ git clone https://{% data variables.command_line.codeblock %}/USERNAME/REPOSITORY.git
+$ git clone https://{% data variables.command_line.codeblock %}/<em>USERNAME</em>/<em>REPOSITORY</em>.git
 # Clones a repository to your computer
 ```
 
@@ -49,7 +48,7 @@ Use `git fetch` to retrieve new work done by other people. Fetching from a repos
 If you already have a local repository with a remote URL set up for the desired project, you can grab all the new information by using `git fetch *remotename*` in the terminal:
 
 ```shell
-$ git fetch REMOTE-NAME
+$ git fetch <em>remotename</em>
 # Fetches updates made to a remote repository
 ```
 
@@ -62,7 +61,7 @@ Merging combines your local changes with changes made by others.
 Typically, you'd merge a remote-tracking branch (i.e., a branch fetched from a remote repository) with your local branch:
 
 ```shell
-$ git merge REMOTE-NAME/BRANCH-NAME
+$ git merge <em>remotename</em>/<em>branchname</em>
 # Merges updates made online with your local work
 ```
 
@@ -71,17 +70,17 @@ $ git merge REMOTE-NAME/BRANCH-NAME
 `git pull` is a convenient shortcut for completing both `git fetch` and `git merge `in the same command:
 
 ```shell
-$ git pull REMOTE-NAME BRANCH-NAME
+$ git pull <em>remotename</em> <em>branchname</em>
 # Grabs online updates and merges them with your local work
 ```
 
 Because `pull` performs a merge on the retrieved changes, you should ensure that
 your local work is committed before running the `pull` command. If you run into
-[a merge conflict](/github/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-using-the-command-line)
+[a merge conflict](/articles/resolving-a-merge-conflict-using-the-command-line)
 you cannot resolve, or if you decide to quit the merge, you can use `git merge --abort`
 to take the branch back to where it was in before you pulled.
 
 ## Further reading
 
-- ["Working with Remotes" from the _Pro Git_ book](https://git-scm.com/book/en/Git-Basics-Working-with-Remotes)"{% ifversion fpt or ghec %}
+- ["Working with Remotes" from the _Pro Git_ book](https://git-scm.com/book/en/Git-Basics-Working-with-Remotes)"{% ifversion fpt %}
 - "[Troubleshooting connectivity problems](/articles/troubleshooting-connectivity-problems)"{% endif %}

@@ -3,7 +3,6 @@ title: Syntax for GitHub's form schema
 intro: 'You can use {% data variables.product.company_short %}''s form schema to configure forms for supported features.'
 versions:
   fpt: '*'
-  ghec: '*'
 miniTocMaxHeadingLevel: 3
 topics:
   - Community
@@ -63,8 +62,8 @@ For each form element, you can set the following keys.
 | --- | ----------- | -------- | ---- | ------- | ------- |
 | `type` | The type of element that you want to define. | Required | String | {% octicon "dash" aria-label="The dash icon" %} | <ul><li>`checkboxes`</li><li>`dropdown`</li><li>`input`</li><li>`markdown`</li><li>`textarea`</li></ul> |
 | `id` | The identifier for the element, except when `type` is set to `markdown`. {% data reusables.form-schema.id-must-be-unique %} If provided, the `id` is the canonical identifier for the field in URL query parameter prefills. | Optional | String | {% octicon "dash" aria-label="The dash icon" %} | {% octicon "dash" aria-label="The dash icon" %} |
-| `attributes` | A set of key-value pairs that define the properties of the element.  | Required | Map | {% octicon "dash" aria-label="The dash icon" %} | {% octicon "dash" aria-label="The dash icon" %} |
-| `validations` | A set of key-value pairs that set constraints on the element. | Optional | Map | {% octicon "dash" aria-label="The dash icon" %} | {% octicon "dash" aria-label="The dash icon" %} |
+| `attributes` | A set of key-value pairs that define the properties of the element.  | Required | Hash | {% octicon "dash" aria-label="The dash icon" %} | {% octicon "dash" aria-label="The dash icon" %} |
+| `validations` | A set of key-value pairs that set constraints on the element. | Optional | Hash | {% octicon "dash" aria-label="The dash icon" %} | {% octicon "dash" aria-label="The dash icon" %} |
 
 You can choose from the following types of form elements. Each type has unique attributes and validations.
 
@@ -101,8 +100,7 @@ For multi-line text, you can use the pipe operator.
 ```YAML{:copy}
 body:
 - type: markdown
-  attributes:
-    value: "## Thank you for contributing to our project!"
+  value: "## Thank you for contributing to our project!"
 - type: markdown
   attributes:
     value: |
@@ -184,7 +182,7 @@ body:
   attributes:
     label: Bug prevalence
     description: "How often do you or others encounter this bug?"
-    placeholder: "Example: Whenever I visit the personal account page (1-2 times a week)"
+    placeholder: "Example: Whenever I visit the user account page (1-2 times a week)"
   validations:
     required: true
 ```
@@ -239,7 +237,7 @@ You can use the `checkboxes` element to add a set of checkboxes to your form.
 
 | Key | Description | Required | Type | Default | Valid values |
 | --- | ----------- | -------- | ---- | ------- | ------- |
-| `label` | A brief description of the expected user input, which is displayed in the form. | Required | String | {% octicon "dash" aria-label="The dash icon" %} | {% octicon "dash" aria-label="The dash icon" %} |
+| `label` | A brief description of the expected user input, which is displayed in the form. | Optional | String | {% octicon "dash" aria-label="The dash icon" %} | {% octicon "dash" aria-label="The dash icon" %} |
 | `description` | A description of the set of checkboxes, which is displayed in the form. Supports Markdown formatting. | Optional | String | Empty String | {% octicon "dash" aria-label="The dash icon" %} |
 | `options` | An array of checkboxes that the user can select. For syntax, see below. | Required | Array | {% octicon "dash" aria-label="The dash icon" %} | {% octicon "dash" aria-label="The dash icon" %} |
 

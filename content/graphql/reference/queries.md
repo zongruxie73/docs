@@ -1,12 +1,11 @@
 ---
 title: Queries
-miniTocMaxHeadingLevel: 3
+miniTocMaxHeadingLevel: 2
 redirect_from:
   - /v4/query
   - /v4/reference/query
 versions:
   fpt: '*'
-  ghec: '*'
   ghes: '*'
   ghae: '*'
 topics:
@@ -25,4 +24,14 @@ For more information, see "[About queries](/graphql/guides/forming-calls-with-gr
 
 {% endnote %}
 
-<!-- Content after this section is automatically generated -->
+## Connections
+
+{% for item in graphql.schemaForCurrentVersion.queries.connections %}
+  {% include graphql-query %}
+{% endfor %}
+
+## Fields
+
+{% for item in graphql.schemaForCurrentVersion.queries.fields %}
+  {% include graphql-query %}
+{% endfor %}

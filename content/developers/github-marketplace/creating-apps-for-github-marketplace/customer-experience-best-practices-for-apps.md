@@ -4,7 +4,6 @@ intro: Guidelines for creating an app that will be easy to use and understand.
 shortTitle: Customer experience best practice
 versions:
   fpt: '*'
-  ghec: '*'
 topics:
   - Marketplace
 redirect_from:

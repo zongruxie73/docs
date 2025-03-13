@@ -8,9 +8,8 @@ redirect_from:
   - /code-security/secure-coding/using-codeql-code-scanning-with-your-existing-ci-system
 versions:
   fpt: '*'
-  ghes: '*'
+  ghes: '>=3.0'
   ghae: '*'
-  ghec: '*'
 type: how_to
 topics:
   - Advanced Security
@@ -25,6 +24,5 @@ children:
   - /running-codeql-runner-in-your-ci-system
   - /configuring-codeql-runner-in-your-ci-system
   - /troubleshooting-codeql-runner-in-your-ci-system
-  - /migrating-from-the-codeql-runner-to-codeql-cli
 ---
-
+<!--For this article in earlier GHES versions, see /content/github/finding-security-vulnerabilities-and-errors-in-your-code-->

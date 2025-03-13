@@ -1,124 +1,86 @@
-meta:
-  default_description: 开始使用、排除故障和充分利用 GitHub。新用户、开发人员、管理员和所有 GitHub 产品的文档。
+---
 header:
   github_docs: GitHub Docs
-  contact: 联系人
+  contact: 联系我们
   notices:
-    ghae_silent_launch: GitHub AE 目前处于受限版。
-    release_candidate:
-      # The version name is rendered before the below text via includes/header-notification.html
-      ' 目前可作为候选发布。有关详细信息，请参阅“<a href="/admin/overview/about-upgrades-to-new-releases">关于升级到新版本</a>”。'
-    localization_complete:
-      "我们经常发布文档更新，此页面的翻译可能仍在进行中。有关最新信息，请访问<a id=\"to-english-doc\" href=\"/en\">英语文档</a>。"
-    early_access: 📣 请<b>不要公开分享</b>此 URL。此页面包含有关早期访问功能的内容。
-    release_notes_use_latest: 请使用最新版本获取最新的安全性、性能和 bug 修复程序。
-    # GHES release notes
-    ghes_release_notes_upgrade_patch_only: "📣 这不是 Enterprise Server 的<a href=\"#{{ latestPatch }}\">最新补丁版本</a>。"
-    ghes_release_notes_upgrade_release_only: "📣 这不是 Enterprise Server 的<a href=\"/enterprise-server@{{ latestRelease }}/admin/release-notes\">最新版本</a>。"
-    ghes_release_notes_upgrade_patch_and_release: "📣 这不是此版本系列的<a href=\"#{{ latestPatch }}\">最新补丁版本</a>，也不是 Enterprise Server 的<a href=\"/enterprise-server@{{ latestRelease }}/admin/release-notes\">最新版本</a>。"
-  sign_up_cta: 注册
-picker:
-  language_picker_default_text: 选择语言
-  product_picker_default_text: 所有产品
-  version_picker_default_text: 选择版本
+    ghae_silent_launch: GitHub AE 目前是有限发行版。请<a href="https://enterprise.github.com/contact">联系我们的销售团队</a>了解更多信息。
+    release_candidate: '# 版本名称是通过 includes/header-notification.html 在以下文本之前呈现：目前可用作发行版候选。更多信息请参阅“<a href="/admin/overview/about-upgrades-to-new-releases">关于升级到新版本</a>”。'
+    localization_complete: 我们经常发布文档更新，此页面的翻译可能仍在进行中。有关最新信息，请访问<a id="to-english-doc" href="/en">英文文档</a>。如果此页面上的翻译有问题，请<a href="https://github.com/contact?form[subject]=translation%20issue%20on%20docs.github.com&form[comments]=">告诉我们</a>。
+    localization_in_progress: 你好，探索者！ 此页面正在积极开发或仍在翻译中。有关最新和最准确的信息，请访问我们的<a id="to-english-doc" href="/en">英文文档</a>。
+    early_access: '📣请<b>不要公开分享</b>此 URL。此页包含有关早期访问功能的内容。'
+    release_notes_use_latest: 请使用最新版本获取最新的安全性、性能和错误修复。
+    #GHES release notes
+    ghes_release_notes_upgrade_patch_only: '📣 This is not the <a href="#{{ latestPatch }}">latest patch release</a> of Enterprise Server.'
+    ghes_release_notes_upgrade_release_only: '📣 This is not the <a href="/enterprise-server@{{ latestRelease }}/admin/release-notes">latest release</a> of Enterprise Server.'
+    ghes_release_notes_upgrade_patch_and_release: '📣 This is not the <a href="#{{ latestPatch }}">latest patch release</a> of this release series, and this is not the <a href="/enterprise-server@{{ latestRelease }}/admin/release-notes">latest release</a> of Enterprise Server.'
 release_notes:
-  banner_text: GitHub 开始向企业推出这些更改
+  banner_text_current: 这些更改将在未来一周内推出。
+  banner_text_past: 这些更改将在 周内部署到企业
 search:
   need_help: 需要帮助？
-  placeholder: 搜索 GitHub Docs
-  loading: 加载
-  no_results: 未找到结果
-  search_results_for: 搜索以下项的结果
-  no_content: 无内容
-  matches_displayed: 显示的匹配项
-  search_error: 尝试执行搜索时发生错误。
-  description: 输入搜索词以在 GitHub 文档中找到它。
-  label: 搜索 GitHub Docs
-  results_found: "在 {s} 毫秒内找到了 {n} 个结果"
-  results_page: "这是第 {page} 页，共 {pages} 页。"
-  nothing_found: 未找到任何内容 😿
+  placeholder: 搜索主题、产品...
 homepage:
   explore_by_product: 按产品浏览
   version_picker: 版本
-  description: 在 GitHub 旅程中随时为你提供帮助。
 toc:
-  getting_started: 入门
+  getting_started: 入门指南
   popular: 热门
   guides: 指南
-  whats_new: 新增功能
-  videos: 视频
-  all_changelogs: 所有更改日志帖子
+  whats_new: 新增内容
 pages:
-  article_version: '文章版本'
+  article_version: '文章版本：'
   miniToc: 本文内容
   contributor_callout: 这篇文章的参与者和维护者是
-  all_enterprise_releases: 所有 Enterprise Server 发行版
-  about_versions: 关于版本
 errors:
   oops: 哎呀！
-  something_went_wrong: 似乎出现了问题。
+  something_went_wrong: 看来出现了错误。
   we_track_errors: 我们会自动跟踪这些错误，但如果问题仍然存在，请随时联系我们。
   page_doesnt_exist: 看来此页面不存在。
 support:
   still_need_help: 还需要帮助？
-  contact_support: 联系支持人员
+  contact_support: 联系支持
   ask_community: 询问 GitHub 社区
 survey:
-  able_to_find: 此文档对你有帮助吗？
-  yes: Yes
-  no: No
+  able_to_find: 此文档对您有帮助吗？
+  yes: true
+  no: false
+  yes_feedback: 我们在不断改进文档，希望听到您的改进建议。
+  no_feedback: 我们在不断改进文档，希望听到您的改进建议。
   comment_yes_label: 让我们知道哪方面做得好
   comment_no_label: 告诉我们如何改进
   optional: 可选
   required: 必选
   email_placeholder: email@example.com
-  email_label: 如果我们可以就更多问题与你联系，请输入电子邮件地址
-  email_validation: 请输入有效的电子邮件地址
-  send: Send
-  feedback: 谢谢！我们收到了你的反馈。
-  not_support: 如果你需要回复，请联系客户支持。
+  email_label: 如果有更多问题，我们能联系您吗？
+  send: 发送​​
+  feedback: 谢谢！我们收到了您的反馈。
+  not_support: 如果您需要回复，请联系客服。
   privacy_policy: 隐私政策
 contribution_cta:
   title: 帮助我们创建出色的文档！
   body: 所有 GitHub 文档都是开源的。看到错误或不清楚的内容了吗？提交拉取请求。
   button: 做出贡献
-  or: 或者，
+  or: 或,
   to_guidelines: 了解如何参与。
 products:
   graphql:
     reference:
-      implements: 实现
       fields: 字段
       arguments: 参数
       name: 名称
       type: 类型
-      description: 说明
+      description: 描述
       input_fields: 输入字段
       return_fields: 返回字段
       implemented_by: 实施者
       values: 值
       possible_types: 可能的类型
       preview_notice: 预览通知
-      deprecation_notice: 启用通知
-      preview_period: 在预览期间，API 可能会更改，恕不通知。
-    overview:
-      preview_header: '若要切换此预览并访问以下架构成员，必须在 `Accept` 标头中提供自定义媒体类型：'
-      preview_schema_members: '预览的架构成员'
-      announced: 已公布
-      updates: 更新
+      deprecation_notice: 废弃通知
   rest:
     reference:
-      default: 默认
-      name: 名称
-      in: In
-      type: 类型
-      description: 说明
-      notes: 说明
       parameters: 参数
       response: 响应
-      example_response: 示例响应
-      status_code: 状态代码
-      http_status_code: HTTP 响应状态代码
       code_sample: 代码示例
       code_samples: 代码示例
       preview_notice: 预览通知
@@ -126,33 +88,24 @@ products:
       see_preview_notice: 查看预览通知
       see_preview_notices: 查看预览通知
       preview_header_is_required: 此标头<strong>必填</strong>
-      preview_notice_to_change: 此 API 处于预览阶段，可能会更改
-      works_with: 使用
-      api_reference: REST API 参考
-      enum_description_title: 可以是以下选项之一
-      required: 必选
-      headers: 头文件
-      query: 查询参数
-      path: 路径参数
-      body: 正文参数
 footer:
   all_rights_reserved: 保留所有权利
-  terms: 术语
+  terms: 条款
   privacy: 隐私
-  security: 安全性
+  security: 安全
   product:
-    heading: Products
+    heading: 产品
     links:
       features: 功能
-      security: 安全性
-      enterprise: Enterprise
+      security: 安全
+      enterprise: 企业
       case_studies: 案例研究
       pricing: 定价
       resources: 资源
   platform:
     heading: 平台
     links:
-      developer_api: 开发人员 API
+      developer_api: 开发者 API
       partners: 合作伙伴
       atom: Atom
       electron: Electron
@@ -166,62 +119,53 @@ footer:
       status: 状态
       contact_github: 联系 GitHub
   company:
-    heading: Company
+    heading: 公司
     links:
       about: 关于
       blog: 博客
       careers: 招聘
-      press: 请按
-      shop: Shop
+      press: 新闻
+      shop: 商店
 product_landing:
   quickstart: 快速入门
   reference: 参考
-  overview: 概述
+  overview: 概览
   guides: 指南
   code_examples: 代码示例
   search_code_examples: 搜索代码示例
-  search_results_for: 搜索以下项的结果
-  matches_displayed: 显示的匹配项
   show_more: 显示更多
   explore_people_and_projects: 探索人员和项目
-  sorry: 抱歉，找不到以下项的结果
-  no_example: 看起来我们没有适合你的筛选条件的示例。
-  try_another: 请尝试另一个筛选条件或添加你的代码示例。
-  no_result: 抱歉，没有与你的筛选条件匹配的指南。
+  sorry: 抱歉，找不到结果
+  no_example: 看起来我们没有适合您的过滤器的示例。
+  try_another: 请尝试另一个过滤器或添加您的代码示例。
+  no_result: 抱歉，没有与过滤条件匹配的指南。
   learn: 了解如何添加代码示例
-  communities_using_discussions: GitHub.com 上使用讨论的社区
-  add_your_community: 添加社区
+  communities_using_discussions: 使用讨论的社区
+  add_your_community: 添加您的社区
   sponsor_community: GitHub Sponsors 社区
   supported_releases: 支持的版本
   release_notes_for: 发行说明
-  upgrade_from: 升级前的版本
+  upgrade_from: 升级自
   browse_all_docs: 浏览所有文档
-  browse_all: 浏览全部
-  docs: 文档
   explore_release_notes: 浏览发行说明
-  view: 查看全部
-product_guides:
-  start_path: 启动学习路径
+product_sublanding:
+  start: 开始
+  start_path: 开始路径
   learning_paths: '{{ productMap[currentProduct].name }} 学习路径'
-  learning_paths_desc: 学习路径是一系列帮助你掌握特定主题的指南。
+  learning_paths_desc: 学习路径是一系列帮助您掌握特定主题的指南。
   guides: '{{ productMap[currentProduct].name }} 指南'
   more_guides: 更多指南
   load_more: 加载更多指南
   all_guides: '所有 {{ productMap[currentProduct].name }} 指南'
-  filter_instructions: 使用这些控件筛选指南列表
   filters:
     type: 类型
     topic: 主题
-    all: All
-  guides_found:
-    multiple: '找到了 {n} 个指南'
-    one: 找到了 1 个指南
-    none: 找不到指南
+    all: 所有
   guide_types:
-    overview: 概述
+    overview: 概览
     quick_start: 快速入门
     tutorial: 教程
-    how_to: 操作指南
+    how_to: 操作方法指南
     reference: 参考
 learning_track_nav:
   prevGuide: 上一个指南

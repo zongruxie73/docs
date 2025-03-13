@@ -1,25 +1,24 @@
 ---
-title: Interfaces
+title: 接口
 redirect_from:
   - /v4/interface
   - /v4/reference/interface
 versions:
-  fpt: '*'
-  ghec: '*'
-  ghes: '*'
-  ghae: '*'
+  free-pro-team: '*'
+  enterprise-server: '*'
+  github-ae: '*'
 topics:
   - API
 ---
 
-## About interfaces
+### 关于接口
 
-[Interfaces](https://graphql.github.io/graphql-spec/June2018/#sec-Interfaces) serve as parent objects from which other objects can inherit.
+[接口](https://graphql.github.io/graphql-spec/June2018/#sec-Interfaces)可作为供其他对象继承的父对象。
 
-For example, [`Lockable`](/graphql/reference/interfaces#lockable) is an interface because both [`Issue`](/graphql/reference/objects#issue) and [`PullRequest`](/graphql/reference/objects#pullrequest) objects can be locked. An interface has its own list of named fields that are shared by implementing objects.
+例如，[`Lockable`](/graphql/reference/interfaces#lockable)是一个接口，因为 [`Issue`](/graphql/reference/objects#issue) 和 [`PullRequest`](/graphql/reference/objects#pullrequest) 对象都可以锁定。 接口拥有自己的指定字段列表，这些字段通过实现对象得以共享。
 
-For more information, see "[Implementation](/graphql/guides/introduction-to-graphql#implementation)."
+更多信息请参阅“[实现](/graphql/guides/introduction-to-graphql#implementation)。”
 
-{% data reusables.projects.graphql-ghes %}
-
-<!-- Content after this section is automatically generated -->
+{% for item in graphql.schemaForCurrentVersion.interfaces %}
+  {% include graphql-interface %}
+{% endfor %}

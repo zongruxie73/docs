@@ -1,40 +1,30 @@
 import { DefaultLayout } from 'components/DefaultLayout'
 import { TableOfContents } from 'components/landing/TableOfContents'
 import { useTocLandingContext } from 'components/context/TocLandingContext'
+import { ArticleTopper } from 'components/article/ArticleTopper'
 import { ArticleTitle } from 'components/article/ArticleTitle'
-import { MarkdownContent } from 'components/ui/MarkdownContent'
+import { ArticleContent } from 'components/article/ArticleContent'
 import { ArticleList } from 'components/landing/ArticleList'
 import { useTranslation } from 'components/hooks/useTranslation'
 import { ArticleGridLayout } from 'components/article/ArticleGridLayout'
 import { Callout } from 'components/ui/Callout'
-import { Lead } from 'components/ui/Lead'
-import { LearningTrackNav } from 'components/article/LearningTrackNav'
-import { ClientSideRedirects } from 'components/ClientSideRedirects'
 
 export const TocLanding = () => {
-  const {
-    title,
-    introPlainText,
-    tocItems,
-    productCallout,
-    variant,
-    featuredLinks,
-    renderedPage,
-    currentLearningTrack,
-  } = useTocLandingContext()
+  const { title, introPlainText, tocItems, productCallout, variant, featuredLinks, renderedPage } =
+    useTocLandingContext()
   const { t } = useTranslation('toc')
 
   return (
     <DefaultLayout>
-      {/* Doesn't matter *where* this is included because it will
-      never render anything. It always just return null. */}
-      <ClientSideRedirects />
+      <div className="container-xl px-3 px-md-6 my-4 my-lg-4">
+        <ArticleTopper />
 
-      <div className="container-xl px-3 px-md-6 my-4">
-        <ArticleGridLayout>
+        <ArticleGridLayout className="mt-7">
           <ArticleTitle>{title}</ArticleTitle>
 
-          {introPlainText && <Lead data-search="lead">{introPlainText}</Lead>}
+          <div className="lead-mktg">
+            <p>{introPlainText}</p>
+          </div>
 
           {productCallout && (
             <Callout variant="success" dangerouslySetInnerHTML={{ __html: productCallout }} />
@@ -42,39 +32,34 @@ export const TocLanding = () => {
 
           <div className="border-bottom border-xl-0 pb-4 mb-5 pb-xl-2 mb-xl-2" />
 
-          <div className={variant === 'expanded' ? 'mt-5' : 'mt-2'}>
+          <div className={variant === 'expanded' ? 'mt-7' : 'mt-2'}>
             {featuredLinks.gettingStarted && featuredLinks.popular && (
               <div className="pb-8 container-xl">
                 <div className="gutter gutter-xl-spacious clearfix">
                   <div className="col-12 col-lg-6 mb-md-4 mb-lg-0 float-left">
                     <ArticleList
                       title={t('getting_started')}
+                      variant="spaced"
                       articles={featuredLinks.gettingStarted}
                     />
                   </div>
 
                   <div className="col-12 col-lg-6 float-left">
-                    <ArticleList title={t('popular')} articles={featuredLinks.popular} />
+                    <ArticleList
+                      title={t('popular')}
+                      variant="spaced"
+                      articles={featuredLinks.popular}
+                    />
                   </div>
                 </div>
               </div>
             )}
 
-            {renderedPage && (
-              <div id="article-contents" className="mb-5">
-                <MarkdownContent>{renderedPage}</MarkdownContent>
-              </div>
-            )}
+            {renderedPage && <ArticleContent>{renderedPage}</ArticleContent>}
 
             <TableOfContents items={tocItems} variant={variant} />
           </div>
         </ArticleGridLayout>
-
-        {currentLearningTrack?.trackName ? (
-          <div className="mt-4">
-            <LearningTrackNav track={currentLearningTrack} />
-          </div>
-        ) : null}
       </div>
     </DefaultLayout>
   )

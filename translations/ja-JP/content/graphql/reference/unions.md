@@ -1,25 +1,24 @@
 ---
-title: Unions
+title: ユニオン
 redirect_from:
   - /v4/union
   - /v4/reference/union
 versions:
-  fpt: '*'
-  ghec: '*'
-  ghes: '*'
-  ghae: '*'
+  free-pro-team: '*'
+  enterprise-server: '*'
+  github-ae: '*'
 topics:
   - API
 ---
 
-## About unions
+### ユニオンについて
 
-A [union](https://graphql.github.io/graphql-spec/June2018/#sec-Unions) is a type of object representing many objects.
+[ユニオン](https://graphql.github.io/graphql-spec/June2018/#sec-Unions)は、多くのオブジェクトを表すオブジェクトの型です。
 
-For example, a field marked as an [`ProjectCardItem`](/graphql/reference/unions#projectcarditem) could be an [`Issue`](/graphql/reference/objects#issue) or a [`PullRequest`](/graphql/reference/objects#pullrequest) because each of those objects can be inside a project card. Using a union instead of an object gives you flexibility.
+たとえば、[`ProjectCardItem`](/graphql/reference/unions#projectcarditem)としてマークされたフィールドは、[`Issue`](/graphql/reference/objects#issue)あるいは[`PullRequest`](/graphql/reference/objects#pullrequest)になれます。これは、これらのオブジェクトはどちらもプロジェクトカードの中に置けるためです。 オブジェクトの代わりにユニオンを使うことで柔軟性が得られます。
 
-For more information, see "[Introduction to GraphQL](/graphql/guides/introduction-to-graphql)."
+詳しい情報については「[GraphQLの紹介](/graphql/guides/introduction-to-graphql)」を参照してください。
 
-{% data reusables.projects.graphql-ghes %}
-
-<!-- Content after this section is automatically generated -->
+{% for item in graphql.schemaForCurrentVersion.unions %}
+  {% include graphql-union %}
+{% endfor %}

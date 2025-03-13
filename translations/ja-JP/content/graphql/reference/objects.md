@@ -1,25 +1,23 @@
 ---
-title: Objects
+title: オブジェクト
 redirect_from:
   - /v4/object
   - /v4/reference/object
 versions:
-  fpt: '*'
-  ghec: '*'
-  ghes: '*'
-  ghae: '*'
+  free-pro-team: '*'
+  enterprise-server: '*'
+  github-ae: '*'
 topics:
   - API
 ---
 
-## About objects
+### オブジェクトについて
 
-[Objects](https://graphql.github.io/graphql-spec/June2018/#sec-Objects) in GraphQL represent the resources you can access. An object can contain a list of fields, which are specifically typed.
+GraphQLにおける[オブジェクト](https://graphql.github.io/graphql-spec/June2018/#sec-Objects)は、アクセスできるリソースを表します。 オブジェクトは、型が決められたフィールドのリストを持つことができます。
 
-For example, the [`Repository`](/graphql/reference/objects#repository) object has a field called `name`, which is a `String`.
+たとえば[`Repository`](/graphql/reference/objects#repository)オブジェクトは`name`というフィールドを持ち、これは`String`です。
 
-For more information, see "[Introduction to GraphQL](/graphql/guides/introduction-to-graphql)."
+詳しい情報については「[GraphQLの紹介](/graphql/guides/introduction-to-graphql)」を参照してください。
 
-{% data reusables.projects.graphql-ghes %}
-
-<!-- Content after this section is automatically generated -->
+<!-- this page is pre-rendered by scripts because it's too big to load dynamically -->
+<!-- see lib/graphql/static/prerendered-objects.json -->

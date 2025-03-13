@@ -1,97 +1,74 @@
-meta:
-  default_description: "Comenzar, solucionar problemas y aprovechar GitHub. Documentación para nuevos usuarios, desarrolladores, administradores y todos los productos de GitHub."
+---
 header:
   github_docs: GitHub Docs
   contact: Contacto
   notices:
-    ghae_silent_launch: GitHub AE es una versión limitada en este momento.
-    release_candidate:
-      # The version name is rendered before the below text via includes/header-notification.html
-      ' actualmente está disponible como versión candidata para lanzamiento. Para obtener más información, consulte "<a href="/admin/overview/about-upgrades-to-new-releases">Acerca de las mejoras a los lanzamientos nuevos</a>".'
-    localization_complete:
-      "Publicamos actualizaciones para la documentación con frecuencia y es posible que aún se esté traduciendo esta página. Para obtener la información más reciente, visite la <a id=\"to-english-doc\" href=\"/en\">documentación en inglés</a>."
-    early_access: 📣 <b>No comparta</b> esta dirección URL públicamente. Esta página incluye contenido sobre una característica de acceso anticipado.
-    release_notes_use_latest: "Utilice el lanzamiento más reciente para las últimas correcciones de seguridad, rendimiento y errores."
-    # GHES release notes
-    ghes_release_notes_upgrade_patch_only: "📣 Este no es el <a href=\"#{{ latestPatch }}\">lanzamiento de parche más reciente</a> de Enterprise Server."
-    ghes_release_notes_upgrade_release_only: "📣 Este no es el <a href=\"/enterprise-server@{{ latestRelease }}/admin/release-notes\">lanzamiento más reciente </a> de Enterprise Server."
-    ghes_release_notes_upgrade_patch_and_release: "📣 Este no es el <a href=\"#{{ latestPatch }}\">lanzamiento de parche más reciente</a> de esta serie de lanzamientos, y no es el<a href=\"/enterprise-server@{{ latestRelease }}/admin/release-notes\">último lanzamiento</a> de Enterprise Server."
-  sign_up_cta: Suscripción
-picker:
-  language_picker_default_text: Elegir un idioma
-  product_picker_default_text: Todos los productos
-  version_picker_default_text: Elija una versión
+    ghae_silent_launch: GitHub AE está actualmente en un lanzamiento limitado. Por favor, <a href="https://enterprise.github.com/contact">contacta a nuestro equipo de ventas</a> para conocer más sobre esto.
+    release_candidate: '# El nombre de la versión se interpreta antes del texto siguiente a través de '' includes/header-notification.html '' se encuentra disponible actualmente como un candidato de lanzamiento. Para obtener más información, consulta la sección "<a href="/admin/overview/about-upgrades-to-new-releases">Acerca de las mejoras para los lanzamientos nuevos</a>".'
+    localization_complete: Frecuentemente publicamos actualizaciones de nuestra documentación. Es posible que la traducción de esta página esté en curso. Para conocer la información más actual, visita la <a id="to-english-doc" href="/en">documentación en inglés</a>. Si existe un problema con las traducciones en esta página, por favor <a href="https://github.com/contact?form[subject]=translation%20issue%20on%20docs.github.com&form[comments]=">infórmanos</a>.
+    localization_in_progress: '¡Hola, explorador! Esta página está bajo desarrollo activo o todavía está en la etapa de traducción. Para obtener información más actualizada y precisa, visita nuestra <a id="to-english-doc" href="/en">documentación en inglés</a>.'
+    early_access: '📣 Por favor, <b>no compartas</b> esta URL públicamente. Esta página tiene contenido sobre una característica de acceso temprano.'
+    release_notes_use_latest: Por favor, utiliza el lanzamiento más reciente para las últimas correcciones de seguridad, rendimiento y errores.
+    #GHES release notes
+    ghes_release_notes_upgrade_patch_only: '📣 This is not the <a href="#{{ latestPatch }}">latest patch release</a> of Enterprise Server.'
+    ghes_release_notes_upgrade_release_only: '📣 Este no es el <a href="/enterprise-server@{{ latestRelease }}/admin/release-notes">lanzamiento más reciente </a> de Enterprise Server.'
+    ghes_release_notes_upgrade_patch_and_release: '📣 Este no es el <a href="#{{ latestPatch }}">lanzamiento de parche más reciente</a> de esta serie de lanzamientos, y no es el<a href="/enterprise-server@{{ latestRelease }}/admin/release-notes">último lanzamiento</a> de Enterprise Server.'
 release_notes:
-  banner_text: GitHub comenzó a implementar estos cambios en empresas en
+  banner_text_current: These changes will roll out over the next one week.
+  banner_text_past: These changes rolled out to enterprises during the week of
 search:
-  need_help: ¿Necesita ayuda?
-  placeholder: Documentación de Github de búsqueda
-  loading: Carga
-  no_results: No se encontró ningún resultado
-  search_results_for: Resultados de búsqueda para
-  no_content: Sin contenido
-  matches_displayed: Coincidencias mostradas
-  search_error: Ocurrió un error al intentar realizar la búsqueda.
-  description: Introduzca un término de búsqueda para encontrarlo en la documentación de GitHub.
-  label: Documentación de Github de búsqueda
-  results_found: "Se han encontrado {n} resultados en {s} ms"
-  results_page: "Esta es la página {page} de {pages}."
-  nothing_found: No se ha encontrado nada 😿
+  need_help: '¿Necesitas ayuda?'
+  placeholder: Busca temas, productos...
 homepage:
   explore_by_product: Explorar por producto
   version_picker: Versión
-  description: Ayuda para cualquier punto de su recorrido por GitHub.
 toc:
-  getting_started: Introducción
+  getting_started: Empezar
   popular: Popular
   guides: Guías
-  whats_new: Novedades
-  videos: Vídeos
-  all_changelogs: Todas las publicaciones de la bitácora de cambios
+  whats_new: Qué hay de nuevo
 pages:
-  article_version: 'Versión del artículo'
+  article_version: 'Versión del artículo:'
   miniToc: En este artículo
   contributor_callout: En este artículo contribuye y lo mantiene
-  all_enterprise_releases: Todos los lanzamientos de Enterprise Server
-  about_versions: Acerca de las versiones
 errors:
-  oops: ¡Ups!
-  something_went_wrong: Parece que se produjo algún problema.
-  we_track_errors: "Realizamos el seguimiento de estos errores automáticamente, pero si el problema continúa, no dude en contactarnos."
-  page_doesnt_exist: "Al parecer, esta página no existe."
+  oops: '¡Ups!'
+  something_went_wrong: Parece que algo salió mal.
+  we_track_errors: Realizamos el seguimiento de estos errores automáticamente, pero si el problema continúa, no dudes en contactarnos.
+  page_doesnt_exist: Al parecer, esta página no existe.
 support:
-  still_need_help: ¿Aún necesita ayuda?
-  contact_support: Ponerse en contacto con soporte técnico
-  ask_community: Pregúntele a la comunidad de GitHub
+  still_need_help: '¿Aún necesitas ayuda?'
+  contact_support: Contactar con soporte técnico
+  ask_community: Pregúntale a la comunidad de GitHub
 survey:
-  able_to_find: ¿Le ayudó este documento?
-  yes: Yes
-  no: No
-  comment_yes_label: Díganos qué estamos haciendo bien
-  comment_no_label: Déjenos saber lo que podemos mejorar
+  able_to_find: '¿Te ayudó este documento?'
+  yes: true
+  no: false
+  yes_feedback: We're continually improving our docs. We'd love to hear what we do well.
+  no_feedback: Estamos mejorando nuestros documentos constantemente. Nos encantaría saber cómo crees que podemos hacerlo aún mejor.
+  comment_yes_label: Let us know what we do well
+  comment_no_label: Déjanos saber lo que podemos mejorar
   optional: Opcional
-  required: Obligatorio
+  required: Requerido
   email_placeholder: email@ejemplo.com
-  email_label: "Si quiere que le contactemos con más preguntas, introduzca su dirección de correo electrónico"
-  email_validation: Escriba una dirección de correo electrónico válida.
-  send: Envío
-  feedback: Gracias. Recibimos sus comentarios.
-  not_support: "Si necesita una respuesta, es mejor que contacte con soporte."
-  privacy_policy: Directiva de privacidad
+  email_label: '¿Podemos contactarte si tenemos más preguntas?'
+  send: Enviar
+  feedback: Thank you! We received your feedback.
+  not_support: If you need a reply, please contact support instead.
+  privacy_policy: Política de privacidad
 contribution_cta:
-  title: ¡Ayúdenos a hacer geniales estos documentos!
-  body: Toda la documentación de GitHub es de código abierto. ¿Ve algo incorrecto o que no esté claro? Envíe una solicitud de incorporación de cambios.
-  button: Haga una contribución
-  or: "O bien,"
-  to_guidelines: aprenda cómo contribuir.
+  title: '¡Ayúdanos a hacer geniales estos documentos!'
+  body: Todos los documentos de GitHub son de código abierto. ¿Notas algo que esté mal o que no sea claro? Emite una solicitud de cambios.
+  button: Haz una contribución
+  or: O,
+  to_guidelines: aprende cómo contribuir.
 products:
   graphql:
     reference:
-      implements: Implementaciones
-      fields: Fields
+      fields: Campos
       arguments: Argumentos
       name: Nombre
-      type: Tipo
+      type: Type
       description: Descripción
       input_fields: Campos de entrada
       return_fields: Campos de retorno
@@ -99,42 +76,18 @@ products:
       values: Valores
       possible_types: Tipos posibles
       preview_notice: Aviso de previsualización
-      deprecation_notice: Aviso de desuso
-      preview_period: "Durante el período de versión preliminar, la API podría cambiar sin previo aviso."
-    overview:
-      preview_header: 'Para alternar esta vista previa y acceder a los siguientes miembros de esquema, debe proporcionar un tipo de medio personalizado en el encabezado `Accept`:'
-      preview_schema_members: 'Miembros del esquema de versión preliminar'
-      announced: Anunciado
-      updates: Actualizaciones
+      deprecation_notice: Aviso de depreciación
   rest:
     reference:
-      default: Valor predeterminado
-      name: Nombre
-      in: En
-      type: Tipo
-      description: Descripción
-      notes: Notas
       parameters: Parámetros
-      response: Response
-      example_response: Respuesta de ejemplo
-      status_code: status code
-      http_status_code: Códigos de estado de respuesta HTTP
-      code_sample: Código de ejemplo
+      response: Respuesta
+      code_sample: Ejemplo de código
       code_samples: Ejemplos de código
       preview_notice: Aviso de previsualización
       preview_notices: Avisos de previsualización
       see_preview_notice: Ver aviso de previsualización
       see_preview_notices: Ver avisos de previsualización
       preview_header_is_required: El encabezado es <strong>requerido</strong>
-      preview_notice_to_change: Esta API está en vista previa y sujeta a cambios
-      works_with: Funciona con
-      api_reference: Referencia de la API REST
-      enum_description_title: Puede ser uno de los siguientes
-      required: Obligatorio
-      headers: encabezados
-      query: Parámetros de consulta
-      path: Parámetros de la ruta de acceso
-      body: Parámetros del cuerpo
 footer:
   all_rights_reserved: Todos los derechos reservados
   terms: Términos
@@ -145,91 +98,82 @@ footer:
     links:
       features: Características
       security: Seguridad
-      enterprise: Enterprise
-      case_studies: Casos prácticos
+      enterprise: Empresa
+      case_studies: Estudios de caso
       pricing: Precios
       resources: Recursos
   platform:
     heading: Plataforma
     links:
       developer_api: API de desarrollo
-      partners: Asociados
+      partners: Socios
       atom: Atom
       electron: Electron
       github_desktop: GitHub Desktop
   support:
-    heading: Soporte técnico
+    heading: Asistencia
     links:
       help: Ayuda
       community_forum: Foro de la comunidad
-      training: Cursos
+      training: Capacitación
       status: Estado
-      contact_github: Póngase en contacto con GitHub
+      contact_github: Ponte en contacto con GitHub
   company:
-    heading: Compañía
+    heading: Empresa
     links:
-      about: Información
+      about: Acerca de
       blog: Blog
       careers: Carreras
-      press: Presione
-      shop: Comprar
+      press: Prensa
+      shop: Tienda
 product_landing:
-  quickstart: Guía de inicio rápido
+  quickstart: Inicio Rápido
   reference: Referencia
-  overview: Información general
+  overview: Resumen
   guides: Guías
   code_examples: Ejemplos de código
   search_code_examples: Ejemplos de búsqueda de código
-  search_results_for: Resultados de búsqueda para
-  matches_displayed: Coincidencias mostradas
   show_more: Mostrar más
   explore_people_and_projects: Explorar personas y proyectos
-  sorry: No hay resultados para
-  no_example: Parece que no tenemos un ejemplo que se ajuste a su filtro.
-  try_another: Inténtelo con otro archivo o agregue su ejemplo de código.
-  no_result: No hay guías que coincidan con su filtro.
-  learn: Aprenda cómo agregar un ejemplo de código
-  communities_using_discussions: Comunidades de GitHub.com que usan discusiones
-  add_your_community: Agregue su comunidad
-  sponsor_community: Comunidad de patrocinadores de GitHub
+  sorry: Lo sentimos, no hay respultados para
+  no_example: Parece que no tenemos un ejemplo que se ajuste a tu filtro.
+  try_another: Inténtalo con otro archivo o agrega tu ejemplo de código.
+  no_result: Lo sentimos, no hay una guía que coincida con tu filtro.
+  learn: Aprende cómo agregar un ejemplo de código
+  communities_using_discussions: Comunidades que utilizan debates
+  add_your_community: Agrega tu comunidad
+  sponsor_community: Comunidad de GitHub Sponsors
   supported_releases: Lanzamientos compatibles
-  release_notes_for: Notas de la versión para
-  upgrade_from: Actualización de
-  browse_all_docs: Examinar todos los documentos
-  browse_all: Buscar toda
-  docs: la documentación
-  explore_release_notes: Explorar las notas de la versión
-  view: Ver todo
-product_guides:
-  start_path: Comenzar ruta de aprendizaje
+  release_notes_for: Notas de lanzamiento para
+  upgrade_from: Mejorar desde
+  browse_all_docs: Buscar todos los documentos
+  explore_release_notes: Explorar las notas de lanzamiento
+product_sublanding:
+  start: Inicio
+  start_path: Ruta de inicio
   learning_paths: 'Rutas de aprendizaje de {{ productMap[currentProduct].name }}'
-  learning_paths_desc: Las rutas de aprendizaje son una recopilación de guías que le ayudan a dominar un tema en particular.
+  learning_paths_desc: Las rutas de aprendizaje son una recopilación de guías que te ayudan a dominar un tema en particular.
   guides: 'Guías de {{ productMap[currentProduct].name }}'
   more_guides: más guías
-  load_more: Cargar más guías
+  load_more: Carga más guías
   all_guides: 'Todas las guías de {{ productMap[currentProduct].name }}'
-  filter_instructions: Filtre la lista de guías utilizando estos controles
   filters:
-    type: Tipo
+    type: Type
     topic: Tema
-    all: All
-  guides_found:
-    multiple: 'Se encontraron {n} guías'
-    one: Se encontró 1 guía
-    none: No se encontraron guías
+    all: Todas
   guide_types:
-    overview: Información general
-    quick_start: Guía de inicio rápido
+    overview: Resumen
+    quick_start: Inicio Rápido
     tutorial: Tutorial
-    how_to: Guía paso a paso
+    how_to: Guía instruccional
     reference: Referencia
 learning_track_nav:
-  prevGuide: Guía anterior
+  prevGuide: Guía previa
   nextGuide: Guía siguiente
 toggle_images:
-  off: "Las imágenes están desactivadas, haga clic para mostrar"
-  on: "Las imágenes están activadas, haga clic para ocultar"
+  off: Las imágenes están inactivas, haz clic para mostrar
+  on: Las imágenes están activas, haz clic para ocultar
   hide_single: Ocultar imagen
   show_single: Mostrar imagen
 scroll_button:
-  scroll_to_top: Desplazarse hasta el principio
+  scroll_to_top: Desplazarse hasta arriba
