@@ -1,1 +1,6 @@
-1. 在组织名称下，单击 {% octicon "people" aria-label="The people icon" %} **Teams（团队）**。 ![组织页面上的团队选项卡](/assets/images/help/organizations/organization-teams-tab.png)
+1. Under your organization name, click {% octicon "people" aria-label="The people icon" %} **Teams**.
+  {% ifversion fpt or ghes or ghec %}
+  ![Teams tab on the organization page](/assets/images/help/organizations/organization-teams-tab-with-overview.png)
+  {% else %}
+  ![Teams tab on the organization page](/assets/images/help/organizations/organization-teams-tab.png)
+  {% endif %}

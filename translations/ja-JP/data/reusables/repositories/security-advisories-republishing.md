@@ -1,1 +1,1 @@
-{% data variables.product.prodname_security_advisories %}を使い、すでに別の場所で公開したセキュリティ脆弱性の詳細をコピーして新しいセキュリティアドバイザリに貼り付けることにより、その詳細を再度公開できます。
+You can also use repository security advisories to republish the details of a security vulnerability that you have already disclosed elsewhere by copying and pasting the details of the vulnerability into a new security advisory.

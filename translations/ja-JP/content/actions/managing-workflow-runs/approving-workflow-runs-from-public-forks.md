@@ -1,19 +1,31 @@
 ---
-title: Approving workflow runs from public forks
-intro: 'When a first-time contributor submits a pull request to a public repository, a maintainer with write access must approve any workflow runs.'
-product: '{% data reusables.gated-features.actions %}'
+title: パブリックフォークで実行されるワークフローの実行を承認する
+intro: 外部の共同作成者が pull request をパブリック リポジトリに送信するとき、書き込みアクセスを持つメンテナはワークフローの実行を承認する必要がある場合があります。
 versions:
-  free-pro-team: '*'
+  fpt: '*'
+  ghec: '*'
+shortTitle: Approve public fork runs
+ms.openlocfilehash: b995362f67d97a3e2ee6d1029cbe24227867f58a
+ms.sourcegitcommit: 5f9527483381cfb1e41f2322f67c80554750a47d
+ms.translationtype: HT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 09/11/2022
+ms.locfileid: '145088452'
 ---
+## パブリック フォークからのワークフロー実行について
 
-Forks of public repositories can submit pull requests that propose changes to a repository's {% data variables.product.prodname_actions %} workflows. Although workflows from forks do not have access to sensitive data such as secrets, they can be an annoyance for maintainers if they are modified for abusive purposes. To help prevent this, workflows on pull requests are not run automatically if they are received from first-time contributors, and must be approved first.
+{% data reusables.actions.workflow-run-approve-public-fork %}
 
-Maintainers with write access to the repository can use the following procedure to review and run workflows on pull requests from first-time contributors. After a contributor has at least one pull request merged into a project's repository, any future pull requests from that contributor's fork will automatically run workflows.
+[リポジトリ](/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository#configuring-required-approval-for-workflows-from-public-forks)、[Organization](/organizations/managing-organization-settings/disabling-or-limiting-github-actions-for-your-organization#configuring-required-approval-for-workflows-from-public-forks)、または [Enterprise](/enterprise-cloud@latest/admin/policies/enforcing-policies-for-your-enterprise/enforcing-policies-for-github-actions-in-your-enterprise#enforcing-a-policy-for-fork-pull-requests-in-your-enterprise) のワークフロー承認要件を構成できます。
 
-{% data reusables.repositories.sidebar-pr %}
-{% data reusables.repositories.choose-pr-review %}
-{% data reusables.repositories.changed-files %}
-1. Inspect the proposed changes in the pull request and ensure that you are comfortable running your workflows on the pull request branch. You should be especially alert to any proposed changes in the `.github/workflows/` directory that affect workflow files.
-1. If you are comfortable with running workflows on the pull request branch, return to the {% octicon "comment-discussion" aria-label="The discussion icon" %} **Conversation** tab, and under "Workflow(s) awaiting approval", click **Approve and run**.
+30 日を超えて承認を待っているワークフローの実行は自動的に削除されます。
 
-   ![Approve and run workflows](/assets/images/help/pull_requests/actions-approve-and-run-workflows-from-fork.png)
+## パブリック フォークからの pull request でワークフロー実行を承認する
+
+リポジトリへの書き込みアクセスを持つ保守担当者は、次の手順を使用して、承認を必要とする共同作成者からの pull request でワークフローをレビューして実行できます。
+
+{% data reusables.repositories.sidebar-pr %} {% data reusables.repositories.choose-pr-review %} {% data reusables.repositories.changed-files %}
+1. プルリクエストで提案された変更を調べて、プルリクエストブランチでワークフローを快適に実行できることを確認します。 ワークフロー ファイルに影響を与える `.github/workflows/` ディレクトリで提案された変更には特に注意する必要があります。
+1. pull request ブランチでワークフローを実行することに慣れている場合は、{% octicon "comment-discussion" aria-label="The discussion icon" %} **[会話]** タブに戻り、[承認を待っているワークフロー] で **[承認して実行]** をクリックします。
+
+   ![ワークフローを承認して実行する](/assets/images/help/pull_requests/actions-approve-and-run-workflows-from-fork.png)
