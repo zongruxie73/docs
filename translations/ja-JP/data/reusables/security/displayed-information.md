@@ -1,7 +1,8 @@
-既存のリポジトリで1つ以上のセキュリティ及び分析機能を有効化すると、数分のうちに{% data variables.product.prodname_dotcom %}上に結果が表示されます。
+When you enable one or more security and analysis features for existing repositories, you will see any results displayed on {% data variables.product.prodname_dotcom %} within minutes:
 
-- 既存のすべてのリポジトリは、選択された設定を持ちます。
-- 新しいリポジトリは、新しいリポジトリのチェックボックスを有効にしていれば、選択された設定に従います。{% if currentVersion == "free-pro-team@latest" %}
-- 関連するサービスに適用するマニフェストファイルをスキャンするために権限を使用します。
-- 依存関係グラフ上に情報が表示されます。
-- {% data variables.product.prodname_dotcom %}は、{% data variables.product.prodname_dependabot_alerts %}を生成します。 そして、Pull Requestを作成します。{% endif %} 
+- All the existing repositories will have the selected configuration.
+- New repositories will follow the selected configuration if you've enabled the checkbox for new repositories.{% ifversion fpt or ghec %}
+- We use the permissions to scan for manifest files to apply the relevant services.
+- If enabled, you'll see dependency information in the dependency graph.
+- If enabled, {% data variables.product.prodname_dotcom %} will generate {% data variables.product.prodname_dependabot_alerts %} for vulnerable dependencies or malware.{% endif %}{% ifversion fpt or ghec or ghes %}
+- If enabled, {% data variables.product.prodname_dependabot %} security updates will create pull requests to upgrade vulnerable dependencies when {% data variables.product.prodname_dependabot_alerts %} are triggered.{% endif %}

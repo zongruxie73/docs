@@ -1,2 +1,7 @@
-1. En {% data variables.product.prodname_dotcom %}, navega a la página principal de tu organización.
-2. Debajo del nombre de tu organización, haz clic en **Paquetes**. ![Botón de invitación para el acceso al contenedor](/assets/images/help/package-registry/org-tab-for-packages.png)
+1. On {% data variables.product.prodname_dotcom %}, navigate to the main page of your organization.
+2. Under your organization name, click **Packages**.
+  {% ifversion fpt or ghes or ghec %}
+  ![Packages tab on org landing page](/assets/images/help/package-registry/org-tab-for-packages-with-overview-tab.png)
+  {% else %}
+  ![Packages tab on org landing page](/assets/images/help/package-registry/org-tab-for-packages.png)
+  {% endif %}
