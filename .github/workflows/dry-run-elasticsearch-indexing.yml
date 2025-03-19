@@ -41,7 +41,7 @@ jobs:
         run: git lfs checkout
 
       - name: Setup node
-        uses: actions/setup-node@1f8c6b94b26d0feae1e387ca63ccbdc44d27b561
+        uses: actions/setup-node@cdca7365b2dadb8aad0a33bc7601856ffabcc48e
         with:
           node-version: 16.15.x
           cache: npm
