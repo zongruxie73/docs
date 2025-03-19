@@ -1,8 +1,8 @@
-1. Organization 名の下で、クリックします
-{% octicon "people" aria-label="The people icon" %} **Teams**.
-  {% ifversion fpt or ghes > 3.2 or ghec %}
-  ![Teamsタブ](/assets/images/help/organizations/organization-teams-tab-with-overview.png)
+1. Under your organization name, click {% octicon "people" aria-label="The people icon" %} **Teams**.
+  {% ifversion fpt or ghes or ghec %}
+  ![Teams tab](/assets/images/help/organizations/organization-teams-tab-with-overview.png)
   {% else %}
-  ![Teamsタブ](/assets/images/help/organizations/organization-teams-tab.png)
+  ![Teams tab](/assets/images/help/organizations/organization-teams-tab.png)
   {% endif %}
-1. Teamsタブで、Teamの名前をクリックしてください。 ![Organization の Team のリスト](/assets/images/help/teams/click-team-name.png)
+1. On the Teams tab, click the name of the team.
+  ![List of the organization's teams](/assets/images/help/teams/click-team-name.png)

@@ -1,5 +1,5 @@
 ---
-title: 非コードファイルでの作業
+title: Working with non-code files
 intro: '{% data variables.product.product_name %} supports rendering and diffing in a number of non-code file formats.'
 redirect_from:
   - /articles/rendering-and-diffing-images
@@ -32,87 +32,87 @@ versions:
   ghec: '*'
 topics:
   - Repositories
-shortTitle: 非コードファイルでの作業
+shortTitle: Working with non-code files
 ---
 
-## 画像をレンダリングして違いを見極める
+## Rendering and diffing images
 
-{% data variables.product.product_name %} では、一般的な画像形式のいくつか (PNG、JPG、GIF、PSD、SVG など) を表示できます。 単に表示するだけではなく、画像を異なるバージョン間で比較する方法もいくつかあります。
+{% data variables.product.product_name %} can display several common image formats, including PNG, JPG, GIF, PSD, and SVG. In addition to simply displaying them, there are several ways to compare differences between versions of those image formats.
 
 {% note %}
 
-**注釈:**
-- {% data variables.product.prodname_dotcom %} does not support comparing the differences between PSD files.
+**Note:** 
+- {% data variables.product.prodname_dotcom %} does not support comparing the differences between PSD files. 
 - If you are using the Firefox browser, SVGs on {% data variables.product.prodname_dotcom %} may not render.
 
 {% endnote %}
 
-### 画像を表示する
+### Viewing images
 
-You can directly browse and view images in your repository on {% ifversion ghae %}{% data variables.product.product_name %}{% else %}{% data variables.product.product_location %}{% endif %}:
+You can directly browse and view images in your repository on {% ifversion ghae %}{% data variables.product.product_name %}{% else %}{% data variables.location.product_location %}{% endif %}:
 
-![インライン画像](/assets/images/help/images/view.png)
+![inline image](/assets/images/help/images/view.png)
 
-SVG では現在、インラインスクリプトやアニメーションはサポートされていません。
+SVGs don't currently support inline scripting or animation.
 
-### 差異を見る
+### Viewing differences
 
-画像は、[見開き (2-Up)](#2-up)、[スワイプ (Swipe)](#swipe)、および[オニオンスキン (Onion Skin)](#onion-skin)の 3 種類のモードで表示して比較できます。
+You can visually compare images in three different modes: [2-up](#2-up), [swipe](#swipe), and [onion skin](#onion-skin).
 
-#### 見開き(2-Up)
+#### 2-up
 
-**見開き (2-Up)** はデフォルトモードで、一度に両方の画像を見ることができます。 加えて、画像のサイズがバージョン間で変わっていれば、その違いがそのまま表れます。 このモードではサイズの違いが明瞭にわかります。アセットがより高い解像度にアップグレードされた場合などにサイズが変わります。
+**2-up** is the default mode; it gives you a quick glimpse of both images. In addition, if the image has changed size between versions, the actual dimension change is displayed. This should make it very apparent when things are resized, such as when assets are upgraded to higher resolutions.
 
-![見開き(2-Up)](/assets/images/help/repository/images-2up-view.png)
+![2-up](/assets/images/help/repository/images-2up-view.png)
 
-#### スワイプ
+#### Swipe
 
-**スワイプ**では画像の部分を並べて表示することができます。 新旧画像間でなされた微妙な色変更がわかりづらいといった場合、 スワイプスライダーを問題の領域までドラッグして注目すると、違いが見えてきます。
+**Swipe** lets you view portions of your image side by side. Not sure if colors shifted between different versions? Drag the swipe slider over the area in question and compare the pixels for yourself.
 
-![スワイプ](/assets/images/help/repository/images-swipe-view.png)
+![Swipe](/assets/images/help/repository/images-swipe-view.png)
 
-#### オニオンスキン
+#### Onion skin
 
-**オニオンスキン**は、要素の移動量が小さくてわかりづらい場合に役立ちます。 ほとんど変わっていないように見えるアイコンが、もしかしたら 2 ピクセルほど左にずらされているかもしれません。その場合、 スライダーで不透明度を調節して、それが動くかどうかを見てください。
+**Onion Skin** really comes in handy when elements move around by small, hard to notice amounts. Did an icon shift two pixels to the left? Drag the opacity slider back a bit and notice if things move around.
 
-![オニオンスキン](/assets/images/help/repository/images-onion-view.gif)
+![Onion skin](/assets/images/help/repository/images-onion-view.gif)
 
-## 3Dファイルビューア
+## 3D File Viewer
 
-{% data variables.product.product_name %}は、*.stl* 拡張子の 3D ファイルをホストしてレンダリングできます。
+{% data variables.product.product_name %} can host and render 3D files with the *.stl* extension.
 
-STLファイルを直接{% data variables.product.product_name %}で見る場合、以下のことができます。
+When looking directly at an STL file on {% data variables.product.product_name %} you can:
 
-* クリックしてドラッグすることでモデルを回転させる。
-* 右クリックしてからドラッグすることでビューを変換する。
-* スクロールしてズームイン及びズームアウトする。
-* 様々なビューモードをクリックしてビューを変更する。
+* Click and drag to spin the model.
+* Right click and drag to translate the view.
+* Scroll to zoom in and out.
+* Click the different view modes to change the view.
 
-### Diff
+### Diffs
 
-STLファイルを含むコミットあるいは一連の変更を見る場合、そのファイルのdiffの前後を見ることができます。
+When looking at a commit or set of changes which includes an STL file, you'll be able to see a before and after diff of the file.
 
-デフォルトでは、変更されなかった物はすべてワイヤーフレームで表示されます。 追加分は緑になり、削除された部分は赤になります。
+By default, you'll get a view where everything unchanged is in wireframe. Additions are colored in green, and removed parts are colored in red.
 
-![ワイヤーフレーム](/assets/images/help/repository/stl_wireframe.png)
+![wireframe](/assets/images/help/repository/stl_wireframe.png)
 
-**Revision Slider（リビジョンスライダー）**オプションを選択し、ファイル上のスライダーを使って現在と以前のリビジョン間を行き来することもできます。
+You can also select the **Revision Slider** option, which lets you use a slider at the top of the file to transition between the current and previous revisions.
 
-### 低速なパフォーマンスの修正
+### Fixing slow performance
 
-このアイコンがビューアの隅に表示されている場合、そのブラウザではWebGLテクノロジが利用できません。
+If you see this icon in the corner of the viewer, then the WebGL technology is not available on your browser:
 
-![WebGLのポップエラー](/assets/images/help/repository/render_webgl_error.png)
+![WebGL pop error](/assets/images/help/repository/render_webgl_error.png)
 
-使用しているコンピューターのハードウェアを完全に活用するためには、WebGLが必要です。 WebGLが有効化されている [Chrome](https://www.google.com/intl/en/chrome/browser/)あるいは[Firefox](https://www.mozilla.org/en-US/firefox/new/)などのブラウザの利用をおすすめします。
+WebGL is necessary to take advantage of your computer's hardware to its fullest. We recommend you try browsers like [Chrome](https://www.google.com/intl/en/chrome/browser/) or [Firefox](https://www.mozilla.org/en-US/firefox/new/), which ship with WebGL enabled.
 
-### エラー："Unable to display"（表示不能）
+### Error: "Unable to display"
 
-モデルが不正なら、GitHub はそのファイルを表示できないことがあります。 加えて、10 MB 以上のファイルは大きすぎて GitHub は表示できません。
+If your model is invalid, GitHub may not be able to display the file. In addition, files that are larger than 10 MB are too big for GitHub to display.
 
-### 他の場所へのモデルの埋め込み
+### Embedding your model elsewhere
 
-インターネット上の別の場所に3Dファイルを表示するには、このテンプレートを変更し、JavaScriptをサポートするHTMLページに配置します。
+To display your 3D file elsewhere on the internet, modify this template and place it on any HTML page that supports JavaScript:
 
 ```html
 <script src="https://embed.github.com/view/3d/<username>/<repo>/<ref>/<path_to_file>"></script>
@@ -124,11 +124,11 @@ For example, if your model's URL is [`github.com/skalnik/secret-bear-clip/blob/m
 <script src="https://embed.github.com/view/3d/skalnik/secret-bear-clip/master/stl/clip.stl"></script>
 ```
 
-デフォルトでは、埋め込まれるレンダラは幅420ピクセル高さ620ピクセルになりますが、 `?height=300&width=500`というように高さと幅の変数をパラメータとしてURLの終わりに渡せば、この出力はカスタマイズできます。
+By default, the embedded renderer is 420 pixels wide by 620 pixels high, but you can customize the output by passing height and width variables as parameters at the end of the URL, such as `?height=300&width=500`.
 
 {% tip %}
 
-**注釈**: `ref` は、個々のコミットへのブランチまたはハッシュ (`2391ae` など) にすることができます。
+**Note**: `ref` can be a branch or the hash to an individual commit (like `2391ae`).
 
 {% endtip %}
 
@@ -138,48 +138,50 @@ For example, if your model's URL is [`github.com/skalnik/secret-bear-clip/blob/m
 You can embed ASCII STL syntax directly in Markdown. For more information, see "[Creating diagrams](/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams#creating-stl-3d-models)."
 {% endif %}
 
-## CSV および TSV データをレンダリングする
+## Rendering CSV and TSV data
 
-GitHub では、*.csv* (カンマ区切り) 形式および *.tsv* (タブ区切り) 形式のファイルのレンダリングがサポートされています。
+GitHub supports rendering tabular data in the form of *.csv* (comma-separated) and .*tsv* (tab-separated) files.
 
-![レンダリングされた CSV のサンプル](/assets/images/help/repository/rendered_csv.png)
+![Rendered CSV sample](/assets/images/help/repository/rendered_csv.png)
 
-When viewed, any _.csv_ or _.tsv_ file committed to a repository on {% ifversion ghae %}{% data variables.product.product_name %}{% else %}{% data variables.product.product_location %}{% endif %} automatically renders as an interactive table, complete with headers and row numbering. デフォルトでは、常に 1 番目の行がヘッダ行であるとみなされます。
+When viewed, any _.csv_ or _.tsv_ file committed to a repository on {% ifversion ghae %}{% data variables.product.product_name %}{% else %}{% data variables.location.product_location %}{% endif %} automatically renders as an interactive table, complete with headers and row numbering. By default, we'll always assume the first row is your header row.
 
-行番号をクリックして特定の行にリンクすることも、Shift キーを押して複数行を選択することもできます。 あとは URL をコピーして送るだけです。
+You can link to a particular row by clicking the row number, or select multiple rows by holding down the shift key. Just copy the URL and send it to a friend.
 
-### データを検索する
+### Searching data
 
-データセットから特定の値を見つけるには、ファイルの上にある検索バーで直接、入力を開始します。 行が自動的にフィルタされます。
+If you want to find a certain value in your dataset, you can start typing in the search bar directly above the file. The rows will filter automatically:
 
-![値を検索する](/assets/images/help/repository/searching_csvs.gif)
+![Searching for values](/assets/images/help/repository/searching_csvs.gif)
 
-### エラーを処理する
+### Handling errors
 
-時々、CSV や TSV が正常にレンダリングされないことがあります。 その場合、生テキストの末尾にエラーボックスが表示され、考えられる原因が示されます。
+Occasionally, you may discover that your CSV or TSV file isn't rendering. In those instances, an error box appears at the bottom of your raw text, suggesting what the error may be.
 
-![CSV レンダリングのエラーメッセージ](/assets/images/help/repository/csv_render_error.png)
+![CSV render error message](/assets/images/help/repository/csv_render_error.png)
 
-よくある原因として次のようなものがあります:
+Common errors include:
 
-* 列カウントの不一致。 セルは空白でもかまいませんが、各行の区切り文字の数は同じである必要があります。
-* ファイルサイズの超過。 レンダリングが機能するファイルのサイズは 512KB までです。 それより大きいと、ブラウザが低速になります。
+* Mismatched column counts. You must have the same number of separators in each row, even if the cell is blank
+* Exceeding the file size. Our rendering only works for files up to 512KB. Anything bigger than that slows down the browser.
 
-## PDF ドキュメントをレンダリングする
+## Rendering PDF documents
 
-GitHub では PDF ドキュメントのレンダリングをサポートしています。
+GitHub supports rendering of PDF documents.
 
-![レンダリングされた PDF ドキュメント](/assets/images/help/repository/rendered-pdf.png)
+![Rendered PDF Document](/assets/images/help/repository/rendered-pdf.png)
 
-現在、PDF 内のリンクは無視されます。
+Currently, links within PDFs are ignored.
 
-## 文章ドキュメントの差分をレンダリングする
+## Rendering differences in prose documents
 
-文章ドキュメントを含むコミットとプルリクエストには、そのドキュメントを*ソース*と*レンダリング済み*のビューで表示する機能があります。
+Commits and pull requests that include prose documents have the ability to represent those documents with *source* and *rendered* views.
 
-ソースビューでは入力された生テキストが表示されますが、レンダリング済みビューでは {% data variables.product.product_name %} でレンダリングされた様子を見ることができます。 たとえば、 Markdown での `**bold**` がレンダリング済みビューで **bold** と表示される、という違いがあります。
+The source view shows the raw text that has been typed, while the rendered
+view shows how that text would look once it's rendered on {% data variables.product.product_name %}. For example,
+this might be the difference between showing `**bold**` in Markdown, and **bold** in the rendered view.
 
-文章のレンダリングがサポートされるのは、[github/markup](https://github.com/github/markup) によってサポートされるレンダリング済みドキュメントです。
+Prose rendering is supported for rendered documents supported by [github/markup](https://github.com/github/markup):
 
 * Markdown
 * AsciiDoc
@@ -191,149 +193,156 @@ GitHub では PDF ドキュメントのレンダリングをサポートして�
 * MediaWiki
 * Pod
 
-![レンダリング済み文章ドキュメントを表示する紙アイコン](/assets/images/help/repository/rendered_prose_diff.png)
+![Paper icon to view rendered prose document](/assets/images/help/repository/rendered_prose_diff.png)
 
-{% octicon "file" aria-label="The paper icon" %} をクリックすると、コミットの一環としてドキュメントに行った変更を表示できます。
+You can click {% octicon "file" aria-label="The paper icon" %} to see the changes made to the document as part of a commit.
 
-![レンダリング済み文章変更](/assets/images/help/repository/rendered_prose_changes.png)
-
-{% ifversion fpt or ghes > 3.2 or ghae-issue-5232 or ghec %}
+![Rendered Prose changes](/assets/images/help/repository/rendered_prose_changes.png)
 
 ### Disabling Markdown rendering
 
 {% data reusables.repositories.disabling-markdown-rendering %}
 
-{% endif %}
+### Visualizing attribute changes
 
-### 属性変更を可視化する
+We provide a tooltip
+describing changes to attributes that, unlike words, would not otherwise be visible in the rendered document. For example, if a link URL changes from one website to
+another, we'd show a tooltip like this:
 
-読者に見せる文字部分とは異なり、属性への変更は、レンダリングされたドキュメントでは見えなくなります。Github ではそれをツールチップで示します。 たとえば、リンク URL が、あるウェブサイトから別のものに変更された場合、ツールチップで次のように示されます:
+![Rendered Prose attribute changes](/assets/images/help/repository/prose_diff_attributes.png)
 
-![レンダリング済み文章属性変更](/assets/images/help/repository/prose_diff_attributes.png)
+### Commenting on changes
 
-### 変更についてのコメントを入力する
+[Commit comments](/articles/commenting-on-differences-between-files) can only
+be added to files within the *source* view, on a line-by-line basis.
 
-[コミットコメント](/articles/commenting-on-differences-between-files)は、*ソース*ビュー内で行ごとにのみ追加できます。
+### Linking to headers
 
-### ヘッダにリンクする
+As with [other rendered prose documents](/articles/about-readmes),
+hovering over a header in your document creates a link icon. You can link readers
+of your rendered prose diff to specific sections.
 
-[他のレンダリング済み文章ドキュメント](/articles/about-readmes)と同様、ドキュメントのヘッダにマウスオーバーすると、リンクアイコンが作成されます。 レンダリング済み文章の diff の読者を特定のセクションにリンクできます。
+### Viewing complex diffs
 
-### 複雑な diff を表示する
+Some pull requests involve a large number of changes with large, complex documents. When the changes take too long to analyze, {% data variables.product.product_name %} can't always produce a rendered view of the changes. If this happens, you'll see an error message when you click the rendered button.
 
-プルリクエストの中には、大きくて複雑なドキュメントでの多数の変更を含むものがあります。 変更の分析に時間がかかりすぎると、{% data variables.product.product_name %} が変更のレンダリングされたビューを常に生成できない場合があります。 これが発生した場合、レンダリングされたボタンをクリックするとエラーメッセージが表示されます。
+![Message when view can't be rendered](/assets/images/help/repository/prose_diff_rendering.png)
 
-![ビューをレンダリングできない場合のメッセージ](/assets/images/help/repository/prose_diff_rendering.png)
+You can still use the source view to analyze and comment on changes.
 
-その場合でもソースビューは変更の分析やコメント入力に使用できます。
+### Viewing HTML elements
 
-### HTML 要素を表示する
+We don't directly support rendered views of commits to HTML documents. Some formats, such as Markdown, let you embed arbitrary HTML in a document. When these documents are shown on {% data variables.product.product_name %}, some of that embedded HTML can be shown in a preview, while some (like an embedded YouTube video) cannot.
 
-HTML ドキュメントへのコミットのレンダリング済みビューは、直接にはサポートしていません。 形式の中には、Markdown のように、任意の HTML をドキュメントに埋め込むことができるものがあります。 そうしたドキュメントが {% data variables.product.product_name %}で表示される際、埋め込まれた HTML はプレビューで表示されますが、表示できないもの (埋め込み YouTube 動画など) もあります。
+In general, rendered views of changes to a document containing embedded HTML will show changes to the elements that are supported in {% data variables.product.product_name %}'s view of the document. Changes to documents containing embedded HTML should always be reviewed in both the rendered and source views for completeness.
 
-通常、埋め込み HTML を含むドキュメントへの変更のレンダリング済みビューでは、{% data variables.product.product_name %} のドキュメントのビューでサポートされている要素への変更を表示します。 埋め込み HTML を含むドキュメントへの変更のレビューは、完全を期して、常にレンダリング済みとソースの両方のビューで行う必要があります。
+## Mapping GeoJSON/TopoJSON files on {% data variables.product.prodname_dotcom %}
 
-## Mapping geoJSON files on {% data variables.product.prodname_dotcom %}
+{% data variables.product.product_name %} supports rendering GeoJSON and TopoJSON map files within {% data variables.product.product_name %} repositories. Simply commit the file as you would normally using a `.geojson` or `.topojson` extension. Files with a `.json` extension are also supported, but only if `type` is set to `FeatureCollection`, `GeometryCollection`, or `topology`. Then, navigate to the path of the GeoJSON/TopoJSON file on GitHub.com.
 
-{% data variables.product.product_name %} は、{% data variables.product.product_name %} リポジトリでの geoJSON および topoJSON マップ ファイルのレンダリングをサポートしています。 `.geojson` または `.topojson` 拡張子を使って、通常と同じようにファイルをコミットするだけです。 `.json` 拡張子の付いたファイルもサポートされますが、`type` が `FeatureCollection`、`GeometryCollection`、または `topology` に設定されている場合に限られます。 コミット後、GitHub.com で geoJSON ファイルのパスに移動してください。
+When you click the paper icon on the right, you'll also see the changes made to that file as part of a commit.
 
-右側にある紙アイコンをクリックすると、そのファイル ドキュメントに加えられた変更も、コミットの一部として表示されます。
-
-![ソースとレンダリングの切り替えのスクリーンショット](/assets/images/help/repository/source-render-toggle-geojson.png)
+![Source Render toggle screenshot](/assets/images/help/repository/source-render-toggle-geojson.png)
 
 ### Geometry types
 
-{% data variables.product.product_name %} のマップは [Leaflet.js](http://leafletjs.com) を使用し、[geoJSON の仕様](http://www.geojson.org/geojson-spec.html) (Point、LineString、Polygon、MultiPoint、MultiLineString、MultiPolygon、GeometryCollection) に概要が示されているジオメトリのタイプをすべてサポートしています。 TopoJSON ファイルは "Topology" タイプで、[topoJSON の仕様](https://github.com/mbostock/topojson/wiki/Specification)に従っている必要があります。
+Maps on {% data variables.product.product_name %} use [Leaflet.js](http://leafletjs.com) and support all the geometry types outlined in [the geoJSON spec](http://www.geojson.org/geojson-spec.html) (Point, LineString, Polygon, MultiPoint, MultiLineString, MultiPolygon, and GeometryCollection). TopoJSON files should be type "Topology" and adhere to the [TopoJSON spec](https://github.com/mbostock/topojson/wiki/Specification).
 
-### フィーチャーのスタイリング
+{% ifversion geoJSON-with-MapBox %}
+### Styling features
 
-GeoJSON オブジェクトのプロパティで追加のメタデータを渡すと、特定の色を指定する、説明アイコンを追加するなど、フィーチャーの表示方法をカスタマイズすることができます。 オプションは次のとおりです:
+You can customize the way features are displayed, such as specifying a particular color or adding a descriptive icon, by passing additional metadata within the GeoJSON object's properties. The options are:
 
-* `marker-size` - `small`、`medium`、または `large`
-* `marker-color` - 有効な RGB 16 進カラー
-* `marker-symbol` - [Maki プロジェクト](http://mapbox.com/maki/)または英数字 1 文字 (a ～ z または 0 ～ 9) のアイコン ID
-* `stroke` - ポリゴンの辺やラインの色 (RGB)
-* `stroke-opacity` - ポリゴンの辺やラインの不透明度 (0.0 ～ 1.0)
-* `stroke-width` - ポリゴンの辺やラインの幅
-* `fill` - ポリゴンの内部の色 (GRB)
-* `fill-opacity` - ポリゴンの内部の透明度 (0.0 ～ 1.0)
+* `marker-size` - `small`, `medium`, or `large`
+* `marker-color` - valid RGB hex color
+* `marker-symbol` - an icon ID from [the Maki project](http://mapbox.com/maki/) or a single alphanumeric character (a-z or 0-9).
+* `stroke` - color of a polygon edge or line (RGB)
+* `stroke-opacity` - opacity of a polygon edge or line (0.0 - 1.0)
+* `stroke-width` - width of a polygon edge or line
+* `fill` - the color of the interior of a polygon (GRB)
+* `fill-opacity` - the opacity of the interior of a polygon (0.0-1.0)
 
-詳細は [simplestyle 公開仕様のバージョン 1.1.0](https://github.com/mapbox/simplestyle-spec/tree/master/1.1.0) を参照してください。
+See [version 1.1.0 of the open simplestyle spec](https://github.com/mapbox/simplestyle-spec/tree/master/1.1.0) for more information.
+{% endif %}
 
-### マップを他の場所に埋め込む
+### Embedding your map elsewhere
 
-GeoJSON マップを {% data variables.product.product_name %} 以外の場所で使用するには、 次のテンプレートを修正し、JavaScript をサポートしている任意の HTML ページに貼り付けてください (例: [{% data variables.product.prodname_pages %}](http://pages.github.com))。
+Want to make your GeoJSON map available someplace other than {% data variables.product.product_name %}? Simply modify this template, and place it in any HTML page that supports JavaScript (e.g., [{% data variables.product.prodname_pages %}](http://pages.github.com)):
 
 ```html
 <script src="https://embed.github.com/view/geojson/<username>/<repo>/<ref>/<path_to_file>"></script>
 ```
 
-たとえば、マップの URL が [github.com/benbalter/dc-wifi-social/blob/master/bars.geojson](https://github.com/benbalter/dc-wifi-social/blob/master/bars.geojson) であれば、埋め込みコードは次のようになります:
+For example, if your map's URL is [github.com/benbalter/dc-wifi-social/blob/master/bars.geojson](https://github.com/benbalter/dc-wifi-social/blob/master/bars.geojson), your embed code would be:
 
 ```html
 <script src="https://embed.github.com/view/geojson/benbalter/dc-wifi-social/master/bars.geojson"></script>
 ```
 
-デフォルトでは、埋め込まれるマップのサイズは 420px x 620px ですが、最後のパラメータとして、`?height=300&width=500` のように height 変数と width 変数 を渡せば、出力をカスタマイズすることができます。
+By default, the embedded map 420px x 620px, but you can customize the output by passing height and width variables as parameters at the end, such as `?height=300&width=500`.
 
 {% tip %}
 
-**注釈**: `ref` は、個々のコミットへのブランチまたはハッシュ (`2391ae` など) にすることができます。
+**Note**: `ref` can be a branch or the hash to an individual commit (like `2391ae`).
 
 {% endtip %}
 
 {% ifversion mermaid %}
 ### Mapping in Markdown
 
-You can embed geoJSON and topoJSON directly in Markdown. For more information, see "[Creating diagrams](/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams#creating-geojson-and-topojson-maps)."
+You can embed GeoJSON and TopoJSON directly in Markdown. For more information, see "[Creating diagrams](/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams#creating-geojson-and-topojson-maps)."
 {% endif %}
 
-### クラスタリング
+### Clustering
 
-マップに大量のマーカー (およそ 750 以上) が設定されている場合、ズーム レベルが大きいときは近隣のマーカーが自動的にクラスタ化されます。 クラスタをクリックしてズームするだけで、個々のマーカーが表示されます。
+If your map contains a large number of markers (roughly over 750), GitHub will automatically cluster nearby markers at higher zoom levels. Simply click the cluster or zoom in to see individual markers.
 
-### 基になるマップに問題がある
+### Something's up with the underlying map
 
-基になるマップ データ (通りの名前、道路など) は、編集可能な無料の世界地図をコラボレーションによって作るプロジェクト、[OpenStreetMap](http://www.openstreetmap.org/) を利用しています。 オープンソースなので、何か不具合に気づいた場合は、ぜひ[サインアップ](https://www.openstreetmap.org/user/new)して修正をサブミットしてください。
+The underlying map data (street names, roads, etc.) are driven by [OpenStreetMap](http://www.openstreetmap.org/), a collaborative project to create a free editable map of the world. If you notice something's not quite right, since it's open source, simply [sign up](https://www.openstreetmap.org/user/new) and submit a fix.
 
-### トラブルシューティング
+### Troubleshooting
 
-geoJSON ファイルのレンダリングに問題がある場合は、[geoJSON 文法チェッカー](http://geojsonlint.com/)でそのファイルを実行し、有効な geoJSON ファイルであることを確認してください。 ポイントが、意図しない場所 (<em></em>海の中など) にある場合、そのデータには、現在サポートされていない投影法が使われている可能性があります。 現在、{% data variables.product.product_name %}でサポートされているのは `urn:ogc:def:crs:OGC:1.3:CRS84` 投影だけです。
+If you're having trouble rendering GeoJSON files, ensure you have a valid GeoJSON file by running it through a [GeoJSON linter](http://geojsonlint.com/). If your points aren't appearing where you'd expect (<em>e.g.</em>, in the middle of the ocean), it's likely that the data is in a projection which is currently unsupported. Currently, {% data variables.product.product_name %} only supports the `urn:ogc:def:crs:OGC:1.3:CRS84` projection.
 
-また、10 MB を超えるような大きな `.geojson` ファイルは、ブラウザではレンダリングできません。 その場合は通常、次のようなメッセージが表示されます:
+Additionally, if your `.geojson` file is especially large (over 10 MB), it is not possible to render within the browser. If that's the case, you'll generally see a message that looks something like this:
 
-![大きいファイル](/assets/images/help/repository/view_raw.png)
+![Large file](/assets/images/help/repository/view_raw.png)
 
-その場合でも、`.geojson` ファイルを [TopoJSON](https://github.com/mbostock/topojson) に変換すればデータをレンダリングできます。TopoJSONは、ファイルサイズを最大 80% まで縮小できる圧縮形式です。 ファイルを小さいチャンクに分割し (州ごと、年ごとなど)、データを複数のファイルとしてリポジトリに格納することは、もちろんいつでもできます。
+It may still be possible to render the data by converting the `.geojson` file to [TopoJSON](https://github.com/mbostock/topojson), a compression format that, in some cases, can reduce filesize by up to 80%. Of course, you can always break the file into smaller chunks (such as by state or by year), and store the data as multiple files within the repository.
 
-### 参考リンク
+### Further reading
 
+{% ifversion geoJSON-with-MapBox %}
 * [Leaflet.js documentation](https://leafletjs.com/)
-* [MapBox マーカースタイリングのドキュメント](http://www.mapbox.com/developers/simplestyle/)
+* [MapBox marker-styling documentation](http://www.mapbox.com/developers/simplestyle/)
+{%- else %}
+* [Azure Maps documentation](https://docs.microsoft.com/en-us/azure/azure-maps/)
+{%- endif %}
 * [TopoJSON Wiki](https://github.com/mbostock/topojson/wiki)
 
 ## Working with Jupyter Notebook files on {% data variables.product.prodname_dotcom %}
 
-When you add Jupyter Notebook or IPython Notebook files with a *.ipynb* extension on {% data variables.product.product_location %}, they will render as static HTML files in your repository.
+When you add Jupyter Notebook or IPython Notebook files with a *.ipynb* extension on {% data variables.location.product_location %}, they will render as static HTML files in your repository.
 
-カスタム JavaScript プロットなど、Notebook のインタラクティブ機能は、{% data variables.product.product_location %} のリポジトリでは機能しません。 例については、[*リンキングおよび Interactions.ipynb*](https://github.com/bokeh/bokeh-notebooks/blob/main/tutorial/06%20-%20Linking%20and%20Interactions.ipynb) を参照してください。
+The interactive features of the notebook, such as custom JavaScript plots, will not work in your repository on {% data variables.location.product_location %}. For an example, see [*Linking and Interactions.ipynb*](https://github.com/bokeh/bokeh-notebooks/blob/main/tutorial/06%20-%20Linking%20and%20Interactions.ipynb).
 
-レンダリングした JavaScript コンテンツで Jupyter notebook を表示する、または、notebook ファイルを他のユーザーと共有する場合、[nbviewer](https://nbviewer.jupyter.org/) を使用できます。 例については、[*nbviewerでレンダリングされたリンキングおよびInteractions.ipynb*](https://nbviewer.jupyter.org/github/bokeh/bokeh-notebooks/blob/main/tutorial/06%20-%20Linking%20and%20Interactions.ipynb) を参照してください。
+To view your Jupyter notebook with JavaScript content rendered or to share your notebook files with others you can use [nbviewer](https://nbviewer.jupyter.org/). For an example, see [*Linking and Interactions.ipynb*](https://nbviewer.jupyter.org/github/bokeh/bokeh-notebooks/blob/main/tutorial/06%20-%20Linking%20and%20Interactions.ipynb) rendered on nbviewer.
 
-Jupyter notebook の完全にインタラクティブなバージョンを表示するには、notebook サーバーをローカルに設定します。 詳細は [Jupyter の公式ドキュメント](http://jupyter.readthedocs.io/en/latest/index.html)を参照してください。
+To view a fully interactive version of your Jupyter Notebook, you can set up a notebook server locally. For more information, see [Jupyter's official documentation](http://jupyter.readthedocs.io/en/latest/index.html).
 
-### トラブルシューティング
+### Troubleshooting
 
-Jupyter notebook ファイルを静的 HTML でレンダリングできない場合は、[`nbconvert` コマンド](https://github.com/jupyter/nbconvert)を使用してコマンドラインでローカルにファイルを変換できます:
+If you're having trouble rendering Jupyter Notebook files in static HTML, you can convert the file locally on the command line by using the [`nbconvert` command](https://github.com/jupyter/nbconvert):
 
 ```shell
-$ jupyter nbconvert --to html <em>NOTEBOOK-NAME.ipynb</em>
+$ jupyter nbconvert --to html NOTEBOOK-NAME.ipynb
 ```
 
-### 参考リンク
+### Further reading
 
-- [Jupyter notebook の GitHub リポジトリ](https://github.com/jupyter/jupyter_notebook)
-- [Jupyter notebooks のギャラリー](https://github.com/jupyter/jupyter/wiki)
+- [Jupyter Notebook's GitHub repository](https://github.com/jupyter/jupyter_notebook)
+- [Gallery of Jupyter Notebooks](https://github.com/jupyter/jupyter/wiki)
 
 {% ifversion mermaid %}
 ## Displaying Mermaid files on {% data variables.product.prodname_dotcom %}
@@ -351,15 +360,16 @@ graph TD
     C -->|Three| F[fa:fa-car Car]
 ```
 
-When you view the file in the repository, it is rendered as a flow chart. ![Rendered mermaid file diagram](/assets/images/help/repository/mermaid-file-diagram.png)
+When you view the file in the repository, it is rendered as a flow chart.
+![Rendered mermaid file diagram](/assets/images/help/repository/mermaid-file-diagram.png)
 
-### トラブルシューティング
+### Troubleshooting
 
 If your chart does not render at all, verify that it contains valid Mermaid Markdown syntax by checking your chart with the [Mermaid live editor](https://mermaid.live/edit).
 
-If the chart displays, but does not appear as you'd expect, you can create a new [feedback discussion](https://github.com/github/feedback/discussions/categories/general-feedback), and add the `mermaid` tag.
+If the chart displays, but does not appear as you'd expect, you can create a new [{% data variables.product.prodname_github_community %} discussion](https://github.com/orgs/community/discussions/categories/general), and add the `Mermaid` label. 
 
-#### 既知の問題
+#### Known issues
 
 * Sequence diagram charts frequently render with additional padding below the chart, with more padding added as the chart size increases. This is a known issue with the Mermaid library.
 * Actor nodes with popover menus do not work as expected within sequence diagram charts. This is due to a discrepancy in how JavaScript events are added to a chart when the Mermaid library's API is used to render a chart.
@@ -369,7 +379,7 @@ If the chart displays, but does not appear as you'd expect, you can create a new
 
 You can embed Mermaid syntax directly in Markdown. For more information, see "[Creating diagrams](/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams#creating-mermaid-diagrams)."
 
-### 参考リンク
+### Further reading
 
 * [Mermaid.js documentation](https://mermaid-js.github.io/mermaid/#/)
 * [Mermaid.js live editor](https://mermaid.live/edit)

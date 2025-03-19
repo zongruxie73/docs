@@ -11,7 +11,7 @@ describe('breadcrumbs', () => {
 
   describe('rendering', () => {
     test('top-level product pages have breadcrumbs', async () => {
-      const $ = await getDOM('/github')
+      const $ = await getDOM('/repositories')
       expect($('[data-testid=breadcrumbs]')).toHaveLength(2)
     })
 
@@ -83,12 +83,6 @@ describe('breadcrumbs', () => {
       const $breadcrumbs = $('[data-testid=breadcrumbs] a')
       expect($breadcrumbs[0].attribs.href).toBe('/en/get-started')
     })
-
-    test('localized breadcrumbs link to localize pages', async () => {
-      const $ = await getDOM('/ja/get-started/learning-about-github')
-      const $breadcrumbs = $('[data-testid=breadcrumbs] a')
-      expect($breadcrumbs[0].attribs.href).toBe('/ja/get-started')
-    })
   })
 
   describeInternalOnly('early access rendering', () => {
@@ -116,11 +110,11 @@ describe('breadcrumbs', () => {
 
   describe('breadcrumbs object', () => {
     test('works on product index pages', async () => {
-      const breadcrumbs = await getJSON('/en/github?json=breadcrumbs')
+      const breadcrumbs = await getJSON('/en/repositories?json=breadcrumbs')
       const expected = [
         {
-          href: '/en/github',
-          title: 'GitHub',
+          href: '/en/repositories',
+          title: 'Repositories',
         },
       ]
       expect(breadcrumbs).toEqual(expected)

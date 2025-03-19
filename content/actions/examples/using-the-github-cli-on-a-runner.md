@@ -1,25 +1,18 @@
 ---
 title: Using the GitHub CLI on a runner
-shortTitle: Using the GitHub CLI on a runner
+shortTitle: Use the GitHub CLI on a runner
 intro: 'How to use advanced {% data variables.product.prodname_actions %} features for continuous integration (CI).'
 versions:
   fpt: '*'
   ghes: '> 3.1'
   ghae: '*'
   ghec: '*'
-showMiniToc: false
 type: how_to
 topics:
   - Workflows
 ---
 
 {% data reusables.actions.enterprise-github-hosted-runners %}
-
-- [Example overview](#example-overview)
-- [Features used in this example](#features-used-in-this-example)
-- [Example workflow](#example-workflow)
-- [Understanding the example](#understanding-the-example)
-- [Next steps](#next-steps)
 
 ## Example overview
 
@@ -50,11 +43,11 @@ topics:
 
 ## Example workflow
 
-{% data reusables.actions.example-docs-engineering-intro %} [`check-all-english-links.yml`](https://github.com/github/docs/blob/main/.github/workflows/check-all-english-links.yml).
+{% data reusables.actions.example-docs-engineering-intro %} [`check-all-english-links.yml`](https://github.com/github/docs/blob/6e01c0653836c10d7e092a17566a2c88b10504ce/.github/workflows/check-all-english-links.yml).
 
 {% data reusables.actions.note-understanding-example %}
 
-<table style="width:350px">
+<table style="table-layout: fixed;">
 <thead>
   <tr>
     <th style="width:70%"></th>
@@ -116,7 +109,11 @@ jobs:
       - if: {% raw %}${{ failure() }}{% endraw %}
         name: Get title for issue
         id: check
+{%- ifversion actions-save-state-set-output-envs %}
+        run: echo "title=$(head -1 broken_links.md)" >> $GITHUB_OUTPUT
+{%- else %}
         run: echo "::set-output name=title::$(head -1 broken_links.md)"
+{%- endif %}
       - if: {% raw %}${{ failure() }}{% endraw %}
         name: Create issue from file
         id: broken-link-report
@@ -185,7 +182,7 @@ jobs:
 
 {% data reusables.actions.example-explanation-table-intro %}
 
-<table style="width:350px">
+<table style="table-layout: fixed;">
 <thead>
   <tr>
     <th style="width:60%"><b>Code</b></th>
@@ -379,7 +376,11 @@ This `run` command executes a script that is stored in the repository at `script
       - if: {% raw %}${{ failure() }}{% endraw %}
         name: Get title for issue
         id: check
+{%- ifversion actions-save-state-set-output-envs %}
+        run: echo "title=$(head -1 broken_links.md)" >> $GITHUB_OUTPUT
+{%- else %}
         run: echo "::set-output name=title::$(head -1 broken_links.md)"
+{%- endif %}
 ```
 </td>
 <td>

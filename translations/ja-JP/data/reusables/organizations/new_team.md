@@ -1,8 +1,8 @@
-1. Organization 名の下で、クリックします
-{% octicon "people" aria-label="The people icon" %} **Teams**.
-  {% ifversion fpt or ghes > 3.2 or ghec %}
-  ![Teamsタブ](/assets/images/help/organizations/organization-teams-tab-with-overview.png)
+1. Under your organization name, click {% octicon "people" aria-label="The people icon" %} **Teams**.
+  {% ifversion fpt or ghes or ghec %}
+  ![Teams tab](/assets/images/help/organizations/organization-teams-tab-with-overview.png)
   {% else %}
-  ![Teamsタブ](/assets/images/help/organizations/organization-teams-tab.png)
+  ![Teams tab](/assets/images/help/organizations/organization-teams-tab.png)
   {% endif %}
-1. Teamsタブの右側で、**New team（新規Team）**をクリックしてください。 ![新規Teamボタン](/assets/images/help/teams/new-team-button.png)
+1. On the right side of the Teams tab, click **New team**.
+  ![New team button](/assets/images/help/teams/new-team-button.png)

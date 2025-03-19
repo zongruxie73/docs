@@ -1,5 +1,5 @@
 ---
-title: 管理企业中的组织
+title: Managing organizations in your enterprise
 redirect_from:
   - /enterprise/admin/articles/adding-users-and-teams
   - /enterprise/admin/categories/admin-bootcamp
@@ -8,7 +8,11 @@ redirect_from:
   - /articles/managing-organizations-in-your-enterprise-account
   - /github/setting-up-and-managing-your-enterprise-account/managing-organizations-in-your-enterprise-account
   - /github/setting-up-and-managing-your-enterprise/managing-organizations-in-your-enterprise-account
-intro: '组织适合在您的公司内创建不同的用户组，例如部门或参与相似项目的组。 属于组织的{% ifversion ghae %}内部{% else %}公共和内部{% endif %}仓库可供企业中其他组织中的成员访问，而私有仓库只能供被授予访问权限的组织成员访问。'
+  - /admin/user-management/managing-organizations-in-your-enterprise/managing-unowned-organizations-in-your-enterprise
+  - /github/setting-up-and-managing-your-enterprise/managing-organizations-in-your-enterprise-account/managing-unowned-organizations-in-your-enterprise-account
+  - /github/setting-up-and-managing-your-enterprise-account/managing-unowned-organizations-in-your-enterprise-account
+  - /github/setting-up-and-managing-your-enterprise/managing-unowned-organizations-in-your-enterprise-account
+intro: 'You can use organizations to group users within your company, such as divisions or groups working on similar projects, and manage access to repositories.'
 versions:
   ghec: '*'
   ghes: '*'
@@ -17,7 +21,6 @@ topics:
   - Enterprise
 children:
   - /adding-organizations-to-your-enterprise
-  - /managing-unowned-organizations-in-your-enterprise
   - /configuring-visibility-for-organization-membership
   - /preventing-users-from-creating-organizations
   - /requiring-two-factor-authentication-for-an-organization
@@ -29,6 +32,6 @@ children:
   - /restoring-a-deleted-organization
   - /managing-projects-using-jira
   - /continuous-integration-using-jenkins
-shortTitle: 管理组织
+shortTitle: Manage organizations
 ---
 

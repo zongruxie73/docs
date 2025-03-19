@@ -1,5 +1,5 @@
 ---
-title: Gerenciar organizações na sua empresa
+title: Managing organizations in your enterprise
 redirect_from:
   - /enterprise/admin/articles/adding-users-and-teams
   - /enterprise/admin/categories/admin-bootcamp
@@ -8,7 +8,11 @@ redirect_from:
   - /articles/managing-organizations-in-your-enterprise-account
   - /github/setting-up-and-managing-your-enterprise-account/managing-organizations-in-your-enterprise-account
   - /github/setting-up-and-managing-your-enterprise/managing-organizations-in-your-enterprise-account
-intro: 'As organizações são uma forma excelente de criar conjuntos distintos de usuários na empresa, como divisões ou grupos que trabalham em projetos semelhantes. {% ifversion ghae %}Os repositórios internos{% else %}públicos e internos{% endif %} que pertencem a uma organização podem ser acessados por membros de outras organizações da empresa, enquanto os repositórios privados podem ser acessador por qualquer pessoa exceto integrantes da organização que recebem acesso.'
+  - /admin/user-management/managing-organizations-in-your-enterprise/managing-unowned-organizations-in-your-enterprise
+  - /github/setting-up-and-managing-your-enterprise/managing-organizations-in-your-enterprise-account/managing-unowned-organizations-in-your-enterprise-account
+  - /github/setting-up-and-managing-your-enterprise-account/managing-unowned-organizations-in-your-enterprise-account
+  - /github/setting-up-and-managing-your-enterprise/managing-unowned-organizations-in-your-enterprise-account
+intro: 'You can use organizations to group users within your company, such as divisions or groups working on similar projects, and manage access to repositories.'
 versions:
   ghec: '*'
   ghes: '*'
@@ -17,7 +21,6 @@ topics:
   - Enterprise
 children:
   - /adding-organizations-to-your-enterprise
-  - /managing-unowned-organizations-in-your-enterprise
   - /configuring-visibility-for-organization-membership
   - /preventing-users-from-creating-organizations
   - /requiring-two-factor-authentication-for-an-organization
@@ -29,6 +32,6 @@ children:
   - /restoring-a-deleted-organization
   - /managing-projects-using-jira
   - /continuous-integration-using-jenkins
-shortTitle: Gerenciar organizações
+shortTitle: Manage organizations
 ---
 

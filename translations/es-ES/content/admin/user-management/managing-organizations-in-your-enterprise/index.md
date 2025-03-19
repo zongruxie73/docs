@@ -1,5 +1,5 @@
 ---
-title: Administrar las organizaciones en tu empresa
+title: Managing organizations in your enterprise
 redirect_from:
   - /enterprise/admin/articles/adding-users-and-teams
   - /enterprise/admin/categories/admin-bootcamp
@@ -8,7 +8,11 @@ redirect_from:
   - /articles/managing-organizations-in-your-enterprise-account
   - /github/setting-up-and-managing-your-enterprise-account/managing-organizations-in-your-enterprise-account
   - /github/setting-up-and-managing-your-enterprise/managing-organizations-in-your-enterprise-account
-intro: 'Las organizaciones son ideales para crear grupos diferentes de usuarios dentro de tu empresa, como divisiones o grupos trabajando en proyectos similares.  Los repositorios {% ifversion ghae %}internos{% else %}Los repositorios públicos e internos{% endif %} que pertenecen a una organización son accesibles para los miembros de otras organizaciones en la empresa, mientras que los repositorios privados no son accesibles para nadie mas que los miembros de la organización que cuenta con este acceso.'
+  - /admin/user-management/managing-organizations-in-your-enterprise/managing-unowned-organizations-in-your-enterprise
+  - /github/setting-up-and-managing-your-enterprise/managing-organizations-in-your-enterprise-account/managing-unowned-organizations-in-your-enterprise-account
+  - /github/setting-up-and-managing-your-enterprise-account/managing-unowned-organizations-in-your-enterprise-account
+  - /github/setting-up-and-managing-your-enterprise/managing-unowned-organizations-in-your-enterprise-account
+intro: 'You can use organizations to group users within your company, such as divisions or groups working on similar projects, and manage access to repositories.'
 versions:
   ghec: '*'
   ghes: '*'
@@ -17,7 +21,6 @@ topics:
   - Enterprise
 children:
   - /adding-organizations-to-your-enterprise
-  - /managing-unowned-organizations-in-your-enterprise
   - /configuring-visibility-for-organization-membership
   - /preventing-users-from-creating-organizations
   - /requiring-two-factor-authentication-for-an-organization
@@ -29,6 +32,6 @@ children:
   - /restoring-a-deleted-organization
   - /managing-projects-using-jira
   - /continuous-integration-using-jenkins
-shortTitle: Administrar las organizaciones
+shortTitle: Manage organizations
 ---
 

@@ -1,25 +1,18 @@
 ---
 title: Using scripts to test your code on a runner
-shortTitle: Using scripts to test your code on a runner
+shortTitle: Use scripts to test your code on a runner
 intro: 'How to use essential {% data variables.product.prodname_actions %} features for continuous integration (CI).'
 versions:
   fpt: '*'
   ghes: '> 3.1'
   ghae: '*'
   ghec: '*'
-showMiniToc: false
 type: how_to
 topics:
   - Workflows
 ---
 
 {% data reusables.actions.enterprise-github-hosted-runners %}
-
-- [Example overview](#example-overview)
-- [Features used in this example](#features-used-in-this-example)
-- [Example workflow](#example-workflow)
-- [Understanding the example](#understanding-the-example)
-- [Next steps](#next-steps)
 
 ## Example overview
 
@@ -48,11 +41,11 @@ topics:
 
 ## Example workflow
 
-{% data reusables.actions.example-docs-engineering-intro %} [`link-check-all.yml`](https://github.com/github/docs/blob/main/.github/workflows/link-check-all.yml).
+{% data reusables.actions.example-docs-engineering-intro %} [`check-broken-links-github-github.yml`](https://github.com/github/docs/blob/main/.github/workflows/check-broken-links-github-github.yml).
 
 {% data reusables.actions.note-understanding-example %}
 
-<table style="width:350px">
+<table style="table-layout: fixed;">
 <thead>
   <tr>
     <th style="width:100%"></th>
@@ -140,7 +133,7 @@ jobs:
 
 {% data reusables.actions.example-explanation-table-intro %}
 
-<table style="width:350px">
+<table style="table-layout: fixed;">
 <thead>
   <tr>
     <th style="width:60%"><b>Code</b></th>

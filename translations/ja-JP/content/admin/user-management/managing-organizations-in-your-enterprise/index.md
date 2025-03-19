@@ -8,7 +8,11 @@ redirect_from:
   - /articles/managing-organizations-in-your-enterprise-account
   - /github/setting-up-and-managing-your-enterprise-account/managing-organizations-in-your-enterprise-account
   - /github/setting-up-and-managing-your-enterprise/managing-organizations-in-your-enterprise-account
-intro: 'Organizationは企業内で、部署や同様のプロジェクトで作業を行うグループなど、個別のユーザグループを作成する素晴らしい手段です。 {% ifversion ghae %}Internal{% else %}Public and internal{% endif %} repositories that belong to an organization are accessible to members of other organizations in the enterprise, while private repositories are inaccessible to anyone but members of the organization that are granted access.'
+  - /admin/user-management/managing-organizations-in-your-enterprise/managing-unowned-organizations-in-your-enterprise
+  - /github/setting-up-and-managing-your-enterprise/managing-organizations-in-your-enterprise-account/managing-unowned-organizations-in-your-enterprise-account
+  - /github/setting-up-and-managing-your-enterprise-account/managing-unowned-organizations-in-your-enterprise-account
+  - /github/setting-up-and-managing-your-enterprise/managing-unowned-organizations-in-your-enterprise-account
+intro: 'Organization は、類似したプロジェクトに取り組む部門やグループなど、社内の個別のユーザー グループを作成するのに最適です。 Organization に属する{% ifversion ghae %}内部{% else %}パブリックおよび内部{% endif %}リポジトリには、Enterprise 内の他の Organization のメンバーがアクセスできますが、プライベート リポジトリには、アクセスが許可されている Organization のメンバー以外はアクセスできません。'
 versions:
   ghec: '*'
   ghes: '*'
@@ -17,7 +21,6 @@ topics:
   - Enterprise
 children:
   - /adding-organizations-to-your-enterprise
-  - /managing-unowned-organizations-in-your-enterprise
   - /configuring-visibility-for-organization-membership
   - /preventing-users-from-creating-organizations
   - /requiring-two-factor-authentication-for-an-organization
@@ -30,5 +33,11 @@ children:
   - /managing-projects-using-jira
   - /continuous-integration-using-jenkins
 shortTitle: Manage organizations
+ms.openlocfilehash: 333d9b8d50bcdb86f709a447fee5a4078353dfe2
+ms.sourcegitcommit: f638d569cd4f0dd6d0fb967818267992c0499110
+ms.translationtype: HT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 10/25/2022
+ms.locfileid: '148109114'
 ---
 
